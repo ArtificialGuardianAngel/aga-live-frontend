@@ -1,0 +1,72 @@
+[
+    {
+        "from": 0,
+        "to": 1,
+        "title": "Extremely Low Happiness",
+        "subtitle": "At this level, your happiness score is extremely low.",
+        "details": "This suggests that you're experiencing a significant amount of distress and dissatisfaction in various areas of your life. It's important to remember that it's okay to ask for help. Consider reaching out to a mental health professional who can provide guidance and support. You might also find it helpful to talk to trusted friends or family members about what you're going through."
+    },
+    {
+        "from": 1,
+        "to": 2,
+        "title": "Very Low Happiness",
+        "subtitle": "With a score in this range, your level of happiness is very low.",
+        "details": "This could indicate that you're facing a lot of challenges and experiencing dissatisfaction in different areas of your life. Consider seeking support from friends, family, or a professional. They can provide a listening ear, offer advice, or help you find strategies to cope with your challenges."
+    },
+    {
+        "from": 2,
+        "to": 3,
+        "title": "Low Happiness",
+        "subtitle": "A score in this range suggests that your happiness level is low.",
+        "details": "You might be experiencing dissatisfaction in various areas of your life. Try to identify the areas that are causing the most distress. Once you've identified these areas, you can start to think about steps you can take to improve these aspects of your life."
+    },
+    {
+        "from": 3,
+        "to": 4,
+        "title": "Below Average Happiness",
+        "subtitle": "Your happiness level is slightly below average.",
+        "details": "While there might be some areas of your life that you're happy with, there are likely other areas that are causing you distress. Try to identify these areas and think about what changes could improve your satisfaction with these aspects of your life."
+    },
+    {
+        "from": 4,
+        "to": 5,
+        "title": "Average Happiness",
+        "subtitle": "Your happiness level is average.",
+        "details": "This suggests that while there are areas of your life that bring you joy, there are other areas that could use improvement. Consider what changes could make a positive impact on your happiness level."
+    },
+    {
+        "from": 5,
+        "to": 6,
+        "title": "Above Average Happiness",
+        "subtitle": "Your happiness level is slightly above average.",
+        "details": "This suggests that you're fairly satisfied with various aspects of your life. However, there's always room for improvement. Consider what steps you can take to continue to increase your level of happiness."
+    },
+    {
+        "from": 6,
+        "to": 7,
+        "title": "High Happiness",
+        "subtitle": "You're experiencing a high level of happiness.",
+        "details": "This suggests that you're satisfied in most areas of your life. Keep doing what you're doing, but also remember to strive for growth and improvement."
+    },
+    {
+        "from": 7,
+        "to": 8,
+        "title": "Very High Happiness",
+        "subtitle": "Your happiness level is very high.",
+        "details": "This suggests that you're highly satisfied in most areas of your life. Keep up the good work, but remember to maintain balance in your life. It's also important to continue to nurture and appreciate these aspects of your life."
+    },
+    {
+        "from": 8,
+        "to": 9,
+        "title": "Extremely High Happiness",
+        "subtitle": "Your happiness level is extremely high.",
+        "details": "This suggests that you're experiencing a great deal of joy and satisfaction in your life. Continue to nurture and appreciate these aspects of your life. Also, consider how you can use your happiness to positively impact the lives of others."
+    },
+    {
+        "from": 9,
+        "to": 10,
+        "title": "Exceptional Happiness",
+        "subtitle": "Your happiness level is exceptional.",
+        "details": "This suggests that you're extremely satisfied and fulfilled in all areas of your life. This is a remarkable achievement. Continue to cultivate this level of happiness and share your joy with others. Remember, happiness is not just about feeling good, it's also about the capacity to feel bad when that's appropriate. It's about living a meaningful life and using your strengths and talents to contribute to the well-being of others."
+    }
+]

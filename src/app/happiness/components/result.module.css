@@ -1,0 +1,10 @@
+.radial_container {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.radial_bordered {
+    border: 5px solid;
+    border-image: linear-gradient(45deg, purple, orange) 1;
+    padding: 1rem;
+}
