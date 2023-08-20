@@ -1,0 +1,78 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.label {
+  color: #d6e1fa;
+  font-size: 15px;
+  line-height: 10px;
+  font-weight: 500;
+
+  @media (max-width: 768px) {
+    line-height: 15px;
+    font-size: 12px;
+  }
+}
+
+.subLabel {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 10px;
+  color: rgba(#d6e1fa, 0.4);
+
+  @media (max-width: 768px) {
+    line-height: 15px;
+    font-size: 12px;
+    text-align: end;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  border: 1px solid rgba(#fff, 0.6);
+  border-radius: 5px;
+
+  &.postfix {
+    &::before {
+      content: attr(data-postfix);
+      display: block;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translate(0, -50%);
+      font-weight: 500;
+      color: #aeb9d2;
+      font-size: 15px;
+      line-height: 10px;
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 0 20px;
+  font-size: 15px;
+  height: 50px;
+  background-color: #3d4b72;
+  color: white;
+  font-family: 'Cera Pro', sans-serif;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+
+  &::placeholder {
+    color: rgba(white, 0.4);
+  }
+
+  &.postfix {
+    padding-right: 70px;
+  }
+}

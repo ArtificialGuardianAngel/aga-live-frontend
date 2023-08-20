@@ -1,0 +1,55 @@
+@import './reset';
+@import './vars';
+@import './fonts';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cera Pro', sans-serif;
+  min-height: 100vh;
+  background-color: #1c2949;
+  font-size: 16px;
+  color: #d6e1fa;
+}
+
+.container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.fixed-back-link {
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border-radius: 50%;
+  border: 2px solid #11f4d1;
+
+  &::before,
+  &::after {
+    content: '';
+    width: 16px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: #11f4d1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotateZ(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotateZ(-45deg);
+  }
+}

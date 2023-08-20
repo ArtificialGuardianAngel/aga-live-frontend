@@ -1,0 +1,43 @@
+.wrapper {
+}
+
+.videoPlaceholder {
+  border: 1.5px dashed #4c5576;
+  border-radius: 20px;
+  height: 468px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-transform: uppercase;
+  color: #aeb9d2;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 8px;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+}
+
+.button {
+  width: 300px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 240px;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.block {
+  padding: 50px 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+}

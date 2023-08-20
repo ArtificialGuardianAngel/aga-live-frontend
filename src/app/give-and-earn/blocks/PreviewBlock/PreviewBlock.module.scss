@@ -1,0 +1,36 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 55px;
+}
+
+.img {
+  flex: 1 1 auto;
+}
+
+.title {
+  flex: 0 0 auto;
+  max-width: 610px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 95px;
+}
+
+.button {
+  flex: 0 0 auto;
+  background-color: #11f4d1;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-image: url('../../assets/images/arrow.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
