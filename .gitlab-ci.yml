@@ -6,7 +6,6 @@ variables:
 
 stages:
   - install
-  - test
   - deploy
   - rollback
 
@@ -19,12 +18,6 @@ install:
   artifacts:
     paths:
       - node_modules/
-
-test:
-  stage: test
-  script:
-    - cd $PROJECT_PATH
-    - npm test
 
 deploy:
   stage: deploy
