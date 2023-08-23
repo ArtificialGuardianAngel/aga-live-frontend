@@ -52,3 +52,12 @@
   background: linear-gradient(180deg, #7c1dce 0%, #11f4d1 100%);
   border-radius: 100px;
 }
+
+.wrapper-background {
+  background: radial-gradient(150.31% 94.37% at 60.52% 17.97%,
+      rgba(191, 60, 189, 0.2) 0%,
+      rgba(29, 42, 161, 0.2) 46.88%,
+      rgba(28, 41, 60, 0.2) 100%),
+    #1c293c;
+  opacity: 0.8;
+}
