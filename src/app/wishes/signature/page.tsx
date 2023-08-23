@@ -31,7 +31,7 @@ export default function ESignature() {
 
                         <div className="text-center">
                             Secure your commitment with an e-signature via
-                            email, and let's set the wheels in motion.
+                            email, and let&apos;s set the wheels in motion.
                         </div>
                     </div>
 

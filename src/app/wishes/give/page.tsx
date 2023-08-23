@@ -93,8 +93,8 @@ export default function WishesGive() {
 
                                         <h6 className="text-center">
                                             Secure your commitment with an
-                                            E-signature via email, and let's set
-                                            the wheels in motion.
+                                            E-signature via email, and
+                                            let&apos;s set the wheels in motion.
                                         </h6>
                                     </div>
 
