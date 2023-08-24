@@ -4,6 +4,7 @@ import cn from "classnames";
 import { PropsWithChildren } from "react";
 import { ArrowIcon } from "@/components/Icons";
 import Link from "next/link";
+import './happiness.css'
 
 const sora = Sora({
     weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -36,7 +37,7 @@ const HappinessLayout = ({ children }: PropsWithChildren) => (
             </div>
             {children}
         </div>
-        <section className="container p-[75px_0_25px] min-[786px]:p-[25px_0]">
+        <section className="container p-[75px_0_25px] md:p-[25px_0]">
             <div className="flex flex-col items-center gap-[50px]">
                 <div className="linear-rect"></div>
                 <div className="text-[14px] font-[500]">Powered by NUAH</div>
