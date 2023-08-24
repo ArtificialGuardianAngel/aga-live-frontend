@@ -12,6 +12,7 @@ stages:
 install:
   stage: install
   script:
+    - rm -rf $PROJECT_PATH/*
     - cp -r ./* $PROJECT_PATH
     - cd $PROJECT_PATH
     - npm install
