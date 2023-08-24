@@ -37,7 +37,7 @@ const HappinessLayout = ({ children }: PropsWithChildren) => (
             </div>
             {children}
         </div>
-        <section className="container p-[75px_0_25px] md:p-[25px_0]">
+        <section className="happiness_container p-[75px_0_25px] md:p-[25px_0]">
             <div className="flex flex-col items-center gap-[50px]">
                 <div className="linear-rect"></div>
                 <div className="text-[14px] font-[500]">Powered by NUAH</div>
