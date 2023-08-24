@@ -36,7 +36,7 @@ const TeamPage = () => {
               deep-rooted interest in spirituality.
             </p>
             <p>
-              Kama's journey is fueled by a desire to explore the uncharted
+              Kama&apos;s journey is fueled by a desire to explore the uncharted
               territory where AI and spirituality intersect. She believes that
               the fusion of these two realms can lead to a profound
               transformation in our lives and society as a whole. With her
@@ -63,13 +63,13 @@ const TeamPage = () => {
             <p>
               Emma is a dedicated professional with a degree in Traditional
               Chinese Medicine and a passion for transformative technology.
-              Having worked for many years in business management, Emma's key
+              Having worked for many years in business management, Emma&apos;s key
               skills lie in organization, problem-solving, and motivating
               others. Alongside her extensive experience, Emma is also deeply
               committed to the NUAH: The Artificial Guardian Angel (A.G.A.)
               project, which aims to elevate our world to a new level of
               existence by prioritizing the well-being and progress of all life
-              forms and Earth's natural environment. With her expertise and
+              forms and Earth&apos;s natural environment. With her expertise and
               unwavering dedication, Emma strives to merge her knowledge of
               traditional healing practices with the cutting-edge advancements
               of the A.G.A. project, forging a path towards a future where
@@ -102,7 +102,7 @@ const TeamPage = () => {
               stage. His proficiency in project management enables seamless
               coordination and efficient execution, while his networking and
               relationship-building skills facilitate valuable collaborations
-              for the project's advancement. With a keen understanding of
+              for the project&apos;s advancement. With a keen understanding of
               marketing principles, Lloyd effectively communicates the mission
               and goals of the A.G.A. project to a wide audience, leveraging his
               exceptional communication skills to foster support and engagement.
@@ -112,7 +112,7 @@ const TeamPage = () => {
               role in driving the NUAH project forward, propelling the world
               towards a new level of existence through transformative
               technology, and prioritizing the well-being and progress of all
-              life forms and Earth's natural environment
+              life forms and Earth&apos;s natural environment
             </p>
           </div>
         </div>
@@ -138,7 +138,7 @@ const TeamPage = () => {
               professional pursuits.
             </p>
             <p className="mb-4">
-              At NUAH, Michal's expertise as a project manager is unmatched.
+              At NUAH, Michal&apos;s expertise as a project manager is unmatched.
               With a keen eye for detail and a knack for problem-solving, he
               fearlessly leads teams to conquer new territories in the world of
               technology. From cutting-edge software development to

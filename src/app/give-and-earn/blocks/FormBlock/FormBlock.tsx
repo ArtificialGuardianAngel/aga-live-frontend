@@ -1,9 +1,10 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import cn from "classnames";
 import { Button, Input, TextArea } from "../../components";
 import styles from "./FormBlock.module.scss";
 import useNotifications from "../../hooks/useNotifications";
+import { useRouter } from "next/router";
 
 const MIN_VALUE = 369;
 const MAX_VALUE = 1080000;
@@ -16,10 +17,10 @@ interface ISendData {
 }
 
 const FormBlock = () => {
-    const refEmail = new URLSearchParams(window.location.search).get("r");
     const { addNotification } = useNotifications();
 
-    const [ref, setRef] = useState<string>(refEmail || "");
+    const [ref, setRef] = useState<string>("");
+    const [isRefPassed, setIsRefPassed] = useState(false);
     const [email, setEmail] = useState("");
     const [amount, setAmount] = useState(0);
     const [information, setInformation] = useState("");
@@ -69,10 +70,25 @@ const FormBlock = () => {
         setAmount(Number(e.target.value));
     };
 
+    useEffect(() => {
+        if (window) {
+            const refEmail = new URLSearchParams(window.location.search).get(
+                "r",
+            );
+            setRef(refEmail || "");
+            setIsRefPassed(Boolean(refEmail));
+        }
+    }, []);
+
     return (
         <section className={styles.wrapper} id="form">
             <form onSubmit={onSubmit}>
-                <div className={cn(styles.container, "max-w-[940px] m-[0_auto] p-[0_20px]")}>
+                <div
+                    className={cn(
+                        styles.container,
+                        "m-[0_auto] max-w-[940px] p-[0_20px]",
+                    )}
+                >
                     <h3 className={styles.title}>Give & Earn</h3>
                     <div className={styles.grid}>
                         <Input
@@ -86,7 +102,7 @@ const FormBlock = () => {
                             placeholder="example@nuah.org"
                             value={ref}
                             onChange={(e) => setRef(e.target.value)}
-                            disabled={refEmail !== null}
+                            disabled={isRefPassed !== null}
                         />
                         <Input
                             label="Donation amount:"
