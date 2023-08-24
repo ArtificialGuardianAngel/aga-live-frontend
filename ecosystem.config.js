@@ -3,7 +3,7 @@ module.exports = {
         {
             name: "aga-live",
             script: 'node_modules/next/dist/bin/next',
-            args: 'start -p 18888',
+            args: 'start -p 8888',
         },
     ],
 }
