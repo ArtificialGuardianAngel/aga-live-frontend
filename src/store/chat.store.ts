@@ -16,7 +16,7 @@ type ChatStore = {
 
 export const useChatStore = create<ChatStore>((set) => {
   const token = useAppStore.getState()?.token;
-  const socket = io(`${process.env.NEXT_API_URL}/?token=${token}`, {
+  const socket = io(`${process.env.NEXT_PUBLIC_API_URL}/?token=${token}`, {
     autoConnect: false,
   });
   return {

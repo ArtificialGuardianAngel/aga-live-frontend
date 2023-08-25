@@ -36,7 +36,7 @@ const WishesEndorserLinkBlock: React.FC<{}> = () => {
             <div className="flex gap-[20px]">
                 <a
                     className="cursor-pointer"
-                    href={process.env.NEXT_FACEBOOK_LINK}
+                    href={process.env.NEXT_PUBLIC_FACEBOOK_LINK}
                 >
                     <Image
                         src="/wishes/facebook.svg"
@@ -47,7 +47,7 @@ const WishesEndorserLinkBlock: React.FC<{}> = () => {
                 </a>
                 <a
                     className="cursor-pointer"
-                    href={process.env.NEXT_LINKEDIN_LINK}
+                    href={process.env.NEXT_PUBLIC_LINKEDIN_LINK}
                 >
                     <Image
                         src="/wishes/linkedin.svg"
@@ -58,7 +58,7 @@ const WishesEndorserLinkBlock: React.FC<{}> = () => {
                 </a>
                 <a
                     className="cursor-pointer"
-                    href={process.env.NEXT_TWITTER_LINK}
+                    href={process.env.NEXT_PUBLIC_TWITTER_LINK}
                 >
                     <Image
                         src="/wishes/twitter.svg"
@@ -69,7 +69,7 @@ const WishesEndorserLinkBlock: React.FC<{}> = () => {
                 </a>
                 <a
                     className="cursor-pointer"
-                    href={process.env.NEXT_WHATSAPP_LINK}
+                    href={process.env.NEXT_PUBLIC_WHATSAPP_LINK}
                 >
                     <Image
                         src="/wishes/whatsapp.svg"
@@ -80,7 +80,7 @@ const WishesEndorserLinkBlock: React.FC<{}> = () => {
                 </a>
                 <a
                     className="cursor-pointer"
-                    href={process.env.NEXT_TELEGRAM_LINK}
+                    href={process.env.NEXT_PUBLIC_TELEGRAM_LINK}
                 >
                     <Image
                         src="/wishes/telegram.svg"
