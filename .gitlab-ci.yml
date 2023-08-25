@@ -25,7 +25,6 @@ deploy:
   script:
     - cd $PROJECT_PATH
     - sudo cp $NGINX_CONF /etc/nginx/sites-available/aga.live
-    - rm .env
     - echo NEXT_API_URL=$NEXT_API_URL >> .env
     - echo NEXT_FACEBOOK_LINK=$NEXT_FACEBOOK_LINK >> .env
     - echo NEXT_LINKEDIN_LINK=$NEXT_LINKEDIN_LINK >> .env
