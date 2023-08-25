@@ -9,9 +9,12 @@ import Link from "next/link";
 
 type Props = {
     questions: { value: string; variants: string[] }[];
-    onNext?: () => void;
+    isNextButtonDisabled?: boolean;
 };
-export const DemographicSection = ({ questions, onNext }: Props) => {
+export const DemographicSection = ({
+    questions,
+    isNextButtonDisabled,
+}: Props) => {
     return (
         <HappinessCard>
             <HappinessHeading>Demographics</HappinessHeading>
@@ -28,7 +31,7 @@ export const DemographicSection = ({ questions, onNext }: Props) => {
             <HapinessDivider />
             <div className="flex items-center justify-center">
                 <Link href="/happiness/result">
-                    <Button>Ok, done</Button>
+                    <Button disabled={isNextButtonDisabled} size="lg">Ok, done</Button>
                 </Link>
             </div>
         </HappinessCard>

@@ -9,6 +9,7 @@ type Props = {
     name: string;
     questions: Question[];
     progressBar: ReactNode;
+    isNextButtonDisabled?: boolean;
     onNext?: () => void;
     onPrevious?: () => void;
 };
@@ -16,6 +17,7 @@ export const Stage = ({
     name,
     questions,
     progressBar,
+    isNextButtonDisabled,
     onNext,
     onPrevious,
 }: Props) => {
@@ -40,7 +42,7 @@ export const Stage = ({
                     <div />
                 )}
                 {onNext && (
-                    <Button size="lg" onClick={onNext}>
+                    <Button size="lg" onClick={onNext} disabled={isNextButtonDisabled}>
                         Next
                     </Button>
                 )}

@@ -91,7 +91,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         () =>
             io(
                 `${
-                    process.env.NEXT_API_URL || "https://api.aga.live"
+                    process.env.NEXT_PUBLIC_SOCKET_URL ||
+                    process.env.NEXT_PUBLIC_API_URL ||
+                    "https://api.aga.live"
                 }/?token=${token}`,
                 {
                     autoConnect: false,

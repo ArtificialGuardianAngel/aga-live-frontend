@@ -7,6 +7,7 @@ import { GrowNumber } from "./grow-number";
 import data from "../data/result.json";
 import cn from "classnames";
 import { GradientIcon } from "./gradient.icon";
+import happinessApi from "@/api/happiness";
 
 const getResultData = (v: number) => {
     return data.find((el) => v >= el.from && v <= el.to);
@@ -15,10 +16,19 @@ const getResultData = (v: number) => {
 export const HappinessResult = () => {
     const result = useHappinessStore((s) => s.calculated_result);
     const calculate = useHappinessStore((s) => s.calculate_result);
+    const question_answers = useHappinessStore(s => s.question_answers)
+    const demographic_answers = useHappinessStore(s => s.demographic_answers)
 
     useEffect(() => {
         calculate();
     }, []);
+
+    useEffect(() => {
+        if (result > 0) {
+            // send to backend
+            happinessApi.submit(question_answers, demographic_answers)
+        }
+    }, [result])
     return (
         <HappinessCard>
             <HappinessHeading>Your result</HappinessHeading>

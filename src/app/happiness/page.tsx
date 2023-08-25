@@ -19,6 +19,13 @@ const sora = Sora({
 
 const HappinesPage = () => {
     const [stage, setStage] = useState(-2);
+    const storedQuestionAnswers = useHappinessStore(
+        (state) => state.question_answers,
+    );
+
+    const storedDemographicAnswers = useHappinessStore(
+        (state) => state.demographic_answers,
+    );
 
     const onNext = () => {
         setStage((p) => p + 1);
@@ -27,6 +34,9 @@ const HappinesPage = () => {
     const onPrevious = () => {
         setStage((p) => p - 1);
     };
+
+    // console.log(storedQuestionAnswers[data.questions[stage].name])
+    // console.log(data.questions[stage].question)
     return (
         <>
             {stage === -2 && <Introduction onNext={onNext} />}
@@ -46,12 +56,21 @@ const HappinesPage = () => {
                     }
                     onNext={onNext}
                     onPrevious={stage === 0 ? undefined : onPrevious}
+                    isNextButtonDisabled={
+                        Object.keys(
+                            storedQuestionAnswers[data.questions[stage].name] ||
+                                {},
+                        ).length < data.questions[stage].question.length
+                    }
                 />
             )}
             {stage === data.questions.length && (
                 <DemographicSection
                     questions={data.demographic}
-                    onNext={onNext}
+                    isNextButtonDisabled={
+                        Object.keys(storedDemographicAnswers).length <
+                        data.demographic.length
+                    }
                 />
             )}
             {stage > data.questions.length && <HappinessResult />}
