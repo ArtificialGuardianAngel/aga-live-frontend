@@ -21,7 +21,7 @@ const HappinessLayout = ({ children }: PropsWithChildren) => (
     <>
         <div
             className={cn(
-                "flex min-h-[100dvh] items-center justify-center py-[150px] font-[Sora] text-blue-5",
+                "flex justify-center py-[150px] font-[Sora] text-blue-5 pb-[100px]",
                 sora.className,
             )}
         >

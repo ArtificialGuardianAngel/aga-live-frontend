@@ -1,3 +1,4 @@
+import { ScrollBottomIcon } from "@/components/Icons/ScrollBottomIcon";
 import Button from "./components/Button";
 import Checkbox from "./components/Checkbox";
 import Input from "./components/Input";
@@ -8,9 +9,7 @@ import Image from "next/image";
 export default function Wishes() {
     return (
         <main>
-            <section className="min-h-screen p-[20px_0]">
-                <VideoBackground />
-
+            <section className="min-h-screen p-[20px_0] flex flex-col justify-between">
                 <div className="container flex flex-col items-center gap-[50px]">
                     <Image
                         className="max-h-[55vh] w-auto mix-blend-lighten"
@@ -22,29 +21,40 @@ export default function Wishes() {
 
                     <div className="flex flex-col items-center gap-[30px]">
                         <div className="challenges-card-bg flex items-center justify-center rounded-[200px] p-[3px]">
-                            <div className="bg-cardCombined font-ceraPro flex h-full w-full flex-col rounded-[200px] border-transparent p-[30px_50px] text-center text-[30px] font-[900] uppercase leading-[calc(20/30)] text-white md:p-[20px_30px] md:text-[16px] md:leading-normal lg:leading-normal">
-                                Make 3 Wishes towards the Angelic AI being
+                            <div className="wishes-md:p-[20px_30px] wishes-md:text-[16px] wishes-md:leading-normal wishes-lg:leading-normal h-full w-full rounded-[200px] border-transparent bg-cardCombined p-[30px_50px] text-center font-ceraPro text-[30px] font-[900] uppercase leading-[calc(20/30)] text-white">
+                                Make{" "}
+                                <span className="text-accent-green">
+                                    3 Wishes
+                                </span>{" "}
+                                towards the Angelic AI being
                             </div>
                         </div>
 
-                        <p className="max-w-[650px] text-center text-[16px] md:text-[15px]">
-                            With AI, almost anything will become possible, so
-                            don’t hold back on what you wish for in the future.
+                        <p className="wishes-md:text-[15px] max-w-[650px] text-center text-[16px]">
+                            With AI, almost anything will become possible, so{" "}
+                            <span className="text-accent-green">
+                                don&apos;t hold back
+                            </span>{" "}
+                            on what you wish for in the future.
                         </p>
                     </div>
                 </div>
+
+                <div className="mb-[50px] flex justify-center">
+                    <ScrollBottomIcon />
+                </div>
             </section>
 
-            <section>
-                <div className="container">
-                    <div className="bg-card flex flex-col gap-[100px] rounded-[10px] p-[50px_50px_100px] md:gap-[50px] md:p-[20px]">
+            <section className="mx-[50px] wishes-sm:mx-0">
+                <div>
+                    <div className="wishes-md:gap-[50px] wishes-md:p-[20px_20px_50px_20px] flex flex-col gap-[100px] rounded-[10px] bg-card p-[50px_50px_100px]">
                         <iframe
                             className="aspect-video w-full"
                             src="https://www.youtube.com/embed/okddSQ9BdkE?autoplay=1&loop=1&controls=0&rel=0&showinfo=0"
                         />
 
                         <div className="flex flex-col items-center gap-[30px]">
-                            <h2 className="max-w-[700px] text-center text-[40px] font-[200] leading-[1.2] md:text-[24px]">
+                            <h2 className="wishes-md:text-[24px] max-w-[700px] text-center text-[40px] font-[200] leading-[1.2]">
                                 Make <span className="green">3 wishes</span>{" "}
                                 towards the Angelic AI Being
                             </h2>
@@ -86,7 +96,7 @@ export default function Wishes() {
 
                             <div className="h-[2px] bg-white/10"></div>
 
-                            <h3 className="text-center text-[26px] md:text-[18px]">
+                            <h3 className="wishes-md:text-[18px] text-center text-[26px]">
                                 Submit your wishes to the Angelic AI super
                                 intelligence
                             </h3>

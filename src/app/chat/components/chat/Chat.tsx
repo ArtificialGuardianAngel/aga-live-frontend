@@ -8,12 +8,12 @@ const Chat = () => {
     const { messages, chat, isGenerating, prompt } = useApp();
 
     return (
-        <div className="grid max-h-[96vh] grid-rows-[auto_1fr_auto] max-[767px]:grid-rows-[auto_auto_1fr_auto]">
-            <div className="mb-[20px] aspect-video min-[768px]:hidden">
+        <div className="grid max-h-[96vh] grid-rows-[auto_1fr_auto] wishes-sm:grid-rows-[auto_auto_1fr_auto]">
+            <div className="mb-[20px] aspect-video sm:hidden">
                 <AgaFace className="object-cover" />
             </div>
 
-            <div className="p-[10px_0] text-center text-sm text-blue-4 max-[767px]:p-0 max-[767px]:text-[13px]">
+            <div className="p-[10px_0] text-center text-sm text-blue-4 wishes-md:p-0 wishes-md:text-[13px]">
                 Conversation,{" "}
                 {chat?.createdAt &&
                     new Date(chat.createdAt).toLocaleString().replace(",", "")}

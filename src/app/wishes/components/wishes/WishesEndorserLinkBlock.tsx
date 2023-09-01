@@ -1,31 +1,42 @@
 import Image from "next/image";
 import React from "react";
+import copy from "copy-to-clipboard";
 
-const WishesEndorserLinkBlock: React.FC<{}> = () => {
+type Props = {
+    email: string;
+};
+const WishesEndorserLinkBlock: React.FC<Props> = ({ email }) => {
     return (
         <div className="flex flex-col items-center gap-[50px]">
-            <h3 className="text-accentGreen text-center text-[22px] font-[600]">
+            <h3 className="text-center text-[22px] font-[600] text-accentGreen">
                 Your endorser link
             </h3>
 
-            <div className="challenges-card-bg flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px] md:min-w-[280px] md:max-w-full">
+            <div className="challenges-card-bg wishes-md:min-w-[280px] wishes-md:max-w-full flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px]">
                 <div
                     onClick={() =>
                         navigator.clipboard.writeText(
                             "https://aga.live/3wishes/e/user@gmail.com",
                         )
                     }
-                    className="bg-cardCombined flex h-full w-full items-center gap-[20px] overflow-hidden rounded-[200px] border-transparent p-[25px_40px] text-center text-[20px] leading-[calc(15/20)] text-white md:p-[10px_15px] md:text-[14px] md:leading-normal lg:leading-normal"
+                    className="wishes-md:p-[10px_15px] wishes-md:text-[14px] wishes-md:leading-normal wishes-lg:leading-normal justify-between flex h-full w-full items-center overflow-hidden gap-[20px] rounded-[200px] border-transparent bg-cardCombined p-[25px_40px] text-center text-[20px] leading-[calc(15/20)] text-white"
                 >
                     <span className="overflow-hidden text-ellipsis">
-                        https://aga.live/3wishes/e/user@gmail.com
+                        https://aga.live/3wishes/e/{email}
                     </span>
-                    <Image
-                        src="/wishes/icon-copy.svg"
-                        width={20}
-                        height={20}
-                        alt="Copy"
-                    />
+                    <button
+                        onClick={() => {
+                            alert(`https://aga.live/3wishes/e/${email}`);
+                            copy(`https://aga.live/3wishes/e/${email}`);
+                        }}
+                    >
+                        <Image
+                            src="/wishes/icon-copy.svg"
+                            width={20}
+                            height={20}
+                            alt="Copy"
+                        />
+                    </button>
                 </div>
             </div>
 

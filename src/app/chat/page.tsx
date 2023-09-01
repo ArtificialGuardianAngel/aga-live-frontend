@@ -15,7 +15,7 @@ const ChatPage = () => {
                 <div className="flex h-[100dvh] w-screen flex-col p-[20px]">
                     <MobileHeader />
                     <AppProvider>
-                        <div className="grid flex-1 grid-cols-[300px_1fr_300px] gap-[4px] max-[1365px]:grid-cols-[216px_1fr_216px] max-[1023px]:grid-cols-[256px_1fr] max-[768px]:gap-[20px] max-[767px]:grid-cols-[1fr]">
+                        <div className="grid flex-1 grid-cols-[300px_1fr_300px] gap-[4px] wishes-xl:grid-cols-[216px_1fr_216px] wishes-lg:grid-cols-[256px_1fr] wishes-md:gap-[20px] wishes-md:grid-cols-[1fr]">
                             <LeftBar />
                             <Chat />
                             <RightBar />
