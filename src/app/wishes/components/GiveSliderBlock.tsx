@@ -24,7 +24,7 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
       <div className="flex flex-col gap-[30px]">
         <h4 className="text-center">Your one-time donation:</h4>
 
-        <div className="flex items-center gap-[25px] md:flex-col">
+        <div className="flex items-center gap-[25px] wishes-md:flex-col">
           <div>369 USD</div>
           <div className="flex-1 flex items-center relative">
             <input
@@ -53,8 +53,8 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
         <div className="flex flex-col gap-[30px] items-center">
           <h4 className="text-center">Your financial reward:</h4>
 
-          <div className="challenges-card-bg rounded-[200px] flex justify-center items-center p-[3px] min-w-[370px] md:min-w-[280px]">
-            <div className="text-center h-full w-full flex flex-col p-[30px_50px] border-transparent bg-cardCombined rounded-[200px] text-[40px] uppercase font-[200] text-white font-ceraPro leading-[calc(20/30)] md:p-[10px_15px] md:text-[20px] md:leading-normal lg:leading-normal">
+          <div className="challenges-card-bg rounded-[200px] flex justify-center items-center p-[3px] min-w-[370px] wishes-md:min-w-[280px]">
+            <div className="text-center h-full w-full flex flex-col p-[30px_50px] border-transparent bg-cardCombined rounded-[200px] text-[40px] uppercase font-[200] text-white font-ceraPro leading-[calc(20/30)] wishes-md:p-[10px_15px] wishes-md:text-[20px] wishes-md:leading-normal wishes-lg:leading-normal">
               {(value / 2).toLocaleString('en-US')} USD
             </div>
           </div>

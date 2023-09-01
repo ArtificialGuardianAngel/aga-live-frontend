@@ -11,7 +11,7 @@ const MobileHeader = () => {
 
   return (
     <>
-      <div className="mb-[20px] flex min-[1024px]:hidden">
+      <div className="mb-[20px] flex lg:hidden">
         <div className="ml-auto flex gap-[5px]">
           <Button
             className="flex-1"

@@ -11,8 +11,8 @@ const RightBar = () => {
   const [prevChatsOpened, setPrevChatsOpened] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col overflow-y-auto max-[1023px]:hidden">
-      <div className="flex gap-[5px] max-[1365px]:flex-col">
+    <div className="flex flex-col overflow-y-auto wishes-lg:hidden">
+      <div className="flex gap-[5px] wishes-xl:flex-col">
         <Button
           className="flex-1"
           type="secondary"

@@ -36,6 +36,21 @@ const config: Config = {
             fontFamily: {
                 ceraPro: "Cera Pro",
             },
+            screens: {
+                "wishes-xxl": { max: "1920px" },
+
+                "wishes-xl": { max: "1279px" },
+                // => @media (max-width: 1279px) { ... }
+
+                "wishes-lg": { max: "1023px" },
+                // => @media (max-width: 1023px) { ... }
+
+                "wishes-md": { max: "767px" },
+                // => @media (max-width: 767px) { ... }
+
+                "wishes-sm": { max: "639px" },
+                // => @media (max-width: 639px) { ... }
+            },
         },
     },
     plugins: [require("tailwind-scrollbar")],

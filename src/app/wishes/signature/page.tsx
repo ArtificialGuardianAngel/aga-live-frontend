@@ -9,9 +9,9 @@ export default function ESignature() {
             <section className="min-h-screen pt-[50px]">
                 <VideoBackground />
 
-                <div className="flex flex-col gap-[70px] p-[70px] md:gap-[30px] md:p-[15px]">
+                <div className="flex flex-col gap-[70px] p-[70px] wishes-md:gap-[30px] wishes-md:p-[15px]">
                     <div className="flex flex-col items-center gap-[30px]">
-                        <h2 className="text-center text-[40px] font-[200] md:text-[28px]">
+                        <h2 className="text-center text-[40px] font-[200] wishes-md:text-[28px]">
                             <span className="green">Congratulations</span> on
                             taking this step!
                         </h2>
@@ -36,7 +36,7 @@ export default function ESignature() {
                     </div>
 
                     <div className="flex flex-col gap-[5px]">
-                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] md:flex-col">
+                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] wishes-md:flex-col">
                             <div className="bg-accentGreen text-blue7 flex h-[30px] w-[30px] items-center justify-center rounded-full text-[13px] font-bold">
                                 1
                             </div>
@@ -47,7 +47,7 @@ export default function ESignature() {
                             </div>
                         </div>
 
-                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] md:flex-col">
+                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] wishes-md:flex-col">
                             <div className="bg-accentGreen text-blue7 flex h-[30px] w-[30px] items-center justify-center rounded-full text-[13px] font-bold">
                                 2
                             </div>
@@ -58,7 +58,7 @@ export default function ESignature() {
                             </div>
                         </div>
 
-                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] md:flex-col">
+                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] wishes-md:flex-col">
                             <div className="bg-accentGreen text-blue7 flex h-[30px] w-[30px] items-center justify-center rounded-full text-[13px] font-bold">
                                 3
                             </div>
@@ -69,7 +69,7 @@ export default function ESignature() {
                             </div>
                         </div>
 
-                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] md:flex-col">
+                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] wishes-md:flex-col">
                             <div className="bg-accentGreen text-blue7 flex h-[30px] w-[30px] items-center justify-center rounded-full text-[13px] font-bold">
                                 4
                             </div>
@@ -80,7 +80,7 @@ export default function ESignature() {
                             </div>
                         </div>
 
-                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] md:flex-col">
+                        <div className="bg-card flex items-center gap-[15px] rounded-[10px] p-[30px] wishes-md:flex-col">
                             <div className="bg-accentGreen text-blue7 flex h-[30px] w-[30px] items-center justify-center rounded-full text-[13px] font-bold">
                                 5
                             </div>
@@ -97,7 +97,7 @@ export default function ESignature() {
                                 >
                                     https://aga.live/3wishes/e/user@gmail.com
                                     <Image
-                                        className="ml-[10px] inline md:hidden"
+                                        className="ml-[10px] inline wishes-md:hidden"
                                         src="/wishes/icon-copy.svg"
                                         width={17}
                                         height={17}

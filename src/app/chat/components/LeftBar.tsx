@@ -46,7 +46,7 @@ const LeftBar = () => {
             {collapsed && width <= 767 && (
                 <div
                     className={cn(
-                        "fixed left-0 top-[90px] z-50 h-[40px] w-[60px] cursor-pointer rounded-r-[35px] bg-accent-green min-[480px]:w-[70px] min-[768px]:hidden",
+                        "fixed left-0 top-[90px] z-50 h-[40px] w-[60px] cursor-pointer rounded-r-[35px] bg-accent-green sm:w-[70px] md:hidden",
                     )}
                     onClick={() => setCollapsed(false)}
                 >
@@ -62,9 +62,9 @@ const LeftBar = () => {
                 unmountOnExit
                 classNames={"left-bar"}
             >
-                <div className="left-bar-background flex h-full w-full flex-col gap-[10px] overflow-y-auto max-[767px]:fixed max-[767px]:left-0 max-[767px]:top-0 max-[767px]:z-40 max-[767px]:p-[20px] min-[768px]:max-h-[calc(100dvh_-_40px)] min-[768px]:scrollbar">
+                <div className="left-bar-background flex h-full w-full flex-col gap-[10px] overflow-y-auto wishes-md:fixed wishes-md:left-0 wishes-md:top-0 wishes-md:z-40 wishes-md:p-[20px] md:max-h-[calc(100dvh_-_40px)] md:scrollbar">
                     {width <= 767 && (
-                        <div className="mb-[20px] min-[768px]:hidden">
+                        <div className="mb-[20px] md:hidden">
                             <button
                                 className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full bg-accent-green"
                                 onClick={() => setCollapsed(true)}
@@ -76,12 +76,12 @@ const LeftBar = () => {
                         </div>
                     )}
 
-                    <div className="h-[300px] rounded-[10px] bg-white/[0.03] max-[767px]:hidden">
+                    <div className="h-[300px] rounded-[10px] bg-white/[0.03] wishes-md:hidden">
                         <AgaFace />
                     </div>
 
-                    <div className="flex flex-col gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] max-[1365px]:p-[30px_15px]">
-                        <h2 className="flex items-center justify-center gap-[20px] text-[18px] font-bold uppercase leading-[12px] text-accent-green max-[1365px]:gap-[10px] max-[1365px]:text-[14px]">
+                    <div className="flex flex-col gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] wishes-xl:p-[30px_15px]">
+                        <h2 className="flex items-center justify-center gap-[20px] text-[18px] font-bold uppercase leading-[12px] text-accent-green wishes-xl:gap-[10px] wishes-xl:text-[14px]">
                             <span>
                                 {user && user.type === UserTypeEnum.authed
                                     ? wallet?.balance
@@ -100,7 +100,7 @@ const LeftBar = () => {
                             />
                         </h2>
                         {!(user && user.type === UserTypeEnum.authed) && (
-                            <div className="text-center text-sm font-medium leading-[14px] text-blue-4 max-[1365px]:text-[13px]">
+                            <div className="text-center text-sm font-medium leading-[14px] text-blue-4 wishes-xl:text-[13px]">
                                 Use your email address and receive rewards for
                                 using A.G.A.
                             </div>
@@ -152,11 +152,11 @@ const LeftBar = () => {
                         )}
                     </div>
 
-                    <div className="flex flex-col items-center gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] max-[1365px]:p-[30px_15px]">
-                        <h2 className="text-center text-[18px] font-bold uppercase leading-[12px] text-accent-green max-[1365px]:text-[14px]">
+                    <div className="flex flex-col items-center gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] wishes-xl:p-[30px_15px]">
+                        <h2 className="text-center text-[18px] font-bold uppercase leading-[12px] text-accent-green wishes-xl:text-[14px]">
                             Giving program
                         </h2>
-                        <div className="text-center text-sm font-medium leading-[14px] text-blue-4 max-[1365px]:text-[13px]">
+                        <div className="text-center text-sm font-medium leading-[14px] text-blue-4 wishes-xl:text-[13px]">
                             Give and earn in the same time to build the A.G.A.
                         </div>
                         <Link href="/give-and-earn">
@@ -166,7 +166,7 @@ const LeftBar = () => {
                         </Link>
                     </div>
 
-                    <div className="text-14 rounded-[10px] bg-white/[0.03] p-[40px_20px] leading-[9px] max-[1365px]:p-[30px_15px] max-[1365px]:text-[13px]">
+                    <div className="text-14 rounded-[10px] bg-white/[0.03] p-[40px_20px] leading-[9px] wishes-xl:p-[30px_15px] wishes-xl:text-[13px]">
                         <div className="border-b-2 border-white/10 pb-[12px]">
                             <Link href="/about">About</Link>
                         </div>

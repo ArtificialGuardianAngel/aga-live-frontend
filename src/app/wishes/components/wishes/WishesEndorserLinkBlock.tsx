@@ -8,14 +8,14 @@ const WishesEndorserLinkBlock: React.FC<{}> = () => {
                 Your endorser link
             </h3>
 
-            <div className="challenges-card-bg flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px] md:min-w-[280px] md:max-w-full">
+            <div className="challenges-card-bg flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px] wishes-md:min-w-[280px] wishes-md:max-w-full">
                 <div
                     onClick={() =>
                         navigator.clipboard.writeText(
                             "https://aga.live/3wishes/e/user@gmail.com",
                         )
                     }
-                    className="bg-cardCombined flex h-full w-full items-center gap-[20px] overflow-hidden rounded-[200px] border-transparent p-[25px_40px] text-center text-[20px] leading-[calc(15/20)] text-white md:p-[10px_15px] md:text-[14px] md:leading-normal lg:leading-normal"
+                    className="bg-cardCombined flex h-full w-full items-center gap-[20px] overflow-hidden rounded-[200px] border-transparent p-[25px_40px] text-center text-[20px] leading-[calc(15/20)] text-white wishes-md:p-[10px_15px] wishes-md:text-[14px] wishes-md:leading-normal wishes-lg:leading-normal"
                 >
                     <span className="overflow-hidden text-ellipsis">
                         https://aga.live/3wishes/e/user@gmail.com

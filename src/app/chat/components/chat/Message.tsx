@@ -41,7 +41,7 @@ const Message: React.FC<Props> = ({
 
   if (isMe) {
     return (
-      <div className="bg-white/[0.03] p-[30px] rounded-[10px] flex gap-[30px] max-[767px]:p-[20px] max-[767px]:flex-col max-[767px]:gap-[10px] max-[767px]:text-sm shadow">
+      <div className="bg-white/[0.03] p-[30px] rounded-[10px] flex gap-[30px] wishes-md:p-[20px] wishes-md:flex-col wishes-md:gap-[10px] wishes-md:text-sm shadow">
         <div className="w-[110px] text-accent-green font-bold">
           Your message:
         </div>
@@ -51,21 +51,21 @@ const Message: React.FC<Props> = ({
   }
 
   return (
-    <div className="flex gap-[30px] p-[50px] max-[767px]:p-[30px_20px] max-[767px]:flex-col max-[767px]:gap-[25px]">
+    <div className="flex gap-[30px] p-[50px] wishes-md:p-[30px_20px] wishes-md:flex-col wishes-md:gap-[25px]">
       <div className="w-[90px] text-accent-green">
-        <div className="flex gap-[10px] items-center font-bold max-[767px]:text-sm">
-          <img className="max-[767px]:hidden" src={logo} alt="" />
+        <div className="flex gap-[10px] items-center font-bold wishes-md:text-sm">
+          <img className="wishes-md:hidden" src={logo} alt="" />
           <span>A.G.A.</span>
         </div>
       </div>
 
       <div className="flex-1">
         <div className="flex flex-col gap-[20px]">
-          {/* <h4 className="text-[15px] text-accent-green font-medium leading-[10px] max-[767px]:text-[13px]">
+          {/* <h4 className="text-[15px] text-accent-green font-medium leading-[10px] wishes-md:text-[13px]">
             Assistant mode:
           </h4> */}
 
-          <div className="leading-[20px] max-[767px]:text-sm">
+          <div className="leading-[20px] wishes-md:text-sm">
             {formattedMessage}
           </div>
         </div>
