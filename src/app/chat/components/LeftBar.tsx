@@ -62,7 +62,7 @@ const LeftBar = () => {
                 unmountOnExit
                 classNames={"left-bar"}
             >
-                <div className="left-bar-background flex h-full w-full flex-col gap-[10px] overflow-y-auto wishes-md:fixed wishes-md:left-0 wishes-md:top-0 wishes-md:z-40 wishes-md:p-[20px] md:max-h-[calc(100dvh_-_40px)] md:scrollbar">
+                <div className="left-bar-background flex h-full w-full flex-col gap-[10px] overflow-y-auto md:max-h-[calc(100dvh_-_40px)] md:scrollbar wishes-md:fixed wishes-md:left-0 wishes-md:top-0 wishes-md:z-40 wishes-md:p-[20px]">
                     {width <= 767 && (
                         <div className="mb-[20px] md:hidden">
                             <button
@@ -152,7 +152,7 @@ const LeftBar = () => {
                         )}
                     </div>
 
-                    <div className="flex flex-col items-center gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] wishes-xl:p-[30px_15px]">
+                    <div className="flex hidden flex-col items-center gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] wishes-xl:p-[30px_15px]">
                         <h2 className="text-center text-[18px] font-bold uppercase leading-[12px] text-accent-green wishes-xl:text-[14px]">
                             Giving program
                         </h2>
