@@ -1,69 +1,77 @@
 .wrapper {
-  min-height: 100vh;
+    min-height: 100vh;
 
-  padding: 50px 50px 80px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-direction: column;
-  gap: 35px;
+    padding: 50px 50px 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 35px;
 
-  background: radial-gradient(
-        77.09% 129.04% at 60.52% 17.97%,
-        rgba(191, 60, 189, 0.2) 0%,
-        rgba(29, 42, 161, 0.2) 46.88%,
-        rgba(28, 41, 60, 0.2) 100%
-      )
-      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-    #1c293c;
-  background-blend-mode: lighten, normal, normal;
+    // background:
+    //     radial-gradient(
+    //             77.09% 129.04% at 60.52% 17.97%,
+    //             rgba(191, 60, 189, 0.2) 0%,
+    //             rgba(29, 42, 161, 0.2) 46.88%,
+    //             rgba(28, 41, 60, 0.2) 100%
+    //         )
+    //         /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    //     #1c293c;
+    background-blend-mode: lighten, normal, normal;
 
-  @media (max-width: 768px) {
-    padding: 25px 25px 40px;
-  }
+    @media (max-width: 768px) {
+        padding: 25px 25px 40px;
+    }
 }
 
 .video {
-  flex: 1 1 auto;
-  max-height: 65vh;
-  max-width: 960px;
-  border-radius: 30px;
+    height: 50vh;
+    width: auto;
+    max-width: unset;
+    margin: auto;
+
+    @media (max-width: 1280px) {
+        height: auto;
+        max-width: 1024px;
+        max-height: unset;
+        width: 100%;
+    }
 }
 
 .title {
-  font-size: 48px;
-  line-height: calc(59 / 48);
-  font-weight: 900;
-  text-shadow: 0px 0px 20px #11f4d1;
-  color: white;
+    font-size: 48px;
+    line-height: calc(59 / 48);
+    font-weight: 900;
+    text-shadow: 0px 0px 20px #11f4d1;
+    color: white;
 
-  @media (max-width: 768px) {
-    font-size: 24px;
-  }
+    @media (max-width: 768px) {
+        font-size: 24px;
+    }
 }
 
 .subtitle {
-  text-transform: uppercase;
-  color: white;
-  font-weight: 700;
-  line-height: 8px;
-  font-size: 12px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 700;
+    line-height: 8px;
+    font-size: 12px;
 }
 
 .buttons {
-  display: flex;
-  gap: 5px;
+    display: flex;
+    gap: 5px;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
 .button {
-  width: 200px;
+    width: 200px;
 }
 
 .image {
-  max-width: 100%;
-  max-height: 60vh;
+    max-width: 100%;
+    max-height: 60vh;
 }
