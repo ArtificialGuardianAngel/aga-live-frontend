@@ -1,4 +1,5 @@
 "use client";
+
 import {
     FormBlock,
     JoinUsBlock,
@@ -11,20 +12,22 @@ import { NotificationsContextProvider } from "./context/NotificationsContext";
 
 const GiveAndEarnPage = () => {
     return (
-        <NotificationsContextProvider>
-            <a href="/" className={"fixed-back-link"}></a>
-            <WelcomeBlock />
+        <>
+            <NotificationsContextProvider>
+                <a href="/" className={"fixed-back-link"}></a>
+                <WelcomeBlock />
 
-            <VideoPresentationBlock />
+                <VideoPresentationBlock />
 
-            <WhyImportantBlock />
+                <WhyImportantBlock />
 
-            <JoinUsBlock />
+                <JoinUsBlock />
 
-            <FormBlock />
+                <FormBlock />
 
-            <Notifications />
-        </NotificationsContextProvider>
+                <Notifications />
+            </NotificationsContextProvider>
+        </>
     );
 };
 

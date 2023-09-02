@@ -1,50 +1,50 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .labelWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
 .label {
-  color: #d6e1fa;
-  font-size: 15px;
-  line-height: 10px;
-  font-weight: 500;
+    color: #d6e1fa;
+    font-size: 15px;
+    line-height: 10px;
+    font-weight: 500;
 }
 
 .subLabel {
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 10px;
-  color: rgba(#d6e1fa, 0.4);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 10px;
+    color: rgba(#d6e1fa, 0.4);
 }
 
 .textArea {
-  padding: 20px;
-  font-size: 15px;
-  height: 50px;
-  background-color: #3d4b72;
-  color: white;
-  font-family: 'Cera Pro', sans-serif;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  flex: 1 1 auto;
-  border: 1px solid rgba(#fff, 0.6);
-  border-radius: 5px;
+    padding: 20px;
+    font-size: 15px;
+    height: 50px;
+    background-color: transparent;
+    color: white;
+    font-family: "Cera Pro", sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    flex: 1 1 auto;
+    border: 1px solid rgba(#fff, 0.6);
+    border-radius: 5px;
 
-  @media (max-width: 768px) {
-    line-height: 15px;
-    font-size: 12px;
-    height: 100px;
-  }
+    @media (max-width: 768px) {
+        line-height: 15px;
+        font-size: 12px;
+        height: 100px;
+    }
 
-  &::placeholder {
-    color: rgba(white, 0.4);
-  }
+    &::placeholder {
+        color: rgba(white, 0.4);
+    }
 }

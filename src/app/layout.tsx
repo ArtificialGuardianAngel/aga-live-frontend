@@ -3,12 +3,21 @@ import authApi from "@/api/auth";
 import "./globals.css";
 import { getLocalInfo } from "@/utils/metadata";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+
+const TITLES: { [key: string]: string } = {
+    "give-and-earn":
+        "Give&Earn - Support the largest humanitarian project that has ever existed.",
+    wishes: "3 Wishes - Make your wish a reality with A.G.A.",
+};
 
 export default function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const pathname = usePathname();
+
     useEffect(() => {
         getLocalInfo()
             .then(authApi.connect)
@@ -17,10 +26,11 @@ export default function RootLayout({
             })
             .catch((e) => console.error(e));
     }, []);
+
     return (
         <html lang="en">
             <head>
-                <title>A.G.A. Live</title>
+                <title>{TITLES[pathname.split("/")[1]] || "A.G.A. Live"}</title>
                 <meta
                     content="width=device-width, initial-scale=1"
                     name="viewport"

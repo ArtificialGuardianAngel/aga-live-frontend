@@ -4,17 +4,19 @@ import copy from "copy-to-clipboard";
 import Image from "next/image";
 import BackButton from "../components/BackButton";
 
-type Props = {
-    email: string;
-};
-export default function ESignature({ email }: Props) {
+interface Props {
+    searchParams: {
+        [key: string]: string | string[] | undefined;
+    };
+}
+export default function ESignature({ searchParams }: Props) {
     return (
         <main>
-            <BackButton className="wishes-xl:top-[30px] wishes-xl:left-[30px] wishes-sm:top-[20px] wishes-sm:left-[20px] fixed left-[50px] top-[50px]" />
-            <section className="wishes-xl:mt-0 mx-[auto] mt-[50px] min-h-screen max-w-[1080px] bg-card">
-                <div className="wishes-md:gap-[30px] wishes-sm:p-[100px_10px_10px] wishes-md:p-[100px_30px_30px] wishes-lg:p-[120px_50px_50px] flex flex-col gap-[70px] p-[70px]">
+            <BackButton className="fixed left-[50px] top-[50px] wishes-xl:left-[30px] wishes-xl:top-[30px] wishes-sm:left-[20px] wishes-sm:top-[20px]" />
+            <section className="mx-[auto] mt-[50px] min-h-screen max-w-[1080px] bg-card wishes-xl:mt-0">
+                <div className="flex flex-col gap-[70px] p-[70px] wishes-lg:p-[120px_50px_50px] wishes-md:gap-[30px] wishes-md:p-[100px_30px_30px] wishes-sm:p-[100px_10px_10px]">
                     <div className="flex flex-col items-center gap-[30px]">
-                        <h2 className="wishes-md:text-[28px] text-center text-[40px] font-[200]">
+                        <h2 className="text-center text-[40px] font-[200] wishes-md:text-[28px]">
                             <span className="green">Congratulations</span> on
                             taking this step!
                         </h2>
@@ -98,16 +100,17 @@ export default function ESignature({ email }: Props) {
                                         )
                                     }
                                 >
-                                    https://aga.live/3wishes/e/{email}
+                                    https://aga.live/3wishes/e/
+                                    {searchParams.email}
                                     <button
                                         onClick={() => {
                                             copy(
-                                                `https://aga.live/3wishes/e/${email}`,
+                                                `https://aga.live/3wishes/e/${searchParams.email}`,
                                             );
                                         }}
                                     >
                                         <Image
-                                            className="wishes-md:hidden ml-[10px] inline"
+                                            className="ml-[10px] inline wishes-md:hidden"
                                             src="/wishes/icon-copy.svg"
                                             width={17}
                                             height={17}
