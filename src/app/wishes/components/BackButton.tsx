@@ -7,9 +7,14 @@ type Props = {
 };
 
 const BackButton = ({ className }: Props) => {
+    const onClick = () => {
+        window.history.go(-1);
+    };
+
     return (
         <button
             className={classNames("flex items-center gap-[15px]", className)}
+            onClick={onClick}
         >
             <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-accentGreen">
                 <Image

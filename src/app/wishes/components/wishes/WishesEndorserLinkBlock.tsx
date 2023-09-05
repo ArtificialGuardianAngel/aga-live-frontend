@@ -1,32 +1,42 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import copy from "copy-to-clipboard";
+import cn from "classnames";
 
 type Props = {
     email: string;
 };
 const WishesEndorserLinkBlock: React.FC<Props> = ({ email }) => {
+    const [copied, setCopied] = useState(false);
+
+    const onCopyClick = () => {
+        copy(`https://aga.live/3wishes/e/${email}`);
+        setCopied(true);
+
+        setTimeout(() => setCopied(false), 2 * 1000);
+    };
+
     return (
         <div className="flex flex-col items-center gap-[50px]">
             <h3 className="text-center text-[22px] font-[600] text-accentGreen">
                 Your endorser link
             </h3>
 
-            <div className="challenges-card-bg wishes-md:min-w-[280px] wishes-md:max-w-full flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px]">
+            <div className="challenges-card-bg flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px] wishes-md:min-w-[280px] wishes-md:max-w-full">
                 <div
-                    onClick={() =>
-                        navigator.clipboard.writeText(
-                            "https://aga.live/3wishes/e/user@gmail.com",
-                        )
-                    }
-                    className="wishes-md:p-[10px_15px] wishes-md:text-[14px] wishes-md:leading-normal wishes-lg:leading-normal justify-between flex h-full w-full items-center overflow-hidden gap-[20px] rounded-[200px] border-transparent bg-cardCombined p-[25px_40px] text-center text-[20px] leading-[calc(15/20)] text-white"
+                    onClick={() => onCopyClick()}
+                    className="tooltip-trigger relative flex h-full w-full cursor-pointer items-center justify-between gap-[20px] rounded-[200px] border-transparent bg-cardCombined p-[25px_40px] text-center text-[20px] leading-[calc(15/20)] text-white wishes-lg:leading-normal wishes-md:p-[10px_15px] wishes-md:text-[14px] wishes-md:leading-normal"
                 >
+                    <div className={cn("tooltip", { active: copied })}>
+                        {copied ? "Copied!" : "Click to Copy"}
+                    </div>
                     <span className="overflow-hidden text-ellipsis">
                         https://aga.live/3wishes/e/{email}
                     </span>
                     <button
                         onClick={() => {
-                            alert(`https://aga.live/3wishes/e/${email}`);
                             copy(`https://aga.live/3wishes/e/${email}`);
                         }}
                     >

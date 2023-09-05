@@ -1,5 +1,6 @@
 import cn from "classnames";
 import React, { useEffect, useRef } from "react";
+import { useWindowSize } from "usehooks-ts";
 
 interface Props {
     value: number;
@@ -11,6 +12,7 @@ const MAX_VALUE = 1080000;
 
 const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
     const valueItemRef = useRef<HTMLDivElement>(null);
+    const { width: windowWidth } = useWindowSize();
 
     useEffect(() => {
         if (valueItemRef.current) {
@@ -19,15 +21,22 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
             }% + ${
                 25 - 50 * ((value - MIN_VALUE) / (MAX_VALUE - MIN_VALUE))
             }px)`;
+
+            valueItemRef.current.style.transform =
+                windowWidth <= 767
+                    ? `translate(${
+                          -100 * ((value - MIN_VALUE) / (MAX_VALUE - MIN_VALUE))
+                      }%, calc(100% + 25px))`
+                    : `translate(-50%, calc(100% + 25px))`;
         }
-    }, [value]);
+    }, [value, windowWidth]);
 
     return (
         <div className="flex flex-col gap-[120px]">
             <div className="flex flex-col gap-[30px]">
                 <h4 className="text-center">Your one-time donation:</h4>
 
-                <div className="wishes-md:flex-col flex items-center gap-[25px]">
+                <div className="flex items-center gap-[25px] wishes-md:flex-col">
                     <div className="wishes-md:hidden">369 USD</div>
                     <div
                         className={cn(
@@ -46,7 +55,7 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
                         />
                         <div
                             ref={valueItemRef}
-                            className="absolute bottom-0 z-20 w-[180px] translate-x-[-50%] translate-y-[calc(100%+25px)] rounded-[5px] bg-accentGreen p-[12px] text-center leading-[calc(12/16)] text-blue7"
+                            className="absolute bottom-0 z-20 w-[180px] rounded-[5px] bg-accentGreen p-[12px] text-center leading-[calc(12/16)] text-blue7"
                         >
                             <span className="font-[700]">
                                 {value.toLocaleString("en-US")}
@@ -54,7 +63,7 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
                             USD
                         </div>
                     </div>
-                    <div className="wishes-md:flex hidden w-full justify-between">
+                    <div className="hidden w-full justify-between wishes-md:flex">
                         <span>369 USD</span>
                         <span>1,080,000 USD</span>
                     </div>
@@ -66,8 +75,8 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
                 <div className="flex flex-col items-center gap-[30px]">
                     <h4 className="text-center">Your financial reward:</h4>
 
-                    <div className="challenges-card-bg wishes-md:min-w-[280px] flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px]">
-                        <div className="wishes-md:p-[10px_15px] wishes-md:text-[30px] wishes-md:leading-normal wishes-lg:leading-normal flex h-full w-full flex-col rounded-[200px] border-transparent bg-cardCombined p-[30px_50px] text-center font-ceraPro text-[40px] font-[200] uppercase leading-[calc(20/30)] text-white">
+                    <div className="challenges-card-bg flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px] wishes-md:min-w-[280px]">
+                        <div className="flex h-full w-full flex-col rounded-[200px] border-transparent bg-cardCombined p-[30px_50px] text-center font-ceraPro text-[40px] font-[200] uppercase leading-[calc(20/30)] text-white wishes-lg:leading-normal wishes-md:p-[10px_15px] wishes-md:text-[30px] wishes-md:leading-normal">
                             {(value / 2).toLocaleString("en-US")} USD
                         </div>
                     </div>

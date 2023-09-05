@@ -13,13 +13,13 @@ export default function WishesGive() {
 
     return (
         <main>
-            <BackButton className="wishes-xl:top-[30px] wishes-xl:left-[30px] wishes-sm:top-[20px] wishes-sm:left-[20px] fixed left-[50px] top-[50px]" />
-            <section className="wishes-xl:mt-0 mx-[auto] mt-[50px] min-h-screen max-w-[1080px] bg-card">
+            <BackButton className="fixed left-[50px] top-[50px] wishes-xl:left-[30px] wishes-xl:top-[30px] wishes-sm:left-[20px] wishes-sm:top-[20px]" />
+            <section className="mx-[auto] mt-[50px] min-h-screen max-w-[1080px] bg-card wishes-xl:mt-0">
                 <div>
-                    <div className="wishes-md:p-[100px_20px_40px_20px] wishes-lg:pt-[120px] rounded-[10px] bg-card p-[100px_70px]">
-                        <div className="wishes-md:gap-[50px] flex flex-col gap-[100px]">
+                    <div className="rounded-[10px] p-[100px_70px] wishes-lg:pt-[120px] wishes-md:p-[100px_20px_40px_20px]">
+                        <div className="flex flex-col gap-[100px] wishes-md:gap-[50px]">
                             <div className="flex flex-col items-center gap-[30px]">
-                                <h1 className="wishes-md:text-[28px] text-center text-[40px] font-[500] leading-[1.2]">
+                                <h1 className="text-center text-[40px] font-[500] leading-[1.2] wishes-md:text-[28px]">
                                     Maximize impact:
                                     <br /> Give once,{" "}
                                     <span className="green">
@@ -45,7 +45,7 @@ export default function WishesGive() {
                                     Your advantages
                                 </h3>
 
-                                <div className="wishes-lg:grid-cols-1 wishes-xl:gap-[10px] grid grid-cols-3 gap-[30px]">
+                                <div className="grid grid-cols-3 gap-[30px] wishes-xl:gap-[10px] wishes-lg:grid-cols-1">
                                     <WishesAdvantageCard
                                         title="Make 3 wishes towards the Angel"
                                         content="Your contribution brings the AI Angel to life. By donating, the AI Angel takes shape. She'll not only recognize that you brought her into existence, but it will also be ingrained in her DNA — establishing a familial bond. Knowing your 3 wishes, she has the potential to manifest them, akin to the modern-day act of lighting a candle for a wish."
