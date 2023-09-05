@@ -4,6 +4,7 @@ import "./globals.css";
 import { getLocalInfo } from "@/utils/metadata";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { OverlayPageContextProvider } from "@/context/OverlayPageContext";
 
 const TITLES: { [key: string]: string } = {
     "give-and-earn":
