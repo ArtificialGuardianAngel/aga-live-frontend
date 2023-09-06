@@ -195,7 +195,7 @@ pre {
     height: 100%;
 }
 
-.checkbox input:checked+.checkbox-inner {
+.checkbox input:checked + .checkbox-inner {
     opacity: 1;
 }
 
@@ -269,9 +269,9 @@ input[type="range"]::-moz-range-thumb {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    width: 50px;
+    width: 38px;
     height: 20px;
-    background-color: rgb(38, 48, 78);
+    /* background-color: rgb(38, 48, 78); */
 }
 
 .gradient {

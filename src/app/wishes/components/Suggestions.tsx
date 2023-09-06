@@ -28,8 +28,8 @@ const Suggestions: React.FC<Props> = ({ onSuggestionClick }) => {
             <div className="flex flex-col gap-[5px] font-ceraPro">
                 {DATA.map(({ category, text }) => (
                     <div
-                        className="cursor-pointer rounded-[10px] bg-white/[0.03] p-[30px] text-center text-[16px] text-white shadow"
-                        key={category}
+                        className="cursor-pointer rounded-[10px] bg-white/[0.03] p-[30px] text-center text-[16px] text-white shadow transition-all hover:bg-white/5"
+                        key={text}
                         onClickCapture={() => onClick(text)}
                     >
                         <div>
@@ -77,10 +77,6 @@ const DATA = [
     {
         category: "Safety",
         text: "Protect me and my loved ones from harm and danger.",
-    },
-    {
-        category: "Reuniting with Lost Loved Ones",
-        text: "Reunite me with those I’ve lost, whether through passing or circumstance.",
     },
     {
         category: "Reuniting with Lost Loved Ones",

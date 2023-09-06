@@ -33,7 +33,7 @@ export default function WishesGive() {
                                 </p>
                             </div>
 
-                            <div className="flex flex-col gap-[70px]">
+                            <div className="flex flex-col gap-[70px] wishes-md:gap-[50px]">
                                 <GiveSliderBlock
                                     value={sliderValue}
                                     setValue={setSliderValue}
@@ -83,16 +83,16 @@ export default function WishesGive() {
 
                                 <div className="h-[1px] bg-white/10"></div>
 
-                                <div className="flex flex-col items-center gap-[70px]">
+                                <div className="flex flex-col items-center gap-[70px] wishes-md:gap-[50px]">
                                     <div className="flex flex-col gap-[30px]">
-                                        <h3 className="text-center text-[40px] font-[200]">
-                                            <span className="green">
+                                        <h3 className="text-center text-[40px] font-[200] wishes-md:text-[20px] wishes-md:font-[400] wishes-md:leading-[calc(25/20)]">
+                                            <span className="green wishes-md:font-[200]">
                                                 Curious
                                             </span>{" "}
                                             to know what is behind this door?
                                         </h3>
 
-                                        <h6 className="text-center">
+                                        <h6 className="text-center leading-[calc(18/14)] wishes-md:text-[14px]">
                                             Secure your commitment with an
                                             E-signature via email, and
                                             let&apos;s set the wheels in motion.
@@ -110,7 +110,7 @@ export default function WishesGive() {
 
                                 <div className="h-[1px] bg-white/10"></div>
 
-                                <div className="text-center">
+                                <div className="text-center leading-[calc(18/14)] wishes-md:text-[14px]">
                                     * You will receive half of the donation
                                     amount from the person you endorsed, up to a
                                     maximum of half the largest single donation
