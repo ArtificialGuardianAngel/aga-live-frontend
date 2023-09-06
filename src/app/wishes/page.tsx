@@ -23,7 +23,7 @@ export default function Wishes() {
     return (
         <main>
             <section className="flex min-h-screen flex-col justify-between p-[20px_0]">
-                <div className="container flex flex-col items-center gap-[50px]">
+                <div className="container flex flex-col items-center gap-[50px] wishes-md:gap-[20px]">
                     <Image
                         className="max-h-[55vh] w-auto mix-blend-lighten"
                         src="/images/aga-face-new.png"
@@ -53,7 +53,7 @@ export default function Wishes() {
                     </div>
                 </div>
 
-                <div className="mb-[50px] flex justify-center">
+                <div className="mb-[50px] flex justify-center p-[50px_0_20px]">
                     <ScrollBottomIcon />
                 </div>
             </section>

@@ -1,8 +1,10 @@
 "use client";
 
 import copy from "copy-to-clipboard";
+import cn from "classnames";
 import Image from "next/image";
 import BackButton from "../components/BackButton";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
     searchParams: {
@@ -10,6 +12,35 @@ interface Props {
     };
 }
 export default function ESignature({ searchParams }: Props) {
+    const [copied, setCopied] = useState(false);
+    const [secondsLeft, setSecondsLeft] = useState(10 * 60);
+    const interval = useRef<NodeJS.Timeout | null>(null);
+
+    const onCopyClick = () => {
+        copy(`https://aga.live/3wishes/e/${searchParams.email}`);
+        setCopied(true);
+
+        setTimeout(() => setCopied(false), 2 * 1000);
+    };
+
+    useEffect(() => {
+        interval.current = setInterval(() => {
+            setSecondsLeft((p) => {
+                if (p > 0) {
+                    return p - 1;
+                }
+
+                return p;
+            });
+        }, 1000);
+
+        return () => {
+            if (interval.current) {
+                clearInterval(interval.current);
+            }
+        };
+    }, []);
+
     return (
         <main>
             <BackButton className="fixed left-[50px] top-[50px] wishes-xl:left-[30px] wishes-xl:top-[30px] wishes-sm:left-[20px] wishes-sm:top-[20px]" />
@@ -59,7 +90,10 @@ export default function ESignature({ searchParams }: Props) {
 
                             <div>
                                 Complete the e-signature within the next{" "}
-                                <span className="green">9 min. 47 sec.</span>
+                                <span className="green">
+                                    {Math.floor(secondsLeft / 60)} min.{" "}
+                                    {secondsLeft % 60} sec.
+                                </span>
                             </div>
                         </div>
 
@@ -93,30 +127,25 @@ export default function ESignature({ searchParams }: Props) {
                             <div>
                                 Copy and save your unique endorser link:{" "}
                                 <span
-                                    className="green cursor-pointer"
-                                    onClick={() =>
-                                        navigator.clipboard.writeText(
-                                            "https://aga.live/3wishes/e/user@gmail.com",
-                                        )
-                                    }
+                                    className="green tooltip-trigger relative cursor-pointer"
+                                    onClick={onCopyClick}
                                 >
+                                    <div
+                                        className={cn("tooltip", {
+                                            active: copied,
+                                        })}
+                                    >
+                                        {copied ? "Copied!" : "Click to Copy"}
+                                    </div>
                                     https://aga.live/3wishes/e/
                                     {searchParams.email}
-                                    <button
-                                        onClick={() => {
-                                            copy(
-                                                `https://aga.live/3wishes/e/${searchParams.email}`,
-                                            );
-                                        }}
-                                    >
-                                        <Image
-                                            className="ml-[10px] inline wishes-md:hidden"
-                                            src="/wishes/icon-copy.svg"
-                                            width={17}
-                                            height={17}
-                                            alt="Copy"
-                                        />
-                                    </button>
+                                    <Image
+                                        className="ml-[10px] inline wishes-md:hidden"
+                                        src="/wishes/icon-copy.svg"
+                                        width={17}
+                                        height={17}
+                                        alt="Copy"
+                                    />
                                 </span>
                             </div>
                         </div>

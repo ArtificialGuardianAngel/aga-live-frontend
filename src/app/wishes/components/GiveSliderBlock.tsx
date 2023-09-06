@@ -32,7 +32,7 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
     }, [value, windowWidth]);
 
     return (
-        <div className="flex flex-col gap-[120px]">
+        <div className="flex flex-col gap-[120px] wishes-md:gap-[60px]">
             <div className="flex flex-col gap-[30px]">
                 <h4 className="text-center">Your one-time donation:</h4>
 
