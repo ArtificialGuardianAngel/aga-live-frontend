@@ -64,7 +64,8 @@ const SearchPage = ({ isActivated: _isAcrivated }: Props) => {
             <div className="w-full max-w-[840px]">
                 <ChatInput
                     onChatInput={(prompt) => {
-                        router.push(`/chat?prompt=${prompt}`);
+                        prompt && localStorage.setItem("first-prompt", prompt);
+                        router.push(`/chat`);
                     }}
                 />
             </div>

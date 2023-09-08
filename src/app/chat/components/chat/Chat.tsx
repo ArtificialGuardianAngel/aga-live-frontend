@@ -6,13 +6,14 @@ import Message from "./Message";
 import { useApp } from "@/hooks/use-app";
 
 const Chat = () => {
-    const { messages, chat, isGenerating, prompt } = useApp();
+    const { messages, chat, isGenerating, prompt, isChatConnected } = useApp();
     useEffect(() => {
-        const promptQuery = new URLSearchParams(window.location.search).get(
-            "prompt",
-        );
-        if (promptQuery) prompt(promptQuery);
-    }, []);
+        const promptQuery = localStorage.getItem("first-prompt");
+        if (promptQuery && isChatConnected) {
+            prompt(promptQuery)
+            localStorage.removeItem('first-prompt')
+        };
+    }, [isChatConnected, prompt]);
     return (
         <div className="grid max-h-[96vh] grid-rows-[auto_1fr_auto] wishes-sm:grid-rows-[auto_auto_1fr_auto]">
             <div className="mb-[20px] aspect-video sm:hidden">

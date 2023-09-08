@@ -31,6 +31,7 @@ interface IContext {
     chat: IChatDocument | undefined;
     chatId: string | null;
     isGenerating: boolean;
+    isChatConnected: boolean;
     prompt: (data: string) => void;
     authorize: (...data: Parameters<typeof authApi.authorize>) => void;
     verify: (...data: Parameters<typeof authApi.verify>) => void;
@@ -48,6 +49,7 @@ const DEFAULT_CONTEXT: IContext = {
     chatId: null,
     chat: undefined,
     isGenerating: false,
+    isChatConnected: false,
     prompt: () => {
         console.warn("Context Is Empty");
     },
@@ -167,6 +169,8 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         chatApi.create().then((r) => setChatId(r.data._id));
     }, []);
 
+    const isChatConnected = useMemo(() => socket.connected, [socket.connected]);
+
     useEffect(() => {
         if (chatId)
             chatApi.getById(chatId).then((r) => {
@@ -241,6 +245,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             isGenerating,
             changeChat,
             startNewChat,
+            isChatConnected,
         }),
         [
             user,
@@ -257,6 +262,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             changeChat,
             startNewChat,
             isGenerating,
+            isChatConnected,
         ],
     );
 
