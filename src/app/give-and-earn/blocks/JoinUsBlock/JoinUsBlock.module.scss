@@ -1,22 +1,27 @@
 .wrapper {
-  padding: 75px 0;
+    padding: 75px 0;
 }
 
 .content {
-  padding: 150px 40px;
-  border-top: 1.5px solid rgba(white, 0.1);
-  border-bottom: 1.5px solid rgba(white, 0.1);
+    padding: 150px 40px;
+    border-top: 1.5px solid rgba(white, 0.1);
+    border-bottom: 1.5px solid rgba(white, 0.1);
 
-  color: #11f4d1;
-  font-size: 36px;
-  line-height: 55px;
-  font-style: italic;
-  font-weight: 300;
-  text-align: center;
+    color: #fff;
+    font-size: 50px;
+    line-height: 63px;
+    font-style: italic;
+    font-weight: 300;
+    text-align: center;
 
-  @media (max-width: 768px) {
-    padding: 50px 20px;
-    font-size: 18px;
-    line-height: 28px;
-  }
+    @media (max-width: 768px) {
+        padding: 50px 20px;
+        font-size: 18px;
+        line-height: 28px;
+    }
+}
+
+.text {
+    max-width: 700px;
+    margin: auto;
 }

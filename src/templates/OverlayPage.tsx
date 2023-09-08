@@ -46,7 +46,7 @@ const OverlayPage = () => {
 
                 {backToTopButtonVisible && (
                     <button
-                        className="overflow:hidden fixed bottom-[20px] right-[20px] z-30 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border-[1px] border-accentGreen backdrop-blur-[25px]"
+                        className="overflow:hidden fixed bottom-[20px] right-[20px] z-30 flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full border-2 border-accentGreen backdrop-blur-[25px]"
                         onClick={onBackToTopButtonClick}
                     >
                         <Image
