@@ -6,7 +6,7 @@ import { SendIcon } from "@/components/Icons";
 import { CHAT_COMANNDS_COMPONENTS, CHAT_COMMANDS } from "./constants";
 
 interface Props {
-    onChatInput?: () => void;
+    onChatInput?: (input?: string) => void;
 }
 
 const ChatInput: React.FC<Props> = ({ onChatInput }) => {
@@ -15,9 +15,9 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
     const isCommand = useMemo(() => input.startsWith("/"), [input]);
 
     const onSubmit = () => {
+        if (onChatInput) return onChatInput(input);
         prompt(input);
         setInput("");
-        onChatInput && onChatInput();
     };
 
     console.log(isCommand);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import GiveSliderBlock from "../components/GiveSliderBlock";
 import WishesAdvantageCard from "../components/wishes/WishesAdvantageCard";
@@ -9,7 +9,12 @@ import BackButton from "../components/BackButton";
 
 export default function WishesGive() {
     const [sliderValue, setSliderValue] = useState(20000);
-    const [email, setEmail] = useState("hello");
+    const [email, setEmail] = useState("");
+
+    useEffect(() => {
+        const dataString = localStorage.getItem("data");
+        if (dataString) setEmail(JSON.parse(dataString).email);
+    }, []);
 
     return (
         <main>
@@ -38,6 +43,33 @@ export default function WishesGive() {
                                     value={sliderValue}
                                     setValue={setSliderValue}
                                 />
+
+                                <div className="h-[1px] bg-white/10"></div>
+
+                                <div className="flex flex-col items-center gap-[70px] wishes-md:gap-[50px]">
+                                    <div className="flex flex-col gap-[30px]">
+                                        <h3 className="text-center text-[40px] font-[200] leading-[50px] wishes-md:text-[20px] wishes-md:font-[400] wishes-md:leading-[calc(25/20)]">
+                                            <span className="green wishes-md:font-[200]">
+                                                Curious
+                                            </span>{" "}
+                                            to know what is behind this door?
+                                        </h3>
+
+                                        <h6 className="text-center leading-[calc(18/14)] wishes-md:text-[14px]">
+                                            Secure your commitment with an
+                                            E-signature via email, and
+                                            let&apos;s set the wheels in motion.
+                                        </h6>
+                                    </div>
+
+                                    <Button
+                                        link="/wishes/signature"
+                                        linkType="internal"
+                                        size="lg"
+                                    >
+                                        MAKE THINGS HAPPEN NOW
+                                    </Button>
+                                </div>
 
                                 <div className="h-[1px] bg-white/10"></div>
 
@@ -80,33 +112,6 @@ export default function WishesGive() {
                                 <div className="h-[1px] bg-white/10"></div>
 
                                 <WishesEndorserLinkBlock email={email} />
-
-                                <div className="h-[1px] bg-white/10"></div>
-
-                                <div className="flex flex-col items-center gap-[70px] wishes-md:gap-[50px]">
-                                    <div className="flex flex-col gap-[30px]">
-                                        <h3 className="text-center text-[40px] font-[200] wishes-md:text-[20px] wishes-md:font-[400] wishes-md:leading-[calc(25/20)]">
-                                            <span className="green wishes-md:font-[200]">
-                                                Curious
-                                            </span>{" "}
-                                            to know what is behind this door?
-                                        </h3>
-
-                                        <h6 className="text-center leading-[calc(18/14)] wishes-md:text-[14px]">
-                                            Secure your commitment with an
-                                            E-signature via email, and
-                                            let&apos;s set the wheels in motion.
-                                        </h6>
-                                    </div>
-
-                                    <Button
-                                        link="/wishes/signature"
-                                        linkType="internal"
-                                        size="lg"
-                                    >
-                                        MAKE THINGS HAPPEN NOW
-                                    </Button>
-                                </div>
 
                                 <div className="h-[1px] bg-white/10"></div>
 

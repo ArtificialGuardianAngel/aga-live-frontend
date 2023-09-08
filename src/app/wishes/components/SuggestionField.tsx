@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Button from "./Button";
 import OverlayPageContext from "@/context/OverlayPageContext";
 import Suggestions from "./Suggestions";
@@ -8,9 +8,14 @@ import Suggestions from "./Suggestions";
 interface Props {
     number: number;
     title: string;
+    onChange?: (v?: string) => void;
 }
 
-const SuggestionField: React.FC<Props> = ({ title, number }) => {
+const SuggestionField: React.FC<Props> = ({
+    title,
+    number,
+    onChange,
+}) => {
     const { open, setContent } = useContext(OverlayPageContext);
     const [value, setValue] = useState("");
 
@@ -20,6 +25,10 @@ const SuggestionField: React.FC<Props> = ({ title, number }) => {
         );
         open();
     };
+
+    useEffect(() => {
+        onChange?.(value);
+    }, [value]);
 
     return (
         <div className="flex flex-col gap-[10px]">

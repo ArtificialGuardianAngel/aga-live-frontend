@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes, PropsWithChildren } from "react";
+import React, { ButtonHTMLAttributes, PropsWithChildren } from "react";
 import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +12,7 @@ interface ButtonProps {
 }
 
 type Props = PropsWithChildren<
-    ButtonProps & HtmlHTMLAttributes<HTMLButtonElement>
+    ButtonProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type">
 >;
 
 const Button = ({

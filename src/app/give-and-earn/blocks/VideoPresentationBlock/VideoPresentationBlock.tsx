@@ -8,7 +8,7 @@ const VideoPresentationBlock = () => {
         <section className={styles.wrapper} id="video">
             <div
                 className={cn(
-                    "m-[0_auto] max-w-[1280px] p-[0_20px]",
+                    "m-[0_auto] max-w-[1280px] p-[0_20px] wide-device:max-w-[unset]",
                     styles.container,
                 )}
             >

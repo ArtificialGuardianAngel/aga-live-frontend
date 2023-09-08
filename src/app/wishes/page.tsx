@@ -1,24 +1,62 @@
 "use client";
 
 import { ScrollBottomIcon } from "@/components/Icons/ScrollBottomIcon";
-import Button from "./components/Button";
 import Checkbox from "./components/Checkbox";
 import Input from "./components/Input";
 import SuggestionField from "./components/SuggestionField";
-import VideoBackground from "./components/VideoBackground";
 import Image from "next/image";
 import VideoPlayer from "@/components/VideoPlayer";
-import { useContext } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import OverlayPageContext from "@/context/OverlayPageContext";
 import WishesPrivacyPolicy from "./components/WishesPrivacyPolicy";
+import { Button } from "@/components";
+import Link from "next/link";
+
+type SuggestionState = {
+    1: string;
+    2: string;
+    3: string;
+};
 
 export default function Wishes() {
     const { open, setContent } = useContext(OverlayPageContext);
+
+    const [wishes, setWishes] = useState<SuggestionState>({
+        1: "",
+        2: "",
+        3: "",
+    });
+
+    const [email, setEmail] = useState("");
+    const [endorser, setEndorser] = useState("");
+    const [isEndorserPresist, setIsEndorserPresist] = useState(false);
+    const [isPrivacyAgreed, setIsPrivacyAgreed] = useState(false);
+
+    const isNextStepDisabled = useMemo(() => {
+        if (!wishes[1] || !wishes[2] || !wishes[3]) return true;
+        if (!email) return true;
+        return !isPrivacyAgreed;
+    }, [wishes, email, isPrivacyAgreed]);
+
+    const onSuggestionChange = (suggestion: Partial<SuggestionState>) =>
+        setWishes((p) => ({ ...p, ...suggestion }));
 
     const openPrivacyPolicy = () => {
         setContent(<WishesPrivacyPolicy />);
         open();
     };
+
+    useEffect(() => {
+        const endorserQuery = new URLSearchParams(window.location.search).get(
+            "e",
+        );
+        if (endorserQuery) {
+            setEndorser(endorserQuery);
+            setIsEndorserPresist(true);
+        }
+    }, []);
+
+    // console.log(isNextStepDisabled);
 
     return (
         <main>
@@ -90,29 +128,54 @@ export default function Wishes() {
                                 <SuggestionField
                                     number={1}
                                     title="Write your first wish:"
+                                    onChange={(e) =>
+                                        onSuggestionChange({ 1: e })
+                                    }
                                 />
 
                                 <SuggestionField
                                     number={2}
                                     title="Write your second wish:"
+                                    onChange={(e) =>
+                                        onSuggestionChange({ 2: e })
+                                    }
                                 />
 
                                 <SuggestionField
                                     number={3}
                                     title="Write your third wish:"
+                                    onChange={(e) =>
+                                        onSuggestionChange({ 3: e })
+                                    }
                                 />
                             </div>
 
                             <div className="h-[2px] bg-white/10"></div>
 
                             <div className="flex flex-col gap-[10px]">
-                                <Input placeholder="Your email address" />
+                                <Input
+                                    placeholder="Your email address"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
 
-                                <Input placeholder="Endorser's email address" />
+                                <Input
+                                    placeholder="Endorser's email address"
+                                    disabled={isEndorserPresist}
+                                    value={endorser}
+                                    onChange={(e) =>
+                                        setEndorser(e.target.value)
+                                    }
+                                />
                             </div>
 
                             <div className="flex justify-center">
-                                <Checkbox>
+                                <Checkbox
+                                    checked={isPrivacyAgreed}
+                                    onChange={(e) =>
+                                        setIsPrivacyAgreed(e.target.checked)
+                                    }
+                                >
                                     I accept{" "}
                                     <span
                                         className="cursor-pointer underline"
@@ -130,14 +193,29 @@ export default function Wishes() {
                                 intelligence
                             </h3>
 
-                            <Button
-                                link="/wishes/give"
-                                linkType="internal"
-                                className="m-auto"
-                                size="lg"
+                            <Link
+                                href={{
+                                    pathname: "/wishes/give",
+                                }}
                             >
-                                SUBMIT YOUR WISHES
-                            </Button>
+                                <Button
+                                    className="m-auto"
+                                    size="lg"
+                                    disabled={isNextStepDisabled}
+                                    onClick={() => {
+                                        localStorage.setItem(
+                                            "data",
+                                            JSON.stringify({
+                                                wishes,
+                                                email,
+                                                endorser,
+                                            }),
+                                        );
+                                    }}
+                                >
+                                    SUBMIT YOUR WISHES
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>

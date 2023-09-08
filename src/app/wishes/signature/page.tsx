@@ -4,7 +4,7 @@ import copy from "copy-to-clipboard";
 import cn from "classnames";
 import Image from "next/image";
 import BackButton from "../components/BackButton";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
     searchParams: {
@@ -14,10 +14,13 @@ interface Props {
 export default function ESignature({ searchParams }: Props) {
     const [copied, setCopied] = useState(false);
     const [secondsLeft, setSecondsLeft] = useState(10 * 60);
+    const [email, setEmail] = useState("");
     const interval = useRef<NodeJS.Timeout | null>(null);
 
+    const link = useMemo(() => `aga.live/wishes?e=${email}`, [email]);
+
     const onCopyClick = () => {
-        copy(`https://aga.live/3wishes/e/${searchParams.email}`);
+        copy(`https://${link}`);
         setCopied(true);
 
         setTimeout(() => setCopied(false), 2 * 1000);
@@ -39,6 +42,11 @@ export default function ESignature({ searchParams }: Props) {
                 clearInterval(interval.current);
             }
         };
+    }, []);
+
+    useEffect(() => {
+        const dataString = localStorage.getItem("data");
+        if (dataString) setEmail(JSON.parse(dataString).email);
     }, []);
 
     return (
@@ -137,8 +145,7 @@ export default function ESignature({ searchParams }: Props) {
                                     >
                                         {copied ? "Copied!" : "Click to Copy"}
                                     </div>
-                                    https://aga.live/3wishes/e/
-                                    {searchParams.email}
+                                    {link}
                                     <Image
                                         className="ml-[10px] inline wishes-md:hidden"
                                         src="/wishes/icon-copy.svg"

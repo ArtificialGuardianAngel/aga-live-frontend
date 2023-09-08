@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import copy from "copy-to-clipboard";
 import cn from "classnames";
 
@@ -11,8 +11,10 @@ type Props = {
 const WishesEndorserLinkBlock: React.FC<Props> = ({ email }) => {
     const [copied, setCopied] = useState(false);
 
+    const link = useMemo(() => `aga.live/wishes?e=${email}`, [email]);
+
     const onCopyClick = () => {
-        copy(`https://aga.live/3wishes/e/${email}`);
+        copy(`https://${link}`);
         setCopied(true);
 
         setTimeout(() => setCopied(false), 2 * 1000);
@@ -32,13 +34,9 @@ const WishesEndorserLinkBlock: React.FC<Props> = ({ email }) => {
                     <div className={cn("tooltip", { active: copied })}>
                         {copied ? "Copied!" : "Click to Copy"}
                     </div>
-                    <span className="overflow-hidden text-ellipsis">
-                        https://aga.live/3wishes/e/{email}
-                    </span>
+                    <span className="text-ellipsis">{link}</span>
                     <button
-                        onClick={() => {
-                            copy(`https://aga.live/3wishes/e/${email}`);
-                        }}
+                        onClick={onCopyClick}
                     >
                         <Image
                             src="/wishes/icon-copy.svg"
@@ -51,7 +49,7 @@ const WishesEndorserLinkBlock: React.FC<Props> = ({ email }) => {
             </div>
 
             <div className="text-center">
-                Share the following link on social media:
+                Share the following link on social media and earn:
             </div>
 
             <div className="flex gap-[20px]">
@@ -84,28 +82,6 @@ const WishesEndorserLinkBlock: React.FC<Props> = ({ email }) => {
                     <Image
                         src="/wishes/twitter.svg"
                         alt="Twitter"
-                        width={35}
-                        height={35}
-                    />
-                </a>
-                <a
-                    className="cursor-pointer"
-                    href={process.env.NEXT_PUBLIC_WHATSAPP_LINK}
-                >
-                    <Image
-                        src="/wishes/whatsapp.svg"
-                        alt="WhatsApp"
-                        width={35}
-                        height={35}
-                    />
-                </a>
-                <a
-                    className="cursor-pointer"
-                    href={process.env.NEXT_PUBLIC_TELEGRAM_LINK}
-                >
-                    <Image
-                        src="/wishes/telegram.svg"
-                        alt="Telegram"
                         width={35}
                         height={35}
                     />

@@ -247,13 +247,16 @@ input[type="range"]::-moz-range-thumb {
 
 .range::-webkit-slider-thumb {
     position: relative;
+    /* background-image: url("/wishes/range-thumb.webp"); */
     background-image: url("/wishes/range-thumb.svg");
+    /* background-image: url("/wishes/range-thumb.png"); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     width: 38px;
     height: 20px;
-    /* background-color: rgb(38, 48, 78); */
+    box-shadow: none;
+    background-color: transparent;
 }
 
 .range::-moz-range-track {
@@ -265,12 +268,16 @@ input[type="range"]::-moz-range-thumb {
 
 .range::-moz-range-thumb {
     position: relative;
+    /* background-image: url("/wishes/range-thumb.webp"); */
     background-image: url("/wishes/range-thumb.svg");
+    /* background-image: url("/wishes/range-thumb.png"); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     width: 38px;
     height: 20px;
+    background-color: transparent;
+    box-shadow: none;
     /* background-color: rgb(38, 48, 78); */
 }
 

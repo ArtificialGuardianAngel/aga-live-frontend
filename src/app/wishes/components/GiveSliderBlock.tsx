@@ -71,16 +71,18 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-[50px]">
+            <div className="flex flex-col gap-[30px]">
                 <div className="flex flex-col items-center gap-[30px]">
-                    <h4 className="text-center">Your financial reward:</h4>
+                    <h4 className="text-center">
+                        Your future financial reward when your friend donates
+                        the same amount:
+                    </h4>
 
                     <div className="challenges-card-bg flex min-w-[370px] items-center justify-center rounded-[200px] p-[3px] wishes-md:min-w-[280px]">
-                        <div className="flex h-full w-full flex-col rounded-[200px] border-transparent bg-cardCombined p-[30px_50px] text-center font-ceraPro text-[40px] font-[200] uppercase leading-[calc(20/30)] text-white wishes-lg:leading-normal wishes-md:p-[10px_15px] wishes-md:text-[30px] wishes-md:leading-normal">
+                        <div className="flex h-full w-full flex-col rounded-[200px] border-transparent bg-cardCombined p-[30px_50px] text-center text-[40px] font-[200] uppercase leading-[calc(20/30)] text-white wishes-lg:leading-normal wishes-md:p-[10px_15px] wishes-md:text-[30px] wishes-md:leading-normal">
                             {(value / 2).toLocaleString("en-US")} USD
                         </div>
                     </div>
-                    <h4 className="text-center">per donation</h4>
                 </div>
 
                 <div className="text-center">

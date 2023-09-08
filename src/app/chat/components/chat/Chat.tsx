@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useMemo } from "react";
 import AgaFace from "./AgaFace";
 import ChatInput from "./ChatInput";
 import Message from "./Message";
@@ -6,7 +7,12 @@ import { useApp } from "@/hooks/use-app";
 
 const Chat = () => {
     const { messages, chat, isGenerating, prompt } = useApp();
-
+    useEffect(() => {
+        const promptQuery = new URLSearchParams(window.location.search).get(
+            "prompt",
+        );
+        if (promptQuery) prompt(promptQuery);
+    }, []);
     return (
         <div className="grid max-h-[96vh] grid-rows-[auto_1fr_auto] wishes-sm:grid-rows-[auto_auto_1fr_auto]">
             <div className="mb-[20px] aspect-video sm:hidden">
