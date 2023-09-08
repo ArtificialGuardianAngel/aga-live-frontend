@@ -4,7 +4,6 @@ import cn from "classnames";
 import { Button, Input, TextArea } from "../../components";
 import styles from "./FormBlock.module.scss";
 import useNotifications from "../../hooks/useNotifications";
-import { useRouter } from "next/router";
 
 const MIN_VALUE = 369;
 const MAX_VALUE = 1080000;
@@ -89,7 +88,7 @@ const FormBlock = () => {
                         "m-[0_auto] max-w-[940px] p-[0_20px]",
                     )}
                 >
-                    <h3 className={styles.title}>Give & Earn</h3>
+                    <h3 className={styles.title}>Take action</h3>
                     <div className={styles.grid}>
                         <Input
                             label="Your email to make the donation:"
@@ -107,9 +106,9 @@ const FormBlock = () => {
                         <Input
                             label="Donation amount:"
                             subLabel="min. 369 USD / max. 1,080,000 USD"
-                            placeholder="369.00"
+                            placeholder="20,000"
                             postfix="USD"
-                            value={amount}
+                            value={amount || ""}
                             onKeyDown={(event) => {
                                 if (
                                     !/[0-9]|Backspace|ArrowUp|ArrowDown|ArrowLeft|ArrowRight/.test(
