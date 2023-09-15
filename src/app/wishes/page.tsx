@@ -27,6 +27,7 @@ export default function Wishes() {
         3: "",
     });
 
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [endorser, setEndorser] = useState("");
     const [isEndorserPresist, setIsEndorserPresist] = useState(false);
@@ -34,9 +35,10 @@ export default function Wishes() {
 
     const isNextStepDisabled = useMemo(() => {
         if (!wishes[1] || !wishes[2] || !wishes[3]) return true;
+        if (!name) return true;
         if (!email) return true;
         return !isPrivacyAgreed;
-    }, [wishes, email, isPrivacyAgreed]);
+    }, [wishes, email, isPrivacyAgreed, name]);
 
     const onSuggestionChange = (suggestion: Partial<SuggestionState>) =>
         setWishes((p) => ({ ...p, ...suggestion }));
@@ -155,6 +157,12 @@ export default function Wishes() {
                             <div className="flex flex-col gap-[10px]">
                                 <Input
                                     placeholder="Your email address"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+
+                                <Input
+                                    placeholder="Your email address"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
@@ -207,6 +215,7 @@ export default function Wishes() {
                                             "data",
                                             JSON.stringify({
                                                 wishes,
+                                                name,
                                                 email,
                                                 endorser,
                                             }),

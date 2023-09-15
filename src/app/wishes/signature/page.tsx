@@ -5,6 +5,7 @@ import cn from "classnames";
 import Image from "next/image";
 import BackButton from "../components/BackButton";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { WishesDataType } from "../typs";
 
 interface Props {
     searchParams: {
@@ -24,6 +25,20 @@ export default function ESignature({ searchParams }: Props) {
         setCopied(true);
 
         setTimeout(() => setCopied(false), 2 * 1000);
+    };
+
+    const sendContractByEmail = async (
+        data: WishesDataType & { amount: string },
+    ) => {
+        try {
+            const result = fetch("/api/wishes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        } catch (error) {}
     };
 
     useEffect(() => {
@@ -46,7 +61,14 @@ export default function ESignature({ searchParams }: Props) {
 
     useEffect(() => {
         const dataString = localStorage.getItem("data");
-        if (dataString) setEmail(JSON.parse(dataString).email);
+
+        if (!dataString) return;
+
+        const data: WishesDataType = JSON.parse(dataString);
+        setEmail(data.email);
+
+        const amount = localStorage.getItem("amount");
+        if (amount) sendContractByEmail({ ...data, amount });
     }, []);
 
     return (

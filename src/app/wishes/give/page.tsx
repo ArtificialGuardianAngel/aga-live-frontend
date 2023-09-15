@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../components/Button";
 import GiveSliderBlock from "../components/GiveSliderBlock";
 import WishesAdvantageCard from "../components/wishes/WishesAdvantageCard";
 import WishesEndorserLinkBlock from "../components/wishes/WishesEndorserLinkBlock";
 import BackButton from "../components/BackButton";
+import { WishesDataType } from "../typs";
 
 export default function WishesGive() {
     const [sliderValue, setSliderValue] = useState(20000);
@@ -15,6 +16,10 @@ export default function WishesGive() {
         const dataString = localStorage.getItem("data");
         if (dataString) setEmail(JSON.parse(dataString).email);
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem("amount", sliderValue.toLocaleString());
+    }, [sliderValue]);
 
     return (
         <main>

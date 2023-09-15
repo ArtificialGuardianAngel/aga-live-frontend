@@ -9,3 +9,6 @@
 | NEXT_PUBLIC_TWITTER_LINK  | TWITTER LINK                              |                      |
 | NEXT_PUBLIC_WHATSAPP_LINK | WHATSAPP LINK                             |                      |
 | NEXT_PUBLIC_TELEGRAM_LINK | TELEGRAM LINK                             |                      |
+| BOLDSIGN_API_URL          | Boldsign apu url for sending template     |                      |
+| BOLDSIGN_TEMPLATE_ID      | Boldsign template id                      |                      |
+| BOLDSIGN_API_KEY          | Boldsign API key                          |                      |
