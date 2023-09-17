@@ -156,7 +156,7 @@ export default function Wishes() {
 
                             <div className="flex flex-col gap-[10px]">
                                 <Input
-                                    placeholder="Your email address"
+                                    placeholder="Your name"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 />

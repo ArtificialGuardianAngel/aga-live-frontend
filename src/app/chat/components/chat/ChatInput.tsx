@@ -20,8 +20,6 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
         setInput("");
     };
 
-    console.log(isCommand);
-
     return (
         <div className="relative pb-[20px]">
             {isCommand && (

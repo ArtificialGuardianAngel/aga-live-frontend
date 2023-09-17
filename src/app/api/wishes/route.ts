@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
+import { NextResponse } from "next/server";
 
 type Body = {
-    amount: number;
+    amount: string;
     email: string;
+    name: string;
     endorser: string;
     wishes: {
         1: string;
@@ -12,20 +14,21 @@ type Body = {
     };
 };
 
-export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
-    const data: Body = req.body;
-
+export const POST = async (req: Request) => {
+    const data: Body = await req.json();
+    console.log(data.email);
     const response = await axios.post(
         process.env["BOLDSIGN_API_URL"]!,
         {
             roles: [
                 {
                     roleIndex: 1,
+                    signerName: data.name,
                     signerEmail: data.email,
                     existingFormFields: [
                         {
                             id: "DonationAmount",
-                            value: data.amount.toLocaleString(),
+                            value: Number(data.amount).toLocaleString(),
                         },
                         {
                             id: "EndorserEmail",
@@ -61,5 +64,16 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
         },
     );
 
+    const contractResponse = await axios.post(
+        "contract/create",
+        response.data,
+        {
+            baseURL: process.env["API_URL"],
+        },
+    );
+
+    // console.log(contractResponse);
+    // res.send(contractResponse.data);
+    return NextResponse.json(contractResponse.data);
     // add record in db about new contract with it id
 };

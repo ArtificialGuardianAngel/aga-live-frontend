@@ -9,11 +9,13 @@ const Chat = () => {
     const { messages, chat, isGenerating, prompt, isChatConnected } = useApp();
     useEffect(() => {
         const promptQuery = localStorage.getItem("first-prompt");
+        console.log(isChatConnected);
         if (promptQuery && isChatConnected) {
-            prompt(promptQuery)
-            localStorage.removeItem('first-prompt')
-        };
-    }, [isChatConnected, prompt]);
+            prompt(promptQuery);
+            localStorage.removeItem("first-prompt");
+        }
+    });
+
     return (
         <div className="grid max-h-[96vh] grid-rows-[auto_1fr_auto] wishes-sm:grid-rows-[auto_auto_1fr_auto]">
             <div className="mb-[20px] aspect-video sm:hidden">

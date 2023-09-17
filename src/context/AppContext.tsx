@@ -18,6 +18,7 @@ import chatApi from "../api/chat";
 import { parseHistoryToMessages } from "./helpers";
 import walletApi from "../api/wallet";
 import { AxiosError } from "axios";
+import crypto from "crypto";
 
 type Message = { content: string; isMe: boolean };
 
@@ -89,6 +90,8 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     const [walletF, setWalletF] = useState(false);
     const [history] = useState<IContext["history"]>(DEFAULT_CONTEXT["history"]);
 
+    const [isChatConnected, setIsChatConnected] = useState(false);
+
     const socket = useMemo(
         () =>
             io(
@@ -141,11 +144,20 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         });
     };
 
+    const generateId = useCallback(
+        (message: string) => {
+            const hash = crypto.createHash("md5").update(message).digest("hex");
+            return `${hash}.${chatId}`;
+        },
+        [chatId],
+    );
+
     const prompt: IContext["prompt"] = useCallback(
         (input) => {
             if (!input) return console.warn("No prompt was provided");
             if (!socket.connected) console.warn("Socket is not connected");
 
+            // _addMessage(generateId(input), input, null, true);
             socket.emit("prompt", { message: input, chatId });
         },
         [chatId, socket],
@@ -168,8 +180,6 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     const startNewChat = useCallback(() => {
         chatApi.create().then((r) => setChatId(r.data._id));
     }, []);
-
-    const isChatConnected = useMemo(() => socket.connected, [socket.connected]);
 
     useEffect(() => {
         if (chatId)
@@ -207,6 +217,15 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             socket.on("prompt_reply_end", () => {
                 setIsGenerating(false);
                 setWalletF((p) => !p);
+            });
+
+            socket.on("connect", () => {
+                // alert("connected");
+                setIsChatConnected(true);
+            });
+            socket.on("disconnect", () => {
+                // alert("disconnected");
+                setIsChatConnected(false);
             });
         }
     }, [socket, token]);

@@ -6,7 +6,6 @@ import GiveSliderBlock from "../components/GiveSliderBlock";
 import WishesAdvantageCard from "../components/wishes/WishesAdvantageCard";
 import WishesEndorserLinkBlock from "../components/wishes/WishesEndorserLinkBlock";
 import BackButton from "../components/BackButton";
-import { WishesDataType } from "../typs";
 
 export default function WishesGive() {
     const [sliderValue, setSliderValue] = useState(20000);
@@ -18,7 +17,7 @@ export default function WishesGive() {
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("amount", sliderValue.toLocaleString());
+        localStorage.setItem("amount", sliderValue.toString());
     }, [sliderValue]);
 
     return (

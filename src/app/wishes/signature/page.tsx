@@ -31,13 +31,16 @@ export default function ESignature({ searchParams }: Props) {
         data: WishesDataType & { amount: string },
     ) => {
         try {
-            const result = fetch("/api/wishes", {
+            console.log(data);
+            const res = await fetch("/api/wishes", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data),
             });
+            const resData = await res.json();
+            localStorage.setItem("result", JSON.stringify(resData));
         } catch (error) {}
     };
 
@@ -67,6 +70,7 @@ export default function ESignature({ searchParams }: Props) {
         const data: WishesDataType = JSON.parse(dataString);
         setEmail(data.email);
 
+        if (localStorage.getItem("result")) return;
         const amount = localStorage.getItem("amount");
         if (amount) sendContractByEmail({ ...data, amount });
     }, []);
