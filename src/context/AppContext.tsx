@@ -90,6 +90,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     const [walletF, setWalletF] = useState(false);
     const [history] = useState<IContext["history"]>(DEFAULT_CONTEXT["history"]);
 
+    const [isSocketConnected, setIsSocketConnected] = useState(false);
     const [isChatConnected, setIsChatConnected] = useState(false);
 
     const socket = useMemo(
@@ -202,6 +203,10 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     }, [user]);
 
     useEffect(() => {
+        if (chat) setIsChatConnected(isSocketConnected);
+    }, [chat, isSocketConnected]);
+
+    useEffect(() => {
         if (token) {
             socket.connect();
             socket.on("prompt_added", (data: IPromptAddedDto) => {
@@ -221,11 +226,11 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 
             socket.on("connect", () => {
                 // alert("connected");
-                setIsChatConnected(true);
+                setIsSocketConnected(true);
             });
             socket.on("disconnect", () => {
                 // alert("disconnected");
-                setIsChatConnected(false);
+                setIsSocketConnected(false);
             });
         }
     }, [socket, token]);
