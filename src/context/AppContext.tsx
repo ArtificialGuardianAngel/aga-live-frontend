@@ -185,8 +185,8 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     useEffect(() => {
         if (chatId)
             chatApi.getById(chatId).then((r) => {
-                setChat(r.data);
                 setMessages(parseHistoryToMessages(r.data.history));
+                setChat(r.data);
             });
     }, [chatId]);
 

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import AgaFace from "./AgaFace";
 import ChatInput from "./ChatInput";
 import Message from "./Message";
@@ -7,6 +7,8 @@ import { useApp } from "@/hooks/use-app";
 
 const Chat = () => {
     const { messages, chat, isGenerating, prompt, isChatConnected } = useApp();
+    const chatEndElementRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         const promptQuery = localStorage.getItem("first-prompt");
         console.log(isChatConnected);
@@ -15,6 +17,12 @@ const Chat = () => {
             localStorage.removeItem("first-prompt");
         }
     });
+
+    useEffect(() => {
+        if (chat && chatEndElementRef.current) {
+            chatEndElementRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [chat]);
 
     return (
         <div className="grid max-h-[96vh] grid-rows-[auto_1fr_auto] wishes-sm:grid-rows-[auto_auto_1fr_auto]">
@@ -40,6 +48,7 @@ const Chat = () => {
                         prompt={prompt}
                     />
                 ))}
+                <div ref={chatEndElementRef} className=""></div>
             </div>
             <ChatInput />
         </div>
