@@ -179,7 +179,10 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     );
     const changeChat = useCallback((id: string) => setChatId(id), []);
     const startNewChat = useCallback(() => {
-        chatApi.create().then((r) => setChatId(r.data._id));
+        chatApi
+            .create()
+            .then((r) => setChatId(r.data._id))
+            .catch((e) => console.error(e));
     }, []);
 
     useEffect(() => {

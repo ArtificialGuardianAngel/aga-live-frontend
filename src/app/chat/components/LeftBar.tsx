@@ -4,7 +4,6 @@ import cn from "classnames";
 import { CSSTransition } from "react-transition-group";
 import { Button, Input } from "@/components";
 import AgaFace from "./chat/AgaFace";
-import infoImg from "@/assets/icons/info.svg";
 import { ArrowIcon } from "@/components/Icons";
 import OverlayPageContext from "@/context/OverlayPageContext";
 import {
@@ -95,7 +94,7 @@ const LeftBar = () => {
                                     )
                                 }
                                 className="cursor-pointer"
-                                src={infoImg}
+                                src="/icons/info.svg"
                                 alt=""
                             />
                         </h2>
@@ -125,6 +124,7 @@ const LeftBar = () => {
                                     }
                                     buttonProps={{
                                         onClick: handleAuthorize,
+                                        className: "flex-shrink-0 flex-grow-0",
                                     }}
                                     value={email}
                                     onChange={setEmail}
@@ -138,6 +138,8 @@ const LeftBar = () => {
                                             }
                                             buttonProps={{
                                                 onClick: handleVerify,
+                                                className:
+                                                    "flex-shrink-0 flex-grow-0",
                                             }}
                                             value={password}
                                             onChange={setPassword}
@@ -167,9 +169,9 @@ const LeftBar = () => {
                     </div>
 
                     <div className="text-14 rounded-[10px] bg-white/[0.03] p-[40px_20px] leading-[9px] wishes-xl:p-[30px_15px] wishes-xl:text-[13px]">
-                        <div className="border-b-2 border-white/10 pb-[12px]">
+                        {/* <div className="border-b-2 border-white/10 pb-[12px]">
                             <Link href="/about">About</Link>
-                        </div>
+                        </div> */}
                         <div className="border-b-2 border-white/10 p-[12px_0]">
                             <span
                                 className="cursor-pointer"

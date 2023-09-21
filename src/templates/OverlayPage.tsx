@@ -38,7 +38,7 @@ const OverlayPage = () => {
             >
                 <button
                     onClick={() => close()}
-                    className="fixed right-[20px] top-[20px] h-[40px] w-[40px] rounded-full border-2 border-accent-green"
+                    className="fixed right-[20px] top-[20px] h-[40px] w-[40px] rounded-full border-2 border-accent-green backdrop-blur-[10px]"
                 >
                     <div className="absolute left-[50%] top-[50%] h-[2px] w-[16px] translate-x-[-50%] rotate-45 rounded-[2px] bg-accent-green"></div>
                     <div className="absolute left-[50%] top-[50%] h-[2px] w-[16px] translate-x-[-50%] rotate-[-45deg] rounded-[2px] bg-accent-green"></div>
@@ -46,7 +46,7 @@ const OverlayPage = () => {
 
                 {backToTopButtonVisible && (
                     <button
-                        className="overflow:hidden fixed bottom-[20px] right-[20px] z-30 flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full border-2 border-accentGreen backdrop-blur-[25px]"
+                        className="overflow:hidden fixed bottom-[20px] right-[20px] z-30 flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full border-2 border-accentGreen backdrop-blur-[10px]"
                         onClick={onBackToTopButtonClick}
                     >
                         <Image
@@ -58,7 +58,7 @@ const OverlayPage = () => {
                     </button>
                 )}
 
-                <div className="max-[1024px]:p-[0_10px] m-auto max-w-[820px]">
+                <div className="max-[1024px]:p-[0_10px] m-auto h-full max-w-[820px]">
                     {content}
                 </div>
             </div>

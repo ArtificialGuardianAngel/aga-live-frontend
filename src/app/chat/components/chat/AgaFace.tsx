@@ -9,7 +9,7 @@ const AgaFace: React.FC<Props> = ({ className }) => {
   return (
     <video
       src='/videos/idle.webm'
-      className={cn('w-full h-full rounded-[10px]', className)}
+      className={cn('w-full h-full rounded-[10px] mix-blend-lighten', className)}
       autoPlay
       muted
       loop
