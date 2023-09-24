@@ -20,17 +20,22 @@ const Chat = () => {
     });
 
     useEffect(() => {
+        if (chat && chatEndElementRef.current) {
+            chatEndElementRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [chat]);
+
+    useEffect(() => {
         if (
-            chat &&
             chatEndElementRef.current &&
             chatMessagesContainerRef.current &&
-            chatMessagesContainerRef.current.scrollTop - 30 >=
+            chatMessagesContainerRef.current.scrollTop + 100 >=
                 chatMessagesContainerRef.current.scrollHeight -
                     chatMessagesContainerRef.current.offsetHeight
         ) {
             chatEndElementRef.current.scrollIntoView({ behavior: "smooth" });
         }
-    }, [chat, messages]);
+    }, [messages]);
 
     return (
         <div className="m-auto grid h-full max-h-[96vh] w-full max-w-[1080px] grid-rows-[auto_1fr_auto] wishes-sm:grid-rows-[auto_auto_1fr_auto]">
