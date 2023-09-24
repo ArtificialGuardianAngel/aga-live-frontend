@@ -33,7 +33,7 @@ export default function RootLayout({
             <head>
                 <title>{TITLES[pathname.split("/")[1]] || "A.G.A. Live"}</title>
                 <meta
-                    content="width=device-width, initial-scale=1"
+                    content="width=device-width, initial-scale=1, maximum-scale=1"
                     name="viewport"
                 />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
