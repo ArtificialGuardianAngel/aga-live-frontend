@@ -26,11 +26,10 @@ const Chat = () => {
     }, [chat]);
 
     useEffect(() => {
-        console.log("MESSAGES", messages);
         if (
             chatEndElementRef.current &&
             chatMessagesContainerRef.current &&
-            chatMessagesContainerRef.current.scrollTop + 300 >=
+            chatMessagesContainerRef.current.scrollTop + 400 >=
                 chatMessagesContainerRef.current.scrollHeight -
                     chatMessagesContainerRef.current.offsetHeight
         ) {
