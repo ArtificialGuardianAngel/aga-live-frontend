@@ -21,7 +21,7 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
     };
 
     return (
-        <div className="relative pb-[20px]">
+        <div className="relative pb-[20px] wishes-md:p-[20px_0]">
             {isCommand && (
                 <section
                     id="commands"
