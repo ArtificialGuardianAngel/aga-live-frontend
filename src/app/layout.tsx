@@ -12,13 +12,13 @@ const TITLES: { [key: string]: string } = {
     wishes: "3 Wishes - Make your wish a reality with A.G.A.",
 };
 
-export const metadata = {
+export const generateMetadata =  () => ({
     viewport: {
         width: "device-width",
         initialScale: 1,
         maximumScale: 1,
     },
-};
+});
 
 export default function RootLayout({
     children,
