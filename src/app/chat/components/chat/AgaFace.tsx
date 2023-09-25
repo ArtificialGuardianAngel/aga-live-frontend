@@ -1,20 +1,25 @@
-import React from 'react';
-import cn from 'classnames';
+import React from "react";
+import cn from "classnames";
 
 interface Props {
-  className?: string;
+    className?: string;
 }
 
 const AgaFace: React.FC<Props> = ({ className }) => {
-  return (
-    <video
-      src='/videos/idle.webm'
-      className={cn('w-full h-full rounded-[10px] mix-blend-lighten', className)}
-      autoPlay
-      muted
-      loop
-    />
-  );
+    return (
+        <video
+            className={cn(
+                "h-full w-full rounded-[10px] mix-blend-lighten",
+                className,
+            )}
+            autoPlay
+            muted
+            loop
+        >
+            <source src="/videos/idle.webm" type="video/webm" />
+            <source src="/videos/idle.mp4" type="video/mp4" />
+        </video>
+    );
 };
 
 export default AgaFace;
