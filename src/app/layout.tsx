@@ -1,15 +1,8 @@
-"use client";
-import authApi from "@/api/auth";
 import "./globals.css";
-import { getLocalInfo } from "@/utils/metadata";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { OverlayPageContextProvider } from "@/context/OverlayPageContext";
+import Layout from "@/layout/DefaultLayout";
 
-const TITLES: { [key: string]: string } = {
-    "give-and-earn":
-        "Give&Earn - Support the largest humanitarian project that has ever existed.",
-    wishes: "3 Wishes - Make your wish a reality with A.G.A.",
+export const metadata = {
+    viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({
@@ -17,25 +10,10 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const pathname = usePathname();
-
-    useEffect(() => {
-        getLocalInfo()
-            .then(authApi.connect)
-            .then((r) => {
-                console.log(r.data);
-            })
-            .catch((e) => console.error(e));
-    }, []);
-
     return (
         <html lang="en">
             <head>
-                <title>{TITLES[pathname.split("/")[1]] || "A.G.A. Live"}</title>
-                <meta
-                    content="width=device-width, initial-scale=1, maximum-scale=1"
-                    name="viewport"
-                />
+                <title>{"AGA Live"}</title>
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
                 <meta
                     name="description"
@@ -43,17 +21,7 @@ export default function RootLayout({
                 />
             </head>
             <body>
-                <video
-                    className="fixed left-0 top-0 -z-20 h-[100dvh] w-screen object-cover"
-                    autoPlay
-                    loop
-                    muted
-                >
-                    <source src="/videos/video-bg.mp4" type="video/mp4" />
-                </video>
-
-                <div className="wrapper-background fixed left-0 top-0 -z-10 h-[100dvh] w-screen"></div>
-                {children}
+                <Layout>{children}</Layout>
             </body>
         </html>
     );

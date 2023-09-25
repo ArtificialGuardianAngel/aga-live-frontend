@@ -21,7 +21,7 @@ const Chat = () => {
 
     useEffect(() => {
         if (chat && chatEndElementRef.current) {
-            chatEndElementRef.current.scrollIntoView({ behavior: "smooth" });
+            chatEndElementRef.current.scrollIntoView();
         }
     }, [chat]);
 
@@ -33,7 +33,7 @@ const Chat = () => {
                 chatMessagesContainerRef.current.scrollHeight -
                     chatMessagesContainerRef.current.offsetHeight
         ) {
-            chatEndElementRef.current.scrollIntoView({ behavior: "smooth" });
+            chatEndElementRef.current.scrollIntoView();
         }
     }, [messages]);
 
