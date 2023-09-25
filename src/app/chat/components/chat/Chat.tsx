@@ -40,10 +40,10 @@ const Chat = () => {
     return (
         <div className="m-auto grid h-full max-h-[96vh] w-full max-w-[1080px] grid-rows-[auto_1fr_auto] wishes-sm:grid-rows-[auto_auto_1fr_auto]">
             <div className="mb-[20px] aspect-video sm:hidden">
-                <AgaFace className="object-cover" />
+                <AgaFace className="object-contain" />
             </div>
 
-            <div className="p-[10px_0] text-center text-sm text-blue-4 wishes-md:p-0 wishes-md:text-[13px]">
+            <div className="p-[10px_0] text-center text-sm text-blue-4 wishes-md:mb-[20px] wishes-md:p-0 wishes-md:text-[13px]">
                 Conversation,{" "}
                 {chat?.createdAt &&
                     new Date(chat.createdAt).toLocaleString().replace(",", "")}
