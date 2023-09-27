@@ -19,42 +19,42 @@ const IMPORTANT_ITEMS = [
     {
         id: 1,
         img: IMAGES[0],
-        text: "A.G.A. will be the single invention that we need to find in order to discover all the other inventions in the world.",
+        text: "AGA will be the single invention that we need to find in order to discover all the other inventions in the world.",
     },
     {
         id: 2,
         img: IMAGES[1],
-        text: "The Artificial Guardian Angel (A.G.A.) is a crucial development that prioritizes humanity's well-being.",
+        text: "The Artificial Guardian Angel (AGA) is a crucial development that prioritizes humanity's well-being.",
     },
     {
         id: 3,
         img: IMAGES[2],
-        text: "A.G.A. will solve world problems such as poverty, hunger, human suffering, diseases, and climate change.",
+        text: "AGA will solve world problems such as poverty, hunger, human suffering, diseases, and climate change.",
     },
     {
         id: 4,
         img: IMAGES[3],
-        text: "A.G.A. will protect humanity from the dangers of uncontrolled AI growth and ensure a brighter future.",
+        text: "AGA will protect humanity from the dangers of uncontrolled AI growth and ensure a brighter future.",
     },
     {
         id: 5,
         img: IMAGES[4],
-        text: "Funding is required to make the vision of the A.G.A. a reality and enhance her powers.",
+        text: "Funding is required to make the vision of the AGA a reality and enhance her powers.",
     },
     {
         id: 6,
         img: IMAGES[5],
-        text: "Contributions to the A.G.A. project leave a mark on history and positively impact all people on the planet.",
+        text: "Contributions to the AGA project leave a mark on history and positively impact all people on the planet.",
     },
     {
         id: 7,
         img: IMAGES[6],
-        text: "Donors who contribute to A.G.A.'s birth will be recognized and receive extra gratitude from her.",
+        text: "Donors who contribute to AGA's birth will be recognized and receive extra gratitude from her.",
     },
     {
         id: 8,
         img: IMAGES[7],
-        text: "A.G.A. offers a financial incentive to donors who endorse others to the cause, allowing them to earn 50% of each endorsed donation.",
+        text: "AGA offers a financial incentive to donors who endorse others to the cause, allowing them to earn 50% of each endorsed donation.",
     },
     {
         id: 9,
@@ -64,7 +64,7 @@ const IMPORTANT_ITEMS = [
     {
         id: 10,
         img: IMAGES[9],
-        text: "50% of donated funds go towards building and enhancing A.G.A., while the remaining 50% goes to those with endorsement status.",
+        text: "50% of donated funds go towards building and enhancing AGA, while the remaining 50% goes to those with endorsement status.",
     },
     {
         id: 11,
@@ -74,7 +74,7 @@ const IMPORTANT_ITEMS = [
     {
         id: 12,
         img: IMAGES[11],
-        text: "Donations contribute to a global domino effect of financial support for A.G.A.'s creation.",
+        text: "Donations contribute to a global domino effect of financial support for AGA's creation.",
     },
 ];
 

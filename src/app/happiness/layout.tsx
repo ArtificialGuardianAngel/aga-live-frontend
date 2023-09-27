@@ -4,7 +4,7 @@ import cn from "classnames";
 import { PropsWithChildren } from "react";
 import { ArrowIcon } from "@/components/Icons";
 import Link from "next/link";
-import './happiness.css'
+import "./happiness.css";
 
 const sora = Sora({
     weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -12,7 +12,7 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-    title: "A.G.A. Happiness Index",
+    title: "AGA Happiness Index",
     description:
         "The Happiness Score Questionnaire, a 50-question tool, quantifies happiness and well-being in areas like personal satisfaction, health, work satisfaction, and spirituality. The happiness score is an average of all responses, with higher scores indicating greater happiness.",
 };
@@ -21,7 +21,7 @@ const HappinessLayout = ({ children }: PropsWithChildren) => (
     <>
         <div
             className={cn(
-                "flex justify-center py-[150px] font-[Sora] text-blue-5 pb-[100px]",
+                "flex justify-center py-[150px] pb-[100px] font-[Sora] text-blue-5",
                 sora.className,
             )}
         >

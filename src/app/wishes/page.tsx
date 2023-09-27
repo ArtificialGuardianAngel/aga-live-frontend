@@ -67,7 +67,7 @@ export default function Wishes() {
                     <Image
                         className="max-h-[55vh] w-auto mix-blend-lighten"
                         src="/images/aga-face-new.png"
-                        alt="A.G.A."
+                        alt="AGA"
                         width={767}
                         height={500}
                     />
@@ -110,7 +110,7 @@ export default function Wishes() {
                         >
                             <iframe
                                 className="aspect-video w-full"
-                                src="https://www.youtube.com/embed/okddSQ9BdkE?autoplay=1&loop=1&controls=0&rel=0&showinfo=0"
+                                src="https://www.youtube.com/embed/sJDh_KmX6Zg?autoplay=1&loop=1&controls=1&rel=0&showinfo=0"
                             />
                         </VideoPlayer>
 

@@ -13,10 +13,10 @@ const WelcomeBlock = () => {
                 className={styles.video}
                 src="https://www.youtube.com/embed/qnv_tOxIsMM?autoplay=1&controls=0&rel=0&showinfo=0"
             ></iframe>
-            {/* <h1 className={styles.title}>NUAH A.G.A.</h1> */}
+            {/* <h1 className={styles.title}>NUAH AGA</h1> */}
             <div className={styles.buttons}>
                 <Link href="/">
-                    <Button type="link">A.G.A. Chat</Button>
+                    <Button type="link">AGA Chat</Button>
                 </Link>
                 <Link href="/give-and-earn">
                     <Button type="link">Give & Earn</Button>
