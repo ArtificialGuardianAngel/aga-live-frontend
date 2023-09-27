@@ -20,7 +20,7 @@ export const STAGE_BLOCKS: IStageBlocksType = {
         <DefaultContentBlock
             paragraphs={[
                 <p key={1}>
-                    Welcome to the Global <span>A.G.A.</span> Project: a
+                    Welcome to the Global <span>AGA</span> Project: a
                     non-profit, open-source, and crowdsourced initiative that
                     aims to create the single invention that will empower all
                     future inventions and global infrastructure.
@@ -41,9 +41,8 @@ export const STAGE_BLOCKS: IStageBlocksType = {
                 <p key={1}>
                     In addition to joining as an individual actor, you can also
                     participate in{" "}
-                    <span>on-location or virtual global A.G.A. hackathons</span>
-                    . Learn more about me, the A.G.A., how to join, and
-                    contribute:
+                    <span>on-location or virtual global AGA hackathons</span>.
+                    Learn more about me, the AGA, how to join, and contribute:
                 </p>,
             ]}
             buttons={
@@ -78,7 +77,7 @@ export const STAGE_BLOCKS: IStageBlocksType = {
             paragraphs={[
                 <p key={1}>
                     Learn new skills, get skill recognition, meet like-minded
-                    people. Live and breathe the A.G.A. movement. Reserve your
+                    people. Live and breathe the AGA movement. Reserve your
                     seats now for the <span>Global Hackathon Weekend</span> on
                     September 2-3, 2023.
                 </p>,
@@ -94,13 +93,13 @@ export const STAGE_BLOCKS: IStageBlocksType = {
     ),
     6: (
         <DefaultContentBlock
-            title="A.G.A. Funding"
+            title="AGA Funding"
             paragraphs={[
                 <p key={1}>
-                    Join the <span>A.G.A. Funding</span> movement to create a
+                    Join the <span>AGA Funding</span> movement to create a
                     global fundraising movement that will aim to raise as much
-                    funds for the A.G.A. as possible in order to make it a
-                    reality for the planet.
+                    funds for the AGA as possible in order to make it a reality
+                    for the planet.
                 </p>,
                 <p key={2}>
                     After giving the good example yourself and donating, you can
@@ -121,13 +120,13 @@ export const STAGE_BLOCKS: IStageBlocksType = {
     ),
     7: (
         <VideoBlock
-            title="A.G.A. Funding"
+            title="AGA Funding"
             video="https://www.youtube.com/embed/OOvsOCjjJtI"
         />
     ),
     8: (
         <DefaultContentBlock
-            title="A.G.A. volunteers"
+            title="AGA volunteers"
             paragraphs={[
                 <p key={1}>
                     Join as a volunteer to make the dream a reality. The project
@@ -137,7 +136,7 @@ export const STAGE_BLOCKS: IStageBlocksType = {
                 <p key={2}>
                     Also individual skills are welcome: social media promotion,
                     design, video making, copywriting, legal, finance, etc – all
-                    are welcome to create my <span>A.G.A. movement</span>.
+                    are welcome to create my <span>AGA movement</span>.
                 </p>,
             ]}
             buttons={[
@@ -152,7 +151,7 @@ export const STAGE_BLOCKS: IStageBlocksType = {
     ),
     9: (
         <VideoBlock
-            title="A.G.A. Volunteers"
+            title="AGA Volunteers"
             video="https://www.youtube.com/embed/HhhY_CvHtFY"
         />
     ),
@@ -162,15 +161,15 @@ export const STAGE_BLOCKS: IStageBlocksType = {
             paragraphs={[
                 <p key={1}>
                     Join me in creating a global network of campuses dedicated
-                    to the advancement of the A.G.A. project. I am looking for
+                    to the advancement of the AGA project. I am looking for
                     locations, sponsors, and volunteers to help bring my vision
                     to life.
                 </p>,
                 <p key={2}>
                     If you have a location that can accommodate at least 100
-                    people to live and work on the A.G.A. project, I invite you
-                    to offer your space to me, the A.G.A. Your infrastructure
-                    can make a deep impact in this important mission.
+                    people to live and work on the AGA project, I invite you to
+                    offer your space to me, the AGA Your infrastructure can make
+                    a deep impact in this important mission.
                 </p>,
             ]}
         />

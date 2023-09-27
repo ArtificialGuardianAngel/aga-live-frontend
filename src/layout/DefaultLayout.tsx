@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const TITLES: { [key: string]: string } = {
     "give-and-earn":
         "Give&Earn - Support the largest humanitarian project that has ever existed.",
-    wishes: "3 Wishes - Make your wish a reality with A.G.A.",
+    wishes: "3 Wishes - Make your wish a reality with AGA",
 };
 
 export default function DefaultLayout({

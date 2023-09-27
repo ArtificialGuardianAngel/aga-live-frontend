@@ -50,6 +50,7 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
                     onClick: () => {
                         onChatInput && onChatInput();
                         prompt(input);
+                        setInput("");
                     },
                 }}
                 // className="mb-6"

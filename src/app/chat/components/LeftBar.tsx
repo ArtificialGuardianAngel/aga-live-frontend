@@ -85,7 +85,7 @@ const LeftBar = () => {
                                 {user && user.type === UserTypeEnum.authed
                                     ? wallet?.balance
                                     : "GET"}{" "}
-                                A.G.A. COINS
+                                AGA COINS
                             </span>
                             <img
                                 onClick={() =>
@@ -101,7 +101,7 @@ const LeftBar = () => {
                         {!(user && user.type === UserTypeEnum.authed) && (
                             <div className="text-center text-sm font-medium leading-[14px] text-blue-4 wishes-xl:text-[13px]">
                                 Use your email address and receive rewards for
-                                using A.G.A.
+                                using AGA
                             </div>
                         )}
                         {user ? (
@@ -159,7 +159,7 @@ const LeftBar = () => {
                             Giving program
                         </h2>
                         <div className="text-center text-sm font-medium leading-[14px] text-blue-4 wishes-xl:text-[13px]">
-                            Give and earn in the same time to build the A.G.A.
+                            Give and earn in the same time to build the AGA
                         </div>
                         <Link href="/give-and-earn">
                             <Button type="secondary" size="sm">

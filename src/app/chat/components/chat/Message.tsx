@@ -56,7 +56,7 @@ const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
                         src="/icons/nuah-logo.svg"
                         alt=""
                     />
-                    <span>A.G.A.</span>
+                    <span>AGA</span>
                 </div>
             </div>
 
