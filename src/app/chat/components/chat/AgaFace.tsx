@@ -15,6 +15,7 @@ const AgaFace: React.FC<Props> = ({ className }) => {
             autoPlay
             muted
             loop
+            playsInline
         >
             <source src="/videos/idle.webm" type="video/webm" />
             <source src="/videos/idle.mp4" type="video/mp4" />
