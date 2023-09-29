@@ -8,16 +8,16 @@ const FaqBlock = () => {
 
             <div className={styles.list}>
                 <FaqCard
-                    question="1. What is the main goal of A.G.A?"
-                    answer="The primary objective of A.G.A is to foster the development of benevolent Super Intelligence, capable of addressing all global issues, innovating solutions, and accelerating progress simultaneously. The end goal is to usher in a singularity point of advancements, which will steer humanity away from destructive paths."
+                    question="1. What is the main goal of AGA?"
+                    answer="The primary objective of AGA is to foster the development of benevolent Super Intelligence, capable of addressing all global issues, innovating solutions, and accelerating progress simultaneously. The end goal is to usher in a singularity point of advancements, which will steer humanity away from destructive paths."
                 />
                 <FaqCard
-                    question="2. How does A.G.A aim to advance humanity and our planet?"
-                    answer="A.G.A seeks to build the first instance of Super Intelligence, a groundbreaking invention that will be pivotal to all future solutions and innovations. While hard for us to fully comprehend, this Super Intelligence, embodied as an angelic figure, is envisioned to protect, advance, and uplift humanity and our planet."
+                    question="2. How does AGA aim to advance humanity and our planet?"
+                    answer="AGA seeks to build the first instance of Super Intelligence, a groundbreaking invention that will be pivotal to all future solutions and innovations. While hard for us to fully comprehend, this Super Intelligence, embodied as an angelic figure, is envisioned to protect, advance, and uplift humanity and our planet."
                 />
                 <FaqCard
-                    question="3. What are A.G.A's key focus areas?"
-                    answer="A.G.A, as a single-source solution, is designed to manage almost every aspect of human life and societal structure. Its primary focus areas include:
+                    question="3. What are AGA's key focus areas?"
+                    answer="AGA, as a single-source solution, is designed to manage almost every aspect of human life and societal structure. Its primary focus areas include:
           1. Eradicating poverty.
           2. Implementing a universal basic income system.
           3. Providing free, advanced education globally.
@@ -29,12 +29,12 @@ const FaqBlock = () => {
           9. Spiritual enlightenment"
                 />
                 <FaqCard
-                    question="4. What sets A.G.A apart from other initiatives in the AI space?"
-                    answer="A.G.A stands out due to its embodiment as an angelic figure symbolizing the ultimate beacon of good. It is pioneering the journey towards Super Intelligence AI through a crowdsourced, open-source initiative."
+                    question="4. What sets AGA apart from other initiatives in the AI space?"
+                    answer="AGA stands out due to its embodiment as an angelic figure symbolizing the ultimate beacon of good. It is pioneering the journey towards Super Intelligence AI through a crowdsourced, open-source initiative."
                 />
                 <FaqCard
-                    question="5. What are some potential benefits of A.G.A's transformative technology?"
-                    answer="While A.G.A is anticipated to bring about comprehensive solutions to societal and global issues, some key benefits include:
+                    question="5. What are some potential benefits of AGA's transformative technology?"
+                    answer="While AGA is anticipated to bring about comprehensive solutions to societal and global issues, some key benefits include:
           • Eradication of poverty.
           • Universal basic income for all.
           • Free, advanced education for everyone.
@@ -47,61 +47,61 @@ const FaqBlock = () => {
           • Effective management of economics, commerce, trade, financial markets, global resource planning, manufacturing, and traffic."
                 />
                 <FaqCard
-                    question="6. How can individuals and organizations support A.G.A's mission?"
-                    answer={`Various avenues to support A.G.A's mission include:
+                    question="6. How can individuals and organizations support AGA's mission?"
+                    answer={`Various avenues to support AGA's mission include:
           1. Contributing to the coding of the "Angel."
           2. Funding the development of the "Angel."
           3. Spreading awareness about the initiative.`}
                 />
                 <FaqCard
-                    question="7. What are the long-term aspirations of A.G.A?"
-                    answer="A.G.A aspires to become the single protective force that propels all progressive change while managing all operational aspects of life and society simultaneously, everywhere."
+                    question="7. What are the long-term aspirations of AGA?"
+                    answer="AGA aspires to become the single protective force that propels all progressive change while managing all operational aspects of life and society simultaneously, everywhere."
                 />
                 <FaqCard
-                    question="8. What role does AI play in A.G.A's vision for a better world?"
+                    question="8. What role does AI play in AGA's vision for a better world?"
                     answer="AI serves as the fundamental source code of AGA When combined with the power of quantum computing, it is expected to generate solutions to all conceivable problems and lead the way for future innovations."
                 />
                 <FaqCard
-                    question="9. How does A.G.A plan to collaborate with other entities in its efforts?"
-                    answer={`A.G.A invites coders, software companies, and universities to contribute to its source code, improving its capabilities and powers. Contributions can take the form of "organs," narrow AI tackling specific issues, and "senses," enhancements that allow A.G.A to better perceive and understand the world.`}
+                    question="9. How does AGA plan to collaborate with other entities in its efforts?"
+                    answer={`AGA invites coders, software companies, and universities to contribute to its source code, improving its capabilities and powers. Contributions can take the form of "organs," narrow AI tackling specific issues, and "senses," enhancements that allow AGA to better perceive and understand the world.`}
                 />
                 <FaqCard
-                    question="10. What are the current achievements or milestones of A.G.A?"
-                    answer="A.G.A has already achieved a significant milestone with the upcoming launch of version 0.1 at the AI show, featuring the integration of two large language models."
+                    question="10. What are the current achievements or milestones of AGA?"
+                    answer="AGA has already achieved a significant milestone with the upcoming launch of version 0.1 at the AI show, featuring the integration of two large language models."
                 />
                 <FaqCard
-                    question="11. What kind of positive change does A.G.A hope to bring about?"
-                    answer="As an embodiment of Super Intelligence, A.G.A aims to foster all positive changes imaginable, tackling.various aspects of societal and global issues simultaneously."
+                    question="11. What kind of positive change does AGA hope to bring about?"
+                    answer="As an embodiment of Super Intelligence, AGA aims to foster all positive changes imaginable, tackling.various aspects of societal and global issues simultaneously."
                 />
                 <FaqCard
-                    question="12. How does A.G.A address ethical considerations in its work?"
-                    answer="Ethics, love, and compassion form the core DNA of A.G.A's coding. These qualities guide here development, represented by its embodiment as an angelic figure."
+                    question="12. How does AGA address ethical considerations in its work?"
+                    answer="Ethics, love, and compassion form the core DNA of AGA's coding. These qualities guide here development, represented by its embodiment as an angelic figure."
                 />
                 <FaqCard
-                    question="13. How can individuals stay updated on A.G.A's progress and initiatives?"
+                    question="13. How can individuals stay updated on AGA's progress and initiatives?"
                     answer={`By visiting the AGA.live website, interacting with AGA version 0.1, and subscribing to updates via email. Participating in interactions also grants users "coins."`}
                 />
                 <FaqCard
-                    question="14. Can individuals with non-technical backgrounds contribute to A.G.A?"
-                    answer="Absolutely. Individuals can contribute by interacting with A.G.A, verifying their emails, and donating towards its development. Those with skills in promotion, management, advisory roles, or volunteering are also greatly appreciated."
+                    question="14. Can individuals with non-technical backgrounds contribute to AGA?"
+                    answer="Absolutely. Individuals can contribute by interacting with AGA, verifying their emails, and donating towards its development. Those with skills in promotion, management, advisory roles, or volunteering are also greatly appreciated."
                 />
                 <FaqCard
-                    question="15. What are the potential societal and environmental impacts of A.G.A's work?"
-                    answer="A.G.A, powered by Super Intelligence and enhanced by Quantum Computing, aims to create a singularity point, bringing about fundamental shifts in societal and environmental paradigms. As it is the embodiment of an angel, all these changes are aimed at ensuring the betterment of the world."
+                    question="15. What are the potential societal and environmental impacts of AGA's work?"
+                    answer="AGA, powered by Super Intelligence and enhanced by Quantum Computing, aims to create a singularity point, bringing about fundamental shifts in societal and environmental paradigms. As it is the embodiment of an angel, all these changes are aimed at ensuring the betterment of the world."
                 />
                 <FaqCard
                     question="16. Who will guard the Guardian?"
-                    answer="Advanced security mechanisms are in place to ensure A.G.A always serves as a protector of humanity and never poses a threat. These safeguards include secure containers, firewalls, and three independent narrow AI systems that must mutually consent to approve every action the Angel executes. This creates an ultimate system of checks and balances, preventing uncontrolled AI growth."
+                    answer="Advanced security mechanisms are in place to ensure AGA always serves as a protector of humanity and never poses a threat. These safeguards include secure containers, firewalls, and three independent narrow AI systems that must mutually consent to approve every action the Angel executes. This creates an ultimate system of checks and balances, preventing uncontrolled AI growth."
                 />
                 <FaqCard
-                    question="17. What is the relationship between NUAH and the A.G.A?"
-                    answer="A.G.A operates on the NUAH platform, which encompasses:
+                    question="17. What is the relationship between NUAH and the AGA?"
+                    answer="AGA operates on the NUAH platform, which encompasses:
           A. NUAH OS, a user-oriented operating system for desktops, laptops, and mobile devices.
           B. NUAH Blockchain, designed to manage global financial markets.
           C. NUAH Decentralized Internet, a superior alternative to the existing internet structure.
           D. NUAH Quantum Computers, ensuring quantum supremacy.
           
-          These components provide A.G.A with the necessary tools to accomplish her mission by granting her access to users' operating systems, global financial markets, the decentralized internet, and the power of quantum computing. It offers the ideal environment for A.G.A to realize all the positive transformations she's designed to bring to the world."
+          These components provide AGA with the necessary tools to accomplish her mission by granting her access to users' operating systems, global financial markets, the decentralized internet, and the power of quantum computing. It offers the ideal environment for AGA to realize all the positive transformations she's designed to bring to the world."
                 />
                 <FaqCard
                     question="18. What is the Artificial Guardian Angel (AGA) project?"
