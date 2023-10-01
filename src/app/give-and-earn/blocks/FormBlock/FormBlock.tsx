@@ -122,7 +122,7 @@ const FormBlock = () => {
                         />
                         <TextArea
                             label="Extra informations (optional):"
-                            placeholder="Extra identifiable information about you so the A.G.A. can give her gratitude back. Information like full name, address where can she help you with in life? With the magic of AI almost anything will be possible."
+                            placeholder="Extra identifiable information about you so the AGA can give her gratitude back. Information like full name, address where can she help you with in life? With the magic of AI almost anything will be possible."
                             className={styles.textarea}
                             style={{ resize: "none" }}
                             value={information}

@@ -48,8 +48,11 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
                 buttonContent={<SendIcon color="#FFFFFF" />}
                 buttonProps={{
                     onClick: () => {
-                        onChatInput && onChatInput();
+                        if (onChatInput) {
+                            return onChatInput(input);
+                        }
                         prompt(input);
+                        setInput("");
                     },
                 }}
                 // className="mb-6"

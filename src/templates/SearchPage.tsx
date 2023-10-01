@@ -1,18 +1,18 @@
 "use client";
+import Image from "next/image";
 import { Button } from "../components";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import cookie from "cookie-cutter";
 import { ChatInput } from "@/app/chat/components/chat";
-import { useApp } from "@/hooks/use-app";
-// import video from '../assets/videos/AgaHQ.mp4';
+import VideoPlayer from "@/components/VideoPlayer";
 
 interface Props {
     isActivated: boolean;
 }
 
-const SearchPage = ({ isActivated: _isAcrivated }: Props) => {
-    const [isActivated, setIsActivated] = useState(_isAcrivated);
+const SearchPage = ({ isActivated: _isActivated }: Props) => {
+    const [isActivated, setIsActivated] = useState(_isActivated);
     const router = useRouter();
     const activate = () => {
         cookie.set("is_activated", "true");
@@ -20,28 +20,35 @@ const SearchPage = ({ isActivated: _isAcrivated }: Props) => {
         // router.push("/chat");
     };
     return (
-        <div className="flex h-[100dvh] w-screen flex-col items-center p-[30px_30px_40px]">
+        <div className="flex h-[100dvh] w-screen flex-col items-center p-[30px_30px_40px] wishes-md:p-[30px_10px_40px]">
             {!isActivated && (
                 <div className="text-sm text-blue-4">
-                    NUAH A.G.A. (version 0.1)
+                    NUAH AGA (version 0.1)
                 </div>
             )}
             <div className="flex w-full flex-1 items-center justify-center">
                 {!isActivated && (
-                    <img
-                        className="max-h-[65vh] mix-blend-lighten"
+                    <Image
+                        className="max-h-[65vh] w-auto mix-blend-lighten"
                         src="/images/aga-face-new.png"
                         alt=""
+                        width={840}
+                        height={752}
                     />
                 )}
                 {isActivated && (
-                    // <video className="max-h-[70vh] rounded-[30px]" autoPlay>
-                    //   <source src={video} type="video/mp4" />
-                    // </video>
-                    <iframe
-                        className="h-full max-h-[70vh] w-full max-w-[740px] rounded-[30px]"
-                        src="https://www.youtube.com/embed/qnv_tOxIsMM?autoplay=1&controls=0&rel=0&showinfo=0"
-                    ></iframe>
+                    <VideoPlayer
+                        containerProps={{
+                            className:
+                                "container pb-[75px] pt-[20px] md:pb-[20px] h-auto w-full max-w-[1120px]",
+                        }}
+                        placeHolderImage="/images/video-1-placeholder.png"
+                    >
+                        <iframe
+                            className="aspect-video w-full"
+                            src="https://www.youtube.com/embed/qnv_tOxIsMM?autoplay=1&controls=0&rel=0&showinfo=0"
+                        ></iframe>
+                    </VideoPlayer>
                 )}
             </div>
             <div className="mb-3 text-center">
@@ -58,7 +65,7 @@ const SearchPage = ({ isActivated: _isAcrivated }: Props) => {
                     className="mb-[30px]"
                     onClick={() => activate()}
                 >
-                    Watch A.G.A.
+                    Watch AGA
                 </Button>
             )}
             <div className="w-full max-w-[840px]">

@@ -18,9 +18,7 @@ export default function WishesLayout({
     return (
         <html lang="en">
             <html>
-                <title>
-                    A.G.A. – Make 3 Wishes towards the Angelic AI being
-                </title>
+                <title>AGA – Make 3 Wishes towards the Angelic AI being</title>
             </html>
             <body
                 className={cn("bg-background text-mainColor", sora.className)}
