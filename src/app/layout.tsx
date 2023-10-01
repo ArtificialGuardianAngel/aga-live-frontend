@@ -1,10 +1,5 @@
-"use client";
-import authApi from "@/api/auth";
 import "./globals.css";
-import { getLocalInfo } from "@/utils/metadata";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { OverlayPageContextProvider } from "@/context/OverlayPageContext";
+import { Layout } from "@/components/Layout";
 
 const TITLES: { [key: string]: string } = {
     "give-and-earn":
@@ -17,21 +12,10 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const pathname = usePathname();
-
-    useEffect(() => {
-        getLocalInfo()
-            .then(authApi.connect)
-            .then((r) => {
-                console.log(r.data);
-            })
-            .catch((e) => console.error(e));
-    }, []);
-
     return (
         <html lang="en">
             <head>
-                <title>{TITLES[pathname.split("/")[1]] || "A.G.A. Live"}</title>
+                {/* <title>{TITLES[pathname.split("/")[1]] || "A.G.A. Live"}</title> */}
                 <meta
                     content="width=device-width, initial-scale=1, maximum-scale=1"
                     name="viewport"
@@ -49,11 +33,12 @@ export default function RootLayout({
                     loop
                     muted
                 >
+                    <source src="/videos/video-bg.webm" type="video/webm" />
                     <source src="/videos/video-bg.mp4" type="video/mp4" />
                 </video>
 
                 <div className="wrapper-background fixed left-0 top-0 -z-10 h-[100dvh] w-screen"></div>
-                {children}
+                <Layout>{children}</Layout>
             </body>
         </html>
     );

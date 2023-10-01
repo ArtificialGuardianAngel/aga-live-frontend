@@ -47,6 +47,7 @@ const config: Config = {
                 // => @media (max-width: 767px) { ... }
                 "wishes-sm": { max: "639px" },
                 "wishes-xs": { max: "480px" },
+                "wishes-xxs": { max: "390px" },
                 // => @media (max-width: 639px) { ... }
                 "wide-device": { min: "1920px" },
             },

@@ -4,8 +4,10 @@ import copy from "copy-to-clipboard";
 import cn from "classnames";
 import Image from "next/image";
 import BackButton from "../components/BackButton";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { WishesDataType } from "../typs";
+import contractApi from "@/api/contract";
+import { useRouter } from "next/navigation";
 
 interface Props {
     searchParams: {
@@ -13,10 +15,13 @@ interface Props {
     };
 }
 export default function ESignature({ searchParams }: Props) {
+    const router = useRouter();
     const [copied, setCopied] = useState(false);
     const [secondsLeft, setSecondsLeft] = useState(10 * 60);
     const [email, setEmail] = useState("");
     const interval = useRef<NodeJS.Timeout | null>(null);
+
+    const [contractSent, setContractSent] = useState(false);
 
     const link = useMemo(() => `aga.live/wishes?e=${email}`, [email]);
 
@@ -41,8 +46,24 @@ export default function ESignature({ searchParams }: Props) {
             });
             const resData = await res.json();
             localStorage.setItem("result", JSON.stringify(resData));
+            setContractSent(true);
         } catch (error) {}
     };
+
+    const checkIsContractSigned = useCallback(async () => {
+        // call an api
+        try {
+            const serializedData = localStorage.getItem("result");
+            if (!serializedData) throw new Error("Contract is not exists");
+            const data = JSON.parse(serializedData);
+            const res = await contractApi.get(data._id);
+            if (res.data.revokedAt) throw new Error("Contract was revoked");
+            if (res.data.completedAt)
+                router.push(`/wishes/signature/${res.data._id}`);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [router]);
 
     useEffect(() => {
         interval.current = setInterval(() => {
@@ -74,6 +95,14 @@ export default function ESignature({ searchParams }: Props) {
         const amount = localStorage.getItem("amount");
         if (amount) sendContractByEmail({ ...data, amount });
     }, []);
+
+    useEffect(() => {
+        if (!contractSent) return;
+        const iid = setInterval(() => {
+            checkIsContractSigned();
+        }, 30000);
+        return () => clearInterval(iid);
+    }, [contractSent, checkIsContractSigned]);
 
     return (
         <main>
