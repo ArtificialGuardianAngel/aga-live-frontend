@@ -57,9 +57,28 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
                             ref={valueItemRef}
                             className="absolute bottom-0 z-20 w-[180px] rounded-[5px] bg-accentGreen p-[12px] text-center leading-[calc(12/16)] text-blue7"
                         >
-                            <span className="font-[700]">
-                                {value.toLocaleString("en-US")}
-                            </span>{" "}
+                            <input
+                                className={cn(
+                                    "inline-block min-w-[3ch] max-w-[8ch] bg-transparent font-[700]",
+                                    // `w-[${value.toString().length}ch]`,
+                                )}
+                                style={{
+                                    width: `${value.toString().length}ch`,
+                                }}
+                                // type="number"
+                                max={1080000}
+                                min={369}
+                                value={value}
+                                onChange={(e) => {
+                                    let value = parseInt(e.target.value);
+                                    if (value > Number(e.target.max))
+                                        value = Number(e.target.max);
+                                    // if (value < Number(e.target.min))
+                                    //     value = Number(e.target.min);
+                                    setValue(isNaN(value) ? 369 : value);
+                                }}
+                            />
+                            {""}
                             USD
                         </div>
                     </div>
