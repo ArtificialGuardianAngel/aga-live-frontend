@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import { NextResponse } from "next/server";
+import client from "@/api/client";
 
 type Body = {
     amount: string;
@@ -16,7 +16,6 @@ type Body = {
 
 export const POST = async (req: Request) => {
     const data: Body = await req.json();
-    console.log(data.email);
     const response = await axios.post(
         process.env["BOLDSIGN_API_URL"]!,
         {
@@ -63,8 +62,9 @@ export const POST = async (req: Request) => {
             },
         },
     );
+    console.log(response);
 
-    const contractResponse = await axios.post(
+    const contractResponse = await client.post(
         "contract/create",
         response.data,
         {
