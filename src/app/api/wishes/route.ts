@@ -1,6 +1,5 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
-import client from "@/api/client";
 
 type Body = {
     amount: string;
@@ -64,9 +63,12 @@ export const POST = async (req: Request) => {
     );
     console.log(response);
 
-    const contractResponse = await client.post(
+    const contractResponse = await axios.post(
         "contract/create",
         response.data,
+        {
+            baseURL: "https://api.aga.live",
+        },
     );
 
     // console.log(contractResponse);
