@@ -67,9 +67,6 @@ export const POST = async (req: Request) => {
     const contractResponse = await client.post(
         "contract/create",
         response.data,
-        {
-            baseURL: process.env["API_URL"],
-        },
     );
 
     // console.log(contractResponse);
