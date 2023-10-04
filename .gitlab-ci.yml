@@ -69,8 +69,8 @@ deploy_development:
         - export INSTANCE_NAME=$NAME
         - export PORT=$PORT
         - cat .env
-        - if [ ! -d $DEPLOY_PATH]; then mkdir $DEPLOY_PATH
-        - if [! -d $BACKUP_PATH]; then mkdir $BACKUP_PATH
+        - if [ ! -d $DEPLOY_PATH ]; then mkdir $DEPLOY_PATH; fi
+        - if [ ! -d $BACKUP_PATH ]; then mkdir $BACKUP_PATH; fi
         - sudo mkdir $BACKUP_PATH/$CI_COMMIT_SHORT_SHA && sudo mv $DEPLOY_PATH $BACKUP_PATH/$CI_COMMIT_SHORT_SHA
         - rm -rf $DEPLOY_PATH/*
         - sudo rsync -av --progress . $DEPLOY_PATH --exclude deploy
