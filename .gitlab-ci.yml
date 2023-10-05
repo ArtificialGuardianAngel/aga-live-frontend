@@ -2,7 +2,7 @@ variables:
     PROJECT_PATH: "/home/gitlab-runner/projects/aga.live"
     DEPLOY_PATH: "/home/gitlab-runner/deployments/aga.live"
     BACKUP_PATH: "/home/gitlab-runner/backups/aga.live"
-    NGINX_CONF: "./nginx.conf"
+    NGINX_CONF: "./nginx/production.conf"
 
 stages:
     - install
@@ -51,10 +51,13 @@ deploy_development:
     variables:
         DEPLOY_PATH: "/home/gitlab-runner/deployments/dev.aga.live"
         BACKUP_PATH: "/home/gitlab-runner/backups/dev.aga.live"
+        PORT: 8889
+        NAME: "dev-aga-live"
+        NGINX_CONF: "./nginx/development.conf"
     stage: deploy_development
     script:
         - cd $PROJECT_PATH
-        - sudo cp $NGINX_CONF /etc/nginx/sites-available/aga.live
+        - sudo cp $NGINX_CONF /etc/nginx/sites-available/dev.aga.live
         - echo NEXT_PUBLIC_API_URL=$NEXT_API_URL >> .env
         - echo NEXT_PUBLIC_FACEBOOK_LINK=$NEXT_FACEBOOK_LINK >> .env
         - echo NEXT_PUBLIC_LINKEDIN_LINK=$NEXT_LINKEDIN_LINK >> .env
@@ -64,9 +67,11 @@ deploy_development:
         - echo BOLDSIGN_API_URL=$BOLDSIGN_API_URL >> .env
         - echo BOLDSIGN_TEMPLATE_ID=$BOLDSIGN_TEMPLATE_ID >> .env
         - echo BOLDSIGN_API_KEY=$BOLDSIGN_API_KEY >> .env
+        - export INSTANCE_NAME=$NAME
+        - export PORT=$PORT
         - cat .env
-        - if [ ! -d $DEPLOY_PATH]; then mkdir $DEPLOY_PATH
-        - if [! -d $BACKUP_PATH]; then mkdir $BACKUP_PATH
+        - if [ ! -d $DEPLOY_PATH ]; then mkdir $DEPLOY_PATH; fi
+        - if [ ! -d $BACKUP_PATH ]; then mkdir $BACKUP_PATH; fi
         - sudo mkdir $BACKUP_PATH/$CI_COMMIT_SHORT_SHA && sudo mv $DEPLOY_PATH $BACKUP_PATH/$CI_COMMIT_SHORT_SHA
         - rm -rf $DEPLOY_PATH/*
         - sudo rsync -av --progress . $DEPLOY_PATH --exclude deploy

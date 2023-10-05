@@ -38,6 +38,7 @@ export default function DefaultLayout({
                 loop
                 muted
             >
+                <source src="/videos/video-bg_h264.mp4" type="video/mp4" />
                 <source src="/videos/video-bg.mp4" type="video/mp4" />
             </video>
 
