@@ -52,7 +52,7 @@ deploy_development:
         DEPLOY_PATH: "/home/gitlab-runner/deployments/dev.aga.live"
         BACKUP_PATH: "/home/gitlab-runner/backups/dev.aga.live"
         PORT: 8889
-        NAME: dev-aga-live
+        NAME: "dev-aga-live"
         NGINX_CONF: "./nginx/development.conf"
     stage: deploy_development
     script:
