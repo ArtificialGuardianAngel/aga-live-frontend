@@ -75,7 +75,12 @@ const GiveSliderBlock: React.FC<Props> = ({ value, setValue }) => {
                                         value = Number(e.target.max);
                                     // if (value < Number(e.target.min))
                                     //     value = Number(e.target.min);
-                                    setValue(isNaN(value) ? 369 : value);
+                                    setValue(isNaN(value) ? 0 : value);
+                                }}
+                                onBlur={(e) => {
+                                    let value = parseInt(e.target.value);
+                                    if (value < Number(e.target.min))
+                                        setValue(Number(e.target.min));
                                 }}
                             />
                             {""}
