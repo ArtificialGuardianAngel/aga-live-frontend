@@ -38,8 +38,9 @@ export default function DefaultLayout({
                 loop
                 muted
             >
-                <source src="/videos/video-bg_h264.mp4" type="video/mp4" />
+                <source src="/videos/video-bg.webm" type="video/webm" />
                 <source src="/videos/video-bg.mp4" type="video/mp4" />
+                <source src="/videos/video-bg_h264.mp4" type="video/mp4" />
             </video>
 
             <div className="wrapper-background fixed left-0 top-0 -z-10 h-[100dvh] w-screen"></div>
