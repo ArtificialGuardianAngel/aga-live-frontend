@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Layout } from "@/components/Layout";
+import VideoBackground from "./wishes/components/VideoBackground";
 
 export const metadata = {
     viewport: "width=device-width, initial-scale=1, maximum-scale=1",
@@ -25,16 +26,14 @@ export default function RootLayout({
                 />
             </head>
             <body>
-                <video
+                <VideoBackground
                     className="fixed left-0 top-0 -z-20 h-[100dvh] w-screen object-cover"
-                    autoPlay
-                    loop
-                    muted
+                    thumbnail="/images/video-bg_thumbnail.png"
                 >
                     <source src="/videos/video-bg.webm" type="video/webm" />
                     <source src="/videos/video-bg_h264.mp4" type="video/mp4" />
                     <source src="/videos/video-bg.mp4" type="video/mp4" />
-                </video>
+                </VideoBackground>
 
                 <div className="wrapper-background fixed left-0 top-0 -z-10 h-[100dvh] w-screen"></div>
                 <Layout>{children}</Layout>
