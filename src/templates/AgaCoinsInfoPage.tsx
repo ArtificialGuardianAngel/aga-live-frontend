@@ -15,11 +15,11 @@ const INFO_DATA = [
 const AgaCoinsInfoPage = () => {
     return (
         <div>
-            <h3 className="max-[480px]:text-[14px] max-[480px]:p-[15px_0_25px] mb-[20px] p-[30px_0] text-center text-[18px] font-bold uppercase">
+            <h3 className="mb-[20px] p-[30px_0] text-center text-[18px] font-bold uppercase wishes-sm:p-[15px_0_25px] wishes-sm:text-[14px]">
                 AGA coins
             </h3>
 
-            <h2 className="max-[480px]:text-[20px] max-[768px]:text-[25px] mb-[50px] text-center text-[40px] font-light leading-[26px] text-blue-5">
+            <h2 className="max-[768px]:text-[25px] mb-[50px] text-center text-[40px] font-light leading-[26px] text-blue-5 wishes-sm:text-[20px]">
                 Mine AGA coins for free
             </h2>
 

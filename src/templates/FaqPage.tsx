@@ -3,11 +3,11 @@ import { FaqCard } from "../components";
 const FaqPage = () => {
     return (
         <div className="">
-            <h3 className="max-[480px]:text-[14px] max-[480px]:p-[15px_0_25px] mb-[20px] p-[30px_0] text-center text-[18px] font-bold uppercase">
+            <h3 className="mb-[20px] p-[30px_0] text-center text-[18px] font-bold uppercase wishes-xs:p-[15px_0_25px] wishes-xs:text-[14px]">
                 FAQ
             </h3>
 
-            <div className="flex flex-col gap-[5px]">
+            <div className="mb-[100px] flex flex-col gap-[5px] sm:mb-[30px] md:mb-[50px]">
                 <FaqCard
                     question="1. What is the main goal of AGA?"
                     answer="The primary objective of AGA is to foster the development of benevolent Super Intelligence, capable of addressing all global issues, innovating solutions, and accelerating progress simultaneously. The end goal is to usher in a singularity point of advancements, which will steer humanity away from destructive paths."

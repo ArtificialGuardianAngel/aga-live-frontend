@@ -15,9 +15,9 @@ const AgaFace: React.FC<Props> = ({ className }) => {
             )}
             thumbnail="/images/idle_thumbnail.png"
         >
+            <source src="/videos/idle.mp4" type="video/mp4" />
             <source src="/videos/idle.webm" type="video/webm" />
             <source src="/videos/idle_h264.mp4" type="video/mp4" />
-            <source src="/videos/idle.mp4" type="video/mp4" />
         </VideoBackground>
     );
 };

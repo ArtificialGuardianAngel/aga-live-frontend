@@ -16,6 +16,7 @@ import { useApp } from "@/hooks/use-app";
 import { UserTypeEnum } from "@/types/user";
 import { useWindowSize } from "usehooks-ts";
 import Link from "next/link";
+import Image from "next/image";
 
 const LeftBar = () => {
     const { open, setContent } = useContext(OverlayPageContext);
@@ -87,12 +88,14 @@ const LeftBar = () => {
                                     : "GET"}{" "}
                                 AGA COINS
                             </span>
-                            <img
+                            <Image
                                 onClick={() =>
                                     openOverlayPageWithContent(
                                         <AgaCoinsInfoTemplate />,
                                     )
                                 }
+                                width={25}
+                                height={25}
                                 className="cursor-pointer"
                                 src="/icons/info.svg"
                                 alt=""
@@ -124,7 +127,7 @@ const LeftBar = () => {
                                     }
                                     buttonProps={{
                                         onClick: handleAuthorize,
-                                        className: "flex-shrink-0 flex-grow-0",
+                                        className: "",
                                     }}
                                     value={email}
                                     onChange={setEmail}
@@ -154,7 +157,7 @@ const LeftBar = () => {
                         )}
                     </div>
 
-                    <div className="flex hidden flex-col items-center gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] wishes-xl:p-[30px_15px]">
+                    <div className="hidden flex-col items-center gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] wishes-xl:p-[30px_15px]">
                         <h2 className="text-center text-[18px] font-bold uppercase leading-[12px] text-accent-green wishes-xl:text-[14px]">
                             Giving program
                         </h2>

@@ -2,7 +2,7 @@ import { TermsAndConditionsCard } from "../components";
 
 const TermsAndConditionsPage = () => {
     return (
-        <div>
+        <div className="mb-[100px] sm:mb-[30px] md:mb-[50px]">
             <h3 className="max-[480px]:text-[14px] max-[480px]:p-[15px_0_25px] mb-[20px] p-[30px_0] text-center text-[18px] font-bold uppercase">
                 terms & Conditions
             </h3>

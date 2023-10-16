@@ -4,6 +4,7 @@ import { Input } from "@/components";
 import { useApp } from "@/hooks/use-app";
 import { SendIcon } from "@/components/Icons";
 import { CHAT_COMANNDS_COMPONENTS, CHAT_COMMANDS } from "./constants";
+import { TextArea } from "@/components/Input";
 
 interface Props {
     onChatInput?: (input?: string) => void;
@@ -42,7 +43,7 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
                     })}
                 </section>
             )}
-            <Input
+            <TextArea
                 placeholder="Ask your question here..."
                 size="lg"
                 buttonContent={<SendIcon color="#FFFFFF" />}
@@ -55,11 +56,10 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
                         setInput("");
                     },
                 }}
-                // className="mb-6"
                 value={input}
                 onChange={setInput}
                 onKeyDown={(e) => {
-                    if (e.key === "Enter") {
+                    if (e.key === "Enter" && !e.shiftKey) {
                         onSubmit();
                     }
                 }}

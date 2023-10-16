@@ -13,6 +13,10 @@ const VideoBackground = ({ className, thumbnail, children }: Props) => {
 
     useEffect(() => {
         if (!ref.current) return;
+        ref.current.addEventListener("canplay", () => {
+            console.log(thumbnail, "can play");
+            setSuspend(false);
+        });
         ref.current.addEventListener("suspend", () => {
             console.log(thumbnail, "suspend");
             setSuspend(true);

@@ -15,7 +15,7 @@ import authApi from "../api/auth";
 import { IPromptAddedDto, IPromptReplyDto } from "../types/message";
 import { IChatDocument, History } from "../types/chat";
 import chatApi from "../api/chat";
-import { parseHistoryToMessages } from "./helpers";
+import { mdAnswer, parseHistoryToMessages } from "./helpers";
 import walletApi from "../api/wallet";
 import { AxiosError } from "axios";
 import crypto from "crypto";
@@ -74,7 +74,10 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     const [isGenerating, setIsGenerating] = useState(false);
     const [messages, setMessages] = useState<
         Array<{ _id: string; content: string; isMe: boolean }>
-    >([]);
+    >([
+        // { _id: "123", content: "hello", isMe: true },
+        // { _id: "123", content: mdAnswer, isMe: false },
+    ]);
 
     const [chatId, setChatId] = useState<string | null>(null);
     const [chats, setChats] = useState<IContext["chats"]>([]);

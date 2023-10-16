@@ -1,7 +1,7 @@
 const TeamPage = () => {
     return (
         <div>
-            <h3 className="max-[480px]:text-[14px] max-[480px]:p-[15px_0_25px] p-[30px_0] text-center text-[18px] font-bold uppercase">
+            <h3 className="wishes-xs:text-[14px] max-[480px]:p-[15px_0_25px] p-[30px_0] text-center text-[18px] font-bold uppercase">
                 Movements Team
             </h3>
 

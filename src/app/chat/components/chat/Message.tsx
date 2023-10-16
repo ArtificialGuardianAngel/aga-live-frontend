@@ -1,4 +1,23 @@
+"use client";
 import React, { useMemo } from "react";
+import { marked } from "marked";
+import { markedHighlight } from "marked-highlight";
+import hljs from "highlight.js";
+import "highlight.js/styles/dracula.css";
+// import { Light } from "react-syntax-highlighter";
+
+marked.use(
+    markedHighlight({
+        langPrefix: "hljs language-",
+        highlight(code, lang) {
+            const language = hljs.getLanguage(lang) ? lang : "plaintext";
+            return hljs.highlight(code, { language }).value;
+        },
+    }),
+    {
+        gfm: true,
+    },
+);
 
 const BotEndTag = "</bot>";
 interface Props {
@@ -10,10 +29,9 @@ interface Props {
 }
 
 const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
+    const hasEndTag = useMemo(() => message.includes(BotEndTag), [message]);
     const formattedMessage = useMemo(() => {
-        const hasEndTag = message.includes(BotEndTag);
         let suffix = "";
-        if (!isMe && !hasEndTag) suffix = "...";
         const content = message.trim().replace(BotEndTag, "") + suffix;
         const messageParts = content.split("\n");
         const msg = messageParts.map((part, idx) => (
@@ -38,7 +56,7 @@ const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
 
     if (isMe) {
         return (
-            <div className="flex gap-[30px] rounded-[10px] bg-white/[0.03] p-[30px] shadow wishes-md:flex-col wishes-md:gap-[10px] wishes-md:p-[20px] wishes-md:text-sm">
+            <div className="flex gap-[30px] rounded-[10px] bg-white/[0.03] p-[30px] shadow wishes-xl:flex-col wishes-md:gap-[10px] wishes-md:p-[20px] wishes-md:text-sm">
                 <div className="w-[110px] font-bold text-accent-green">
                     Your message:
                 </div>
@@ -48,7 +66,7 @@ const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
     }
 
     return (
-        <div className="flex gap-[30px] p-[50px] wishes-md:flex-col wishes-md:gap-[25px] wishes-md:p-[30px_20px]">
+        <div className="flex gap-[30px] p-[50px] wishes-xl:md:flex-col wishes-md:gap-[25px] wishes-md:p-[30px_20px]">
             <div className="w-[90px] text-accent-green">
                 <div className="flex items-center gap-[10px] font-bold wishes-md:text-sm">
                     <img
@@ -66,9 +84,12 @@ const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
             Assistant mode:
           </h4> */}
 
-                    <div className="leading-[20px] wishes-md:text-sm">
-                        {formattedMessage}
-                    </div>
+                    <div
+                        className="markdown markdown-invert leading-[20px] wishes-md:text-sm"
+                        dangerouslySetInnerHTML={{
+                            __html: marked.parse(message),
+                        }}
+                    />
                 </div>
             </div>
         </div>

@@ -58,7 +58,7 @@ const OverlayPage = () => {
                     </button>
                 )}
 
-                <div className="max-[1024px]:p-[0_10px] m-auto h-full max-w-[820px]">
+                <div className="m-auto h-full max-w-[820px] wishes-xl:p-[0_10px]">
                     {content}
                 </div>
             </div>
