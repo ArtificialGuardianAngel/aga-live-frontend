@@ -85,7 +85,7 @@ export const TextArea: React.FC<
     return (
         <div
             className={cn(
-                "flex items-center gap-5 bg-white/10 text-white wishes-xl:gap-[10px]",
+                "flex h-full items-center gap-5 bg-white/10 text-white wishes-xl:gap-[10px]",
                 className,
                 {
                     ["h-12 rounded-[35px] p-[10px_10px_10px_20px] text-sm font-medium wishes-xl:h-[40px] wishes-xl:p-[5px_5px_5px_15px]"]:
