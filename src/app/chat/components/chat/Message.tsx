@@ -66,7 +66,7 @@ const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
     }
 
     return (
-        <div className="flex gap-[30px] p-[50px] wishes-xl:md:flex-col wishes-md:gap-[25px] wishes-md:p-[30px_20px]">
+        <div className="flex gap-[30px] p-[50px] wishes-xl:flex-col wishes-md:gap-[25px] wishes-md:p-[30px_20px]">
             <div className="w-[90px] text-accent-green">
                 <div className="flex items-center gap-[10px] font-bold wishes-md:text-sm">
                     <img

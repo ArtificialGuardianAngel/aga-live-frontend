@@ -75,8 +75,8 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     const [messages, setMessages] = useState<
         Array<{ _id: string; content: string; isMe: boolean }>
     >([
-        // { _id: "123", content: "hello", isMe: true },
-        // { _id: "123", content: mdAnswer, isMe: false },
+        { _id: "123", content: "hello", isMe: true },
+        { _id: "123", content: mdAnswer, isMe: false },
     ]);
 
     const [chatId, setChatId] = useState<string | null>(null);
