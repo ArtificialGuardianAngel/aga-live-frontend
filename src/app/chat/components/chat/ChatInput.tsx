@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Input } from "@/components";
 import { useApp } from "@/hooks/use-app";
 import { SendIcon } from "@/components/Icons";
@@ -16,10 +16,15 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
     const isCommand = useMemo(() => input.startsWith("/"), [input]);
 
     const onSubmit = () => {
+        console.log("submittion", input);
         if (onChatInput) return onChatInput(input);
         prompt(input);
         setInput("");
     };
+
+    useEffect(() => {
+        console.log("input", input);
+    }, [input]);
 
     return (
         <div className="relative pb-[20px] wishes-md:p-[20px_0]">
@@ -48,18 +53,13 @@ const ChatInput: React.FC<Props> = ({ onChatInput }) => {
                 size="lg"
                 buttonContent={<SendIcon color="#FFFFFF" />}
                 buttonProps={{
-                    onClick: () => {
-                        if (onChatInput) {
-                            return onChatInput(input);
-                        }
-                        prompt(input);
-                        setInput("");
-                    },
+                    onClick: onSubmit,
                 }}
                 value={input}
                 onChange={setInput}
                 onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
                         onSubmit();
                     }
                 }}

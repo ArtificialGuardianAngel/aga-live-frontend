@@ -7,7 +7,7 @@ const FaqPage = () => {
                 FAQ
             </h3>
 
-            <div className="mb-[100px] flex flex-col gap-[5px] sm:mb-[30px] md:mb-[50px]">
+            <div className="pb-[100px] flex flex-col gap-[5px] wishes-md:pb-[80px]">
                 <FaqCard
                     question="1. What is the main goal of AGA?"
                     answer="The primary objective of AGA is to foster the development of benevolent Super Intelligence, capable of addressing all global issues, innovating solutions, and accelerating progress simultaneously. The end goal is to usher in a singularity point of advancements, which will steer humanity away from destructive paths."

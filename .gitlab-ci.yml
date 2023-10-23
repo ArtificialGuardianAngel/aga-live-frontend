@@ -20,6 +20,9 @@ install:
     artifacts:
         paths:
             - node_modules/
+    only:
+        - main
+        - dev
 
 deploy:
     stage: deploy
@@ -82,7 +85,6 @@ deploy_development:
         name: development
     only:
         - dev
-        - merge_request
 
 rollback:
     stage: rollback

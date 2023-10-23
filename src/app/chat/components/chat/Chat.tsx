@@ -38,8 +38,8 @@ const Chat = () => {
     }, [messages]);
 
     return (
-        <div className="m-auto grid h-full max-h-[96vh] w-full max-w-[1080px] grid-rows-[auto_1fr_auto] wishes-sm:grid-rows-[auto_auto_1fr_auto]">
-            <div className="mb-[20px] aspect-video sm:hidden">
+        <div className="m-auto grid h-full max-h-[calc(100dvh_-_78px)] w-full max-w-[1080px] grid-rows-[auto_1fr_auto]">
+            <div className="mb-[20px] aspect-video sm:hidden wishes-sm:hidden">
                 <AgaFace className="object-contain" />
             </div>
 
@@ -50,7 +50,7 @@ const Chat = () => {
             </div>
             <div
                 ref={chatMessagesContainerRef}
-                className="overflow-y-auto p-[20px_10px] scrollbar wishes-md:p-0"
+                className="overflow-auto p-[20px_10px] scrollbar wishes-md:p-0"
             >
                 {messages.map(({ content, isMe }, index) => (
                     <Message

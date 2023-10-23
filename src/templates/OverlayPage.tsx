@@ -38,7 +38,7 @@ const OverlayPage = () => {
             >
                 <button
                     onClick={() => close()}
-                    className="fixed right-[20px] top-[20px] h-[40px] w-[40px] rounded-full border-2 border-accent-green backdrop-blur-[10px]"
+                    className="fixed right-[20px] top-[20px] z-[99999] h-[40px] w-[40px] rounded-full border-2 border-accent-green backdrop-blur-[10px]"
                 >
                     <div className="absolute left-[50%] top-[50%] h-[2px] w-[16px] translate-x-[-50%] rotate-45 rounded-[2px] bg-accent-green"></div>
                     <div className="absolute left-[50%] top-[50%] h-[2px] w-[16px] translate-x-[-50%] rotate-[-45deg] rounded-[2px] bg-accent-green"></div>

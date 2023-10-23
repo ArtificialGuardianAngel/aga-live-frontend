@@ -44,16 +44,19 @@ const LeftBar = () => {
     return (
         <>
             {collapsed && width <= 767 && (
-                <div
+                <button
                     className={cn(
                         "fixed left-0 top-[90px] z-50 h-[40px] w-[60px] cursor-pointer rounded-r-[35px] bg-accent-green sm:w-[70px] md:hidden",
                     )}
-                    onClick={() => setCollapsed(false)}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setCollapsed(false);
+                    }}
                 >
                     <span className="absolute right-[16px] top-[50%] translate-y-[-50%]">
                         <ArrowIcon color="#22304D" />
                     </span>
-                </div>
+                </button>
             )}
 
             <CSSTransition

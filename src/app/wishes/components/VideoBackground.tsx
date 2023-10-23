@@ -39,6 +39,7 @@ const VideoBackground = ({ className, thumbnail, children }: Props) => {
                 autoPlay
                 loop
                 muted
+                playsInline
             >
                 {children}
             </video>

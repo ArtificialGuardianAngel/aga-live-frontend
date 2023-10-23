@@ -60,13 +60,18 @@ const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
                 <div className="w-[110px] font-bold text-accent-green">
                     Your message:
                 </div>
-                <div className="flex-1 text-blue-4">{formattedMessage}</div>
+                <div
+                    className="markdown markdown-invert leading-[20px] wishes-md:text-sm"
+                    dangerouslySetInnerHTML={{
+                        __html: marked.parse(message),
+                    }}
+                />
             </div>
         );
     }
 
     return (
-        <div className="flex gap-[30px] p-[50px] wishes-xl:md:flex-col wishes-md:gap-[25px] wishes-md:p-[30px_20px]">
+        <div className="flex gap-[30px] p-[50px] wishes-xl:flex-col wishes-md:gap-[25px] wishes-md:p-[30px_20px]">
             <div className="w-[90px] text-accent-green">
                 <div className="flex items-center gap-[10px] font-bold wishes-md:text-sm">
                     <img
