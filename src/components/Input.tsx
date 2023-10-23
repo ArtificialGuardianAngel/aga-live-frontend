@@ -26,7 +26,7 @@ const Input: React.FC<
     return (
         <div
             className={cn(
-                "flex items-center justify-between gap-5 bg-white/10 text-white wishes-xl:gap-[10px]",
+                "flex items-center justify-between bg-white/10 text-white wishes-xl:gap-[10px]",
                 className,
                 {
                     ["max-[1365px]:h-[40px] max-[1365px]:p-[5px_5px_5px_15px] h-12 rounded-[35px] p-[10px_10px_10px_20px] text-sm font-medium"]:
@@ -39,6 +39,9 @@ const Input: React.FC<
             <input
                 className={cn(
                     "min-w-[100px] max-w-[calc(100%_-_38px)] bg-transparent outline-none placeholder:text-blue-4",
+                    {
+                        "flex-1": Boolean(buttonContent)
+                    }
                 )}
                 value={value}
                 onChange={(e) => onChange?.(e.target.value)}
