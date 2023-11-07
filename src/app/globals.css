@@ -61,10 +61,12 @@
 }
 
 .wrapper-background {
-    background: radial-gradient(150.31% 94.37% at 60.52% 17.97%,
+    background: radial-gradient(
+            150.31% 94.37% at 60.52% 17.97%,
             rgba(191, 60, 189, 0.2) 0%,
             rgba(29, 42, 161, 0.2) 46.88%,
-            rgba(28, 41, 60, 0.2) 100%),
+            rgba(28, 41, 60, 0.2) 100%
+        ),
         #1c293c;
     opacity: 0.8;
 }
@@ -122,4 +124,21 @@ code {
 
 textarea::-webkit-resizer {
     display: none;
+}
+
+.wallet-table-header-bg {
+    background: linear-gradient(
+        90deg,
+        rgba(61, 75, 114, 0.7) 0%,
+        rgba(61, 75, 114, 0) 100%
+    );
+}
+
+.cell {
+    padding: 13px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
