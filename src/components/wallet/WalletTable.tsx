@@ -1,7 +1,9 @@
+"use client";
 import cn from "classnames";
 import Table, { Column } from "../Table";
 import WalletButton from "./WalletButton";
 import { FC } from "react";
+import { useBalances, useCosmos } from "@nuahorg/aga";
 
 interface IWalletData {
     name: string;
@@ -48,6 +50,8 @@ interface Props {
 }
 
 const WalletTable: FC<Props> = ({ type }) => {
+    const {} = useCosmos();
+    const { balances } = useBalances();
     const columns: Column<IWalletData>[] = [
         {
             width: 35,
@@ -111,7 +115,15 @@ const WalletTable: FC<Props> = ({ type }) => {
             <div className="wallet-table-header-bg rounded-[5px] p-[10px_20px] text-[13px] font-[700] uppercase leading-[calc(16/13)]">
                 {type}
             </div>
-            <Table columns={columns} data={MOCK_DATA} />
+            <Table
+                columns={columns}
+                data={balances.map<IWalletData>((balance) => ({
+                    balance: parseInt(balance.amount),
+                    lastChange: { type: "up", value: 0 },
+                    livePrice: 0,
+                    name: balance.denom,
+                }))}
+            />
         </div>
     );
 };

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import cn from "classnames";
 
 interface ButtonProps {
     size?: "sm" | "lg";
     type?: "primary" | "secondary";
+    htmlType?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
     href?: string;
 }
 
@@ -19,6 +20,7 @@ const Button: React.FC<Props> = ({
     size: sz = "sm",
     type = "primary",
     href,
+    htmlType,
     ...props
 }) => {
     if (href) {
@@ -31,7 +33,7 @@ const Button: React.FC<Props> = ({
                     {
                         ["rounded-[35px] p-[15px_20px] text-[11px] leading-[8px]"]:
                             sz === "sm",
-                        ["rounded-[55px] p-[20px_25px] text-[14px] leading-[10px] max-[768px]:p-[10px_15px]"]:
+                        ["max-[768px]:p-[10px_15px] rounded-[55px] p-[20px_25px] text-[14px] leading-[10px]"]:
                             sz === "lg",
                         ["bg-accent-green font-semibold text-blue-6 hover:bg-accent-green/90"]:
                             type === "primary",
@@ -53,7 +55,7 @@ const Button: React.FC<Props> = ({
                 {
                     ["rounded-[35px] p-[15px_20px] text-[11px] leading-[8px]"]:
                         sz === "sm",
-                    ["rounded-[55px] p-[20px_25px] text-[14px] leading-[10px] max-[768px]:p-[10px_15px] max-[768px]:text-[13px]"]:
+                    ["max-[768px]:p-[10px_15px] max-[768px]:text-[13px] rounded-[55px] p-[20px_25px] text-[14px] leading-[10px]"]:
                         sz === "lg",
                     ["bg-accent-green font-semibold text-blue-6 hover:bg-accent-green/90"]:
                         type === "primary",
@@ -62,6 +64,7 @@ const Button: React.FC<Props> = ({
                 },
             )}
             {...props}
+            type={htmlType}
         >
             {children}
         </button>

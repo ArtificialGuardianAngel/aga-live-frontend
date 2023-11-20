@@ -1,5 +1,10 @@
 "use client";
-import React, { useCallback, useContext, useState } from "react";
+import React, {
+    PropsWithChildren,
+    useCallback,
+    useContext,
+    useState,
+} from "react";
 import cn from "classnames";
 import { CSSTransition } from "react-transition-group";
 import { Button, Input } from "@/components";
@@ -17,11 +22,33 @@ import { UserTypeEnum } from "@/types/user";
 import { useWindowSize } from "usehooks-ts";
 import Link from "next/link";
 import Image from "next/image";
+import { useCoin } from "@/hooks/use-coin";
+
+type AgaCoinsTextProps = {
+    hasWallet: boolean;
+    condition: boolean;
+};
+const AgaCoinsText = ({
+    hasWallet,
+    condition,
+    children,
+}: PropsWithChildren<AgaCoinsTextProps>) => {
+    return (
+        <Link href="/wallet">
+            {condition
+                ? hasWallet
+                    ? children
+                    : "CONNECT WALLET"
+                : "GET AGA COINS"}
+        </Link>
+    );
+};
 
 const LeftBar = () => {
     const { open, setContent } = useContext(OverlayPageContext);
-    const { authorize, verify, user, wallet } = useApp();
+    const { authorize, verify, user } = useApp();
     const { width } = useWindowSize();
+    const agaCoins = useCoin("aga");
 
     const [collapsed, setCollapsed] = useState(true);
     const [showPasswordField, setShowPasswordField] = useState(false);
@@ -86,10 +113,18 @@ const LeftBar = () => {
                     <div className="flex flex-col gap-[20px] rounded-[10px] bg-white/[0.03] p-[40px_20px] wishes-xl:p-[30px_15px]">
                         <h2 className="flex items-center justify-center gap-[20px] text-[18px] font-bold uppercase leading-[12px] text-accent-green wishes-xl:gap-[10px] wishes-xl:text-[14px]">
                             <span>
-                                {user && user.type === UserTypeEnum.authed
-                                    ? wallet?.balance
-                                    : "GET"}{" "}
-                                AGA COINS
+                                <AgaCoinsText
+                                    condition={Boolean(
+                                        user &&
+                                            user.type === UserTypeEnum.authed,
+                                    )}
+                                    hasWallet={Boolean(user?.hasWallet)}
+                                >
+                                    {agaCoins?.amount
+                                        ? Number(agaCoins.amount).toFixed(2)
+                                        : (0).toFixed(2)}{" "}
+                                    AGA COINS
+                                </AgaCoinsText>
                             </span>
                             <Image
                                 onClick={() =>
