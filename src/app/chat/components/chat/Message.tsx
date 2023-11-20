@@ -19,7 +19,26 @@ marked.use(
     },
 );
 
-const TAGS = ["</bot>", "</s>", "<human>", "<s>"];
+const findByPercent = (
+    searching: string,
+    substring: string,
+): [number, number] => {
+    let index = -1;
+    let maxPercent = 0;
+    const chars = substring.split("");
+    for (let i = 0; i < chars.length; i++) {
+        const char = chars.slice(0, i + 1).join("");
+        // console.log(char);
+        const foundIndex = searching.indexOf(char);
+        if (foundIndex > -1) {
+            index = foundIndex;
+            maxPercent = ((i + 1) / chars.length) * 100;
+        }
+    }
+    return [index, maxPercent];
+};
+
+const TAGS = ["</bot>", "</s>", "<human>:"];
 interface Props {
     message: string;
     isMe: boolean;
@@ -30,10 +49,14 @@ interface Props {
 
 const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
     const untaggedMessage = useMemo(() => {
-        let nearest = message.indexOf(TAGS[0]);
+        let nearest = message.length;
+        let occuracy = 0;
         for (const tag in TAGS) {
-            if (message.indexOf(tag) < nearest && message.indexOf(tag) != -1)
-                nearest = message.indexOf(tag);
+            const [index, percent] = findByPercent(message, tag);
+            if (index <= nearest && index !== -1 && occuracy <= percent) {
+                nearest = index;
+                occuracy = percent;
+            }
         }
         return message.slice(0, nearest);
     }, [message]);
