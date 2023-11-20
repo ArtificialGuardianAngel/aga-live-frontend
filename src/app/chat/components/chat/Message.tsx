@@ -19,7 +19,7 @@ marked.use(
     },
 );
 
-const TAGS = ["</bot>", "</s>", "<human>", "<s>"];
+const BotEndTag = "</bot>";
 interface Props {
     message: string;
     isMe: boolean;
@@ -29,14 +29,30 @@ interface Props {
 }
 
 const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
-    const untaggedMessage = useMemo(() => {
-        let nearest = message.indexOf(TAGS[0]);
-        for (const tag in TAGS) {
-            if (message.indexOf(tag) < nearest && message.indexOf(tag) != -1)
-                nearest = message.indexOf(tag);
-        }
-        return message.slice(0, nearest);
-    }, [message]);
+    const hasEndTag = useMemo(() => message.includes(BotEndTag), [message]);
+    const formattedMessage = useMemo(() => {
+        let suffix = "";
+        const content = message.trim().replace(BotEndTag, "") + suffix;
+        const messageParts = content.split("\n");
+        const msg = messageParts.map((part, idx) => (
+            <React.Fragment key={idx}>
+                {part && (
+                    <>
+                        <div>
+                            {part}
+                            {idx >= messageParts.length - 1 &&
+                                isGenerating &&
+                                !isMe && (
+                                    <span className="inline-block h-3 w-[.5ch] animate-ping bg-white/80" />
+                                )}
+                        </div>
+                        {idx < messageParts.length - 1 && <br />}
+                    </>
+                )}
+            </React.Fragment>
+        ));
+        return <>{msg}</>;
+    }, [message, isGenerating, isMe]);
 
     if (isMe) {
         return (
@@ -76,7 +92,7 @@ const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
                     <div
                         className="markdown markdown-invert leading-[20px] wishes-md:text-sm"
                         dangerouslySetInnerHTML={{
-                            __html: marked.parse(untaggedMessage),
+                            __html: marked.parse(message),
                         }}
                     />
                 </div>

@@ -19,7 +19,6 @@ import { mdAnswer, parseHistoryToMessages } from "./helpers";
 import walletApi from "../api/wallet";
 import { AxiosError } from "axios";
 import crypto from "crypto";
-import { useCosmos } from "@nuahorg/aga";
 
 type Message = { content: string; isMe: boolean };
 
@@ -34,13 +33,11 @@ interface IContext {
     chatId: string | null;
     isGenerating: boolean;
     isChatConnected: boolean;
-    mnemonic?: string | null | undefined;
     prompt: (data: string) => void;
     authorize: (...data: Parameters<typeof authApi.authorize>) => void;
     verify: (...data: Parameters<typeof authApi.verify>) => void;
     changeChat: (id: string) => void;
     startNewChat: () => void;
-    connectWallet: (password?: string) => Promise<void>;
 }
 
 const DEFAULT_CONTEXT: IContext = {
@@ -69,17 +66,11 @@ const DEFAULT_CONTEXT: IContext = {
     startNewChat: () => {
         console.warn("Context Is Empty");
     },
-    connectWallet: () =>
-        new Promise(() => {
-            console.warn("Context Is Empty");
-        }),
 };
 
 export const AppContext = createContext<IContext>(DEFAULT_CONTEXT);
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
-    const { connect } = useCosmos();
-    const [mnemonic, setMnemonic] = useState<string>();
     const [isGenerating, setIsGenerating] = useState(false);
     const [messages, setMessages] = useState<
         Array<{ _id: string; content: string; isMe: boolean }>
@@ -165,37 +156,6 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         [chatId],
     );
 
-    const getWalletMenmonic = useCallback(
-        (password: string) => {
-            if (!user) throw new Error("User is not authorized");
-            return new Promise<string>((resolve, reject) => {
-                walletApi
-                    .connectWallet(password)
-                    .then((response) => resolve(response.data.mnemonic))
-                    .catch(reject);
-            });
-        },
-        [user],
-    );
-
-    const connectWallet = useCallback(
-        async (_password?: string) => {
-            try {
-                const password = _password || sessionStorage.getItem("pwd");
-                if (!password) throw new Error("Password is not set");
-                const mnemonic = await getWalletMenmonic(password);
-                if (mnemonic) connect(mnemonic);
-                setMnemonic(mnemonic);
-                if (!password) sessionStorage.setItem("pwd", password);
-            } catch (error) {
-                throw error;
-            } finally {
-                setWalletF((p) => !p);
-            }
-        },
-        [getWalletMenmonic, connect],
-    );
-
     const prompt: IContext["prompt"] = useCallback(
         (input) => {
             if (!input) return console.warn("No prompt was provided");
@@ -235,6 +195,11 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
                 setChat(r.data);
             });
     }, [chatId]);
+
+    useEffect(() => {
+        if (user?.type === UserTypeEnum.authed)
+            walletApi.get().then((r) => setWallet(r.data));
+    }, [user, walletF]);
 
     useEffect(() => {
         chatApi.getLast().then((r) => setChatId(r.data._id));
@@ -284,11 +249,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             .catch((e: AxiosError) =>
                 console.error("Error while authorizing", e),
             );
-    }, [token, walletF]);
-
-    useEffect(() => {
-        if (user?.hasWallet) connectWallet().catch((e) => console.error(e));
-    }, [user?.hasWallet]);
+    }, [token]);
 
     useEffect(() => {
         getLocalInfo()
@@ -305,7 +266,6 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             wallet,
             prompt,
             token,
-            getWalletMenmonic,
             authorize,
             verify,
             messages,
@@ -316,8 +276,6 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             changeChat,
             startNewChat,
             isChatConnected,
-            connectWallet,
-            mnemonic,
         }),
         [
             user,
@@ -335,9 +293,6 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             startNewChat,
             isGenerating,
             isChatConnected,
-            getWalletMenmonic,
-            connectWallet,
-            mnemonic,
         ],
     );
 
