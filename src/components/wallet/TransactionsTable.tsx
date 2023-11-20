@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 import Table from "../Table";
+import { useWindowSize } from "usehooks-ts";
+import MobileTransactionsList from "./MobileTransactionsList";
 
 const MOCK_DATA = [
     {
@@ -29,6 +31,8 @@ const MOCK_DATA = [
 ];
 
 const TransactionsTable = () => {
+    const { width } = useWindowSize();
+
     const columns = [
         {
             key: "date",
@@ -87,6 +91,10 @@ const TransactionsTable = () => {
             ),
         },
     ];
+
+    if (width <= 1024) {
+        return <MobileTransactionsList />;
+    }
 
     return <Table columns={columns} data={MOCK_DATA} />;
 };

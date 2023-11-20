@@ -1,10 +1,11 @@
+import WalletCoinsInput from "./CoinsInput";
 import WalletButton from "./WalletButton";
 import WalletInput from "./WalletInput";
 
 const RequestMoneyForm = () => {
     return (
         <div className="flex flex-col gap-[30px]">
-            <div className="grid grid-cols-2 gap-[30px]">
+            <div className="bp-1024:grid-cols-1 grid grid-cols-2 gap-[30px]">
                 <div className="flex flex-col gap-[15px] text-[15px] text-[#D6E1FA]">
                     <div className="leading-[10px]">
                         Who do you request money from?
@@ -22,28 +23,14 @@ const RequestMoneyForm = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-[15px] text-[15px] text-[#D6E1FA]">
-                    <div className="leading-[10px]">Currency or coin:</div>
-                    <WalletInput
-                        placeholder="NUAH+"
-                        postfix={<div className="underline">change</div>}
-                    />
+                <div className="bp-1024:col-span-1 col-span-2 flex flex-col gap-[15px] text-[15px] text-[#D6E1FA]">
+                    <div className="leading-[10px]">
+                        Currency or coin / amount
+                    </div>
+                    <WalletCoinsInput />
                 </div>
 
-                <div className="flex flex-col gap-[15px] text-[15px] text-[#D6E1FA]">
-                    <div className="leading-[10px]">Amount:</div>
-                    <WalletInput
-                        prefix={
-                            <div className="font-[500] text-accent-green">
-                                NUAH+
-                            </div>
-                        }
-                        postfix={<div className="font-[500]">≈0.00 USDn</div>}
-                        placeholder="0.00"
-                    />
-                </div>
-
-                <div className="col-span-2 flex flex-col gap-[15px] text-[15px] text-[#D6E1FA]">
+                <div className="bp-1024:col-span-1 col-span-2 flex flex-col gap-[15px] text-[15px] text-[#D6E1FA]">
                     <div className="leading-[10px]">Reason (optional):</div>
                     <WalletInput placeholder="e.g. Money transfer" />
                 </div>
@@ -51,7 +38,12 @@ const RequestMoneyForm = () => {
 
             <div className="h-[1px] bg-white/10"></div>
 
-            <WalletButton color="green" sz="lg" className="self-end" disabled>
+            <WalletButton
+                color="green"
+                sz="lg"
+                className="bp-1024:self-auto self-end"
+                disabled
+            >
                 Request money
             </WalletButton>
         </div>
