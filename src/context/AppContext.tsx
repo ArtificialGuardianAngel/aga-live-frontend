@@ -225,7 +225,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
                 _addMessage(data.sid, data.message, data.history, false);
             });
 
-            socket.on("prompt_reply_end", () => {
+            socket.on("prompt_reply_end", (data: IPromptReplyDto) => {
+                // console.log(data);
+                _addMessage(data.sid, data.message, data.history, false);
                 setIsGenerating(false);
                 setWalletF((p) => !p);
             });
