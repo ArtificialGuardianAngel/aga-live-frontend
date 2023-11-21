@@ -50,6 +50,11 @@ const config: Config = {
                 "wishes-xxs": { max: "390px" },
                 // => @media (max-width: 639px) { ... }
                 "wide-device": { min: "1920px" },
+                "bp-1536": { max: "1536px" },
+                "bp-1336": { max: "1336px" },
+                "bp-1024": { max: "1024px" },
+                "bp-768": { max: "768px" },
+                "bp-480": { max: "480px" },
             },
         },
     },

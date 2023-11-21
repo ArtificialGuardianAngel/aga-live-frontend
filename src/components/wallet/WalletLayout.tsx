@@ -3,7 +3,7 @@ import WalletTab from "./WalletTab";
 
 const WalletLayout = () => {
     return (
-        <div className="flex">
+        <div className="bp-1024:flex-col flex">
             <WalletNavbar />
             <div className="flex-1 overflow-y-auto">
                 <WalletTab />
