@@ -49,16 +49,18 @@ interface Props {
 
 const Message: React.FC<Props> = ({ message, isMe, isGenerating }) => {
     const untaggedMessage = useMemo(() => {
-        let nearest = message.length;
+        let nearest = -1;
         let occuracy = 0;
-        for (const tag in TAGS) {
+        for (const tag of TAGS) {
             const [index, percent] = findByPercent(message, tag);
+            console.log(tag, index, percent);
             if (index <= nearest && index !== -1 && occuracy <= percent) {
                 nearest = index;
                 occuracy = percent;
             }
         }
-        return message.slice(0, nearest);
+        // console.log(nearest);
+        return nearest === -1 ? message : message.slice(0, nearest);
     }, [message]);
 
     if (isMe) {
