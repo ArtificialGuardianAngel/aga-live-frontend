@@ -72,7 +72,7 @@ const WalletNavbar = () => {
         MenuItems.WALLET_ALL,
     );
     const [mobileMenuOpened, setMobileMenuOpened] = useState(
-        () => width <= 1024,
+        () => width > 1024,
     );
 
     const { key: selectedTabKey, setKey: setSelectedTabKey } =
