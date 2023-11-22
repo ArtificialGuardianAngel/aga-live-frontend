@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useContext, useMemo, useState } from "react";
+import { Fragment, useContext, useEffect, useMemo, useState } from "react";
 import cn from "classnames";
 import { MenuItems } from "@/utils/wallet";
 import WalletTabsContext from "@/context/WalletTabsContext";
@@ -93,6 +93,14 @@ const WalletNavbar = () => {
             }
         }
     }, [selectedTabKey]);
+
+    useEffect(() => {
+        if (width > 1024) {
+            setMobileMenuOpened(true);
+        } else {
+            setMobileMenuOpened(false);
+        }
+    }, [width]);
 
     const toggleMenuOpened = () => {
         setMobileMenuOpened((prev) => !prev);
