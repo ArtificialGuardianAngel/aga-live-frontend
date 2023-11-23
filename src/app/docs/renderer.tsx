@@ -17,7 +17,7 @@ marked.use(
 );
 
 export const DocsRenderer = ({ content }: { content: string }) => (
-    <div className="flex justify-center">
+    <div className="flex justify-center wishes-md:justify-normal">
         <div
             className="markdown markdown-invert leading-[20px] wishes-md:text-sm"
             dangerouslySetInnerHTML={{ __html: marked.parse(marked(content)) }}

@@ -1,7 +1,4 @@
-import { join } from "path";
-import { readFileSync } from "fs";
 import { DocsRenderer } from "./renderer";
-// import { Light } from "react-syntax-highlighter";
 
 const DocsPage = async () => {
     const response = await fetch(
@@ -12,7 +9,6 @@ const DocsPage = async () => {
     );
 
     const text = await response.text();
-    // return <div dangerouslySetInnerHTML={{ __html: marked(fileContent) }} />;
     return <DocsRenderer content={text} />;
 };
 export default DocsPage;
