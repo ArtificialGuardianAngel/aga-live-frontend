@@ -20,7 +20,7 @@ export const DocsRenderer = ({ content }: { content: string }) => (
     <div className="flex justify-center">
         <div
             className="markdown markdown-invert leading-[20px] wishes-md:text-sm"
-            dangerouslySetInnerHTML={{ __html: marked.parse(content) }}
+            dangerouslySetInnerHTML={{ __html: marked(content) }}
         />
     </div>
 );
