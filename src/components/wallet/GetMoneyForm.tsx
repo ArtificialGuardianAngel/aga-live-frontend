@@ -26,7 +26,7 @@ const GetMoneyForm = () => {
         if (!currentAccount) return;
         setStatus("pending");
         try {
-            await fetch("http://34.18.36.107:4500", {
+            await fetch("https://nc-n1-me.aga.live:2083/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

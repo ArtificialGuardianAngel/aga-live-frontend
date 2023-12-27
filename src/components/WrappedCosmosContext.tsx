@@ -1,12 +1,12 @@
 "use client";
-import { AppProvider } from "@/context/AppContext";
+// import { AppProvider } from "@/context/AppContext";
 import { CosmosProvider } from "@nuahorg/aga";
 import { PropsWithChildren } from "react";
 export const WrappedCosmosProvider = ({ children }: PropsWithChildren) => {
     return (
         <CosmosProvider
-            rpc="http://34.18.36.107:26657"
-            apiUrl="http://34.18.36.107:1316"
+            rpc="https://nc-n1-me.aga.live:2096/"
+            apiUrl="https://nc-n1-me.aga.live:2087/"
         >
             {children}
         </CosmosProvider>
