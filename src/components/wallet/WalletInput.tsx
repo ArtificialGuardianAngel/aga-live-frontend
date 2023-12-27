@@ -1,4 +1,4 @@
-import { FC, HTMLProps, ReactNode } from "react";
+import { FC, HTMLProps, InputHTMLAttributes, ReactNode } from "react";
 import cn from "classnames";
 
 interface InputProps {
@@ -7,7 +7,7 @@ interface InputProps {
     postfix?: ReactNode;
 }
 
-type Props = InputProps & Omit<HTMLProps<HTMLInputElement>, 'prefix'>;
+type Props = InputProps & Omit<InputHTMLAttributes<HTMLInputElement>, "prefix">;
 
 const WalletInput: FC<Props> = ({
     className,

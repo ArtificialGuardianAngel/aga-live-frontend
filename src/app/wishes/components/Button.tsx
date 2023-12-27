@@ -24,6 +24,7 @@ const Button = ({
     className,
     linkType,
     onClick,
+    disabled
 }: Props) => {
     const stylesClass = cn(
         "relative cursor-pointer font-[600] rounded-[50px] uppercase inline-block text-center transition-colors",
@@ -89,6 +90,7 @@ const Button = ({
         <button
             className={cn(
                 "relative cursor-pointer rounded-[50px] text-center font-[600] uppercase transition-colors",
+                "disabled:opacity-10 disabled:cursor-not-allowed",
                 className,
                 {
                     ["bg-accentGreen font-[600] text-blue7 hover:bg-[#9AF3E9]"]:
@@ -101,9 +103,11 @@ const Button = ({
                         size === "lg",
                     ["pr-[40px]"]: icon,
                     ["bg-white/10 font-bold text-[#AEB9D2]"]: type === "card",
+
                 },
             )}
             onClick={onClick}
+            disabled={disabled}
         >
             {children}
             {icon && (

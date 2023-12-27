@@ -49,10 +49,10 @@ const MENU = [
         key: MenuItems.MONEY_REQUESTS,
         name: "Money requests",
         children: [
-            {
-                key: MenuItems.MONEY_REQUESTS_SENT,
-                name: "Sent",
-            },
+            // {
+            //     key: MenuItems.MONEY_REQUESTS_SENT,
+            //     name: "Sent",
+            // },
             {
                 key: MenuItems.MONEY_REQUESTS_RECEIVED,
                 name: "Received",

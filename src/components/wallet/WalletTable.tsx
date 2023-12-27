@@ -1,7 +1,16 @@
 import cn from "classnames";
 import Table, { Column } from "../Table";
 import WalletButton from "./WalletButton";
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import {
+    DenomList,
+    Denoms,
+    DenomsNative,
+    DenomsStabe,
+    useBalances,
+    useCosmos,
+    useOracles,
+} from "@nuahorg/aga";
 
 interface IWalletData {
     name: string;
@@ -48,6 +57,36 @@ interface Props {
 }
 
 const WalletTable: FC<Props> = ({ type }) => {
+    const { client } = useCosmos();
+    const { price } = useOracles(undefined);
+    const { balances } = useBalances();
+
+    // const {} = use;
+
+    // @ts-ignore
+    const dataStable: IWalletData[] = Object.keys(DenomsStabe).map((denom) => ({
+        name: DenomsStabe[denom as keyof typeof DenomsStabe],
+        balance:
+            Number(
+                balances.find(
+                    (b) =>
+                        b.denom ===
+                        DenomsStabe[(denom + "n") as keyof typeof DenomsStabe],
+                )?.amount,
+            ) || 0,
+        lastChange: { value: -0.2, type: "up" },
+        livePrice: price.find(p => p.denom === DenomsStabe[denom as keyof typeof DenomsStabe])?.price || 0,
+    }));
+    const dataNative: IWalletData[] = Object.keys(DenomsNative).map(
+        (denom) => ({
+            name: DenomsNative[denom as keyof typeof DenomsNative],
+            balance:
+                Number(balances.find((b) => b.denom === denom)?.amount) || 0,
+            lastChange: { value: -0.2, type: "up" },
+            livePrice: price.find(p => p.denom === DenomsNative[denom as keyof typeof DenomsNative])?.price || 0,
+        }),
+    );
+
     const columns: Column<IWalletData>[] = [
         {
             width: 35,
@@ -70,10 +109,10 @@ const WalletTable: FC<Props> = ({ type }) => {
         {
             key: "livePrice",
             title: "Live price",
-            width: 80,
+            width: 90,
             render: (row) => (
                 <div className="p-[13px_20px] text-[15px] font-[500]">
-                    {row.livePrice.toFixed(2)} {row.name}
+                    {row.livePrice.toFixed(2)} USDn
                 </div>
             ),
         },
@@ -108,10 +147,22 @@ const WalletTable: FC<Props> = ({ type }) => {
 
     return (
         <div>
-            <div className="wallet-table-header-bg rounded-[5px] p-[10px_20px] text-[13px] font-[700] uppercase leading-[calc(16/13)]">
-                {type}
-            </div>
-            <Table columns={columns} data={MOCK_DATA} />
+            {(type === "ALL" || type === "STABLE") && (
+                <>
+                    <div className="wallet-table-header-bg rounded-[5px] p-[10px_20px] text-[13px] font-[700] uppercase leading-[calc(16/13)]">
+                        STABLE
+                    </div>
+                    <Table columns={columns} data={dataStable} />
+                </>
+            )}
+            {(type === "ALL" || type === "NATIVE") && (
+                <>
+                    <div className="wallet-table-header-bg rounded-[5px] p-[10px_20px] text-[13px] font-[700] uppercase leading-[calc(16/13)]">
+                        NATIVE
+                    </div>
+                    <Table columns={columns} data={dataNative} />
+                </>
+            )}
         </div>
     );
 };

@@ -1,3 +1,4 @@
+'use client'
 import ExchangeMoneyForm from "@/components/wallet/ExchangeMoneyForm";
 import GetMoneyForm from "@/components/wallet/GetMoneyForm";
 import LoginsTable from "@/components/wallet/LoginsTable";

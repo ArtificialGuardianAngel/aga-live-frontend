@@ -15,10 +15,10 @@ import authApi from "../api/auth";
 import { IPromptAddedDto, IPromptReplyDto } from "../types/message";
 import { IChatDocument, History } from "../types/chat";
 import chatApi from "../api/chat";
-import { mdAnswer, parseHistoryToMessages } from "./helpers";
+import { parseHistoryToMessages } from "./helpers";
 import walletApi from "../api/wallet";
 import { AxiosError } from "axios";
-import crypto from "crypto";
+import { useCosmos } from "@nuahorg/aga";
 
 type Message = { content: string; isMe: boolean };
 
@@ -33,11 +33,13 @@ interface IContext {
     chatId: string | null;
     isGenerating: boolean;
     isChatConnected: boolean;
+    mnemonic?: string | null | undefined;
     prompt: (data: string) => void;
-    authorize: (...data: Parameters<typeof authApi.authorize>) => void;
-    verify: (...data: Parameters<typeof authApi.verify>) => void;
+    authorize: (...data: Parameters<typeof authApi.authorize>) => Promise<void>;
+    verify: (...data: Parameters<typeof authApi.verify>) => Promise<void>;
     changeChat: (id: string) => void;
     startNewChat: () => void;
+    connectWallet: (password?: string) => Promise<void>;
 }
 
 const DEFAULT_CONTEXT: IContext = {
@@ -54,10 +56,10 @@ const DEFAULT_CONTEXT: IContext = {
     prompt: () => {
         console.warn("Context Is Empty");
     },
-    authorize: () => {
+    authorize: async () => {
         console.warn("Context Is Empty");
     },
-    verify: () => {
+    verify: async () => {
         console.warn("Context Is Empty");
     },
     changeChat: () => {
@@ -66,11 +68,19 @@ const DEFAULT_CONTEXT: IContext = {
     startNewChat: () => {
         console.warn("Context Is Empty");
     },
+    connectWallet: () =>
+        new Promise(() => {
+            console.warn("Context Is Empty");
+        }),
 };
 
 export const AppContext = createContext<IContext>(DEFAULT_CONTEXT);
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
+    const { connect, accounts } = useCosmos();
+    console.log("accounts", accounts);
+    const [mnemonic, setMnemonic] = useState<string>();
+
     const [isGenerating, setIsGenerating] = useState(false);
     const [messages, setMessages] = useState<
         Array<{ _id: string; content: string; isMe: boolean }>
@@ -148,14 +158,35 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         });
     };
 
-    const generateId = useCallback(
-        (message: string) => {
-            const hash = crypto.createHash("md5").update(message).digest("hex");
-            return `${hash}.${chatId}`;
+    const getWalletMenmonic = useCallback(
+        (password: string) => {
+            if (!user) throw new Error("User is not authorized");
+            return new Promise<string>((resolve, reject) => {
+                walletApi
+                    .connectWallet(password)
+                    .then((response) => resolve(response.data.mnemonic))
+                    .catch(reject);
+            });
         },
-        [chatId],
+        [user],
     );
-
+    const connectWallet = useCallback(
+        async (_password?: string, stopF?: boolean) => {
+            try {
+                const password = _password || sessionStorage.getItem("pwd");
+                if (!password) throw new Error("Password is not set");
+                const mnemonic = await getWalletMenmonic(password);
+                setMnemonic(mnemonic);
+                if (mnemonic) connect(mnemonic);
+                if (!password) sessionStorage.setItem("pwd", password);
+            } catch (error) {
+                throw error;
+            } finally {
+                if (!stopF) setWalletF((p) => !p);
+            }
+        },
+        [getWalletMenmonic, connect],
+    );
     const prompt: IContext["prompt"] = useCallback(
         (input) => {
             if (!input) return console.warn("No prompt was provided");
@@ -196,10 +227,10 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             });
     }, [chatId]);
 
-    useEffect(() => {
-        if (user?.type === UserTypeEnum.authed)
-            walletApi.get().then((r) => setWallet(r.data));
-    }, [user, walletF]);
+    // useEffect(() => {
+    //     if (user?.type === UserTypeEnum.authed)
+    //         walletApi.get().then((r) => setWallet(r.data));
+    // }, [user, walletF]);
 
     useEffect(() => {
         chatApi.getLast().then((r) => setChatId(r.data._id));
@@ -251,7 +282,11 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             .catch((e: AxiosError) =>
                 console.error("Error while authorizing", e),
             );
-    }, [token]);
+    }, [token, walletF]);
+
+    useEffect(() => {
+        if (user?.hasWallet) connectWallet().catch((e) => console.error(e));
+    }, [user?.hasWallet]);
 
     useEffect(() => {
         getLocalInfo()
@@ -278,6 +313,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             changeChat,
             startNewChat,
             isChatConnected,
+            connectWallet,
+            mnemonic,
+            getWalletMenmonic,
         }),
         [
             user,
@@ -295,6 +333,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             startNewChat,
             isGenerating,
             isChatConnected,
+            getWalletMenmonic,
+            connectWallet,
+            mnemonic,
         ],
     );
 

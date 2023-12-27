@@ -1,13 +1,23 @@
-import { FC, HTMLProps, ReactNode } from "react";
+import { FC, HTMLProps, ReactNode, SelectHTMLAttributes } from "react";
 import cn from "classnames";
+import { DenomList, DenomsNative, DenomsStabe } from "@nuahorg/aga";
 
-interface CoinInputProps {}
+interface CoinInputProps {
+    selectValue?: string;
+    onSelectChange?: SelectHTMLAttributes<HTMLSelectElement>["onChange"];
+    suffix?: ReactNode;
+    disableDenom?: (denom: keyof typeof DenomList) => boolean;
+}
 
 type Props = CoinInputProps & Omit<HTMLProps<HTMLInputElement>, "prefix">;
 
 const WalletCoinsInput: FC<Props> = ({
     className,
     placeholder = "0.00",
+    selectValue,
+    onSelectChange,
+    suffix,
+    disableDenom,
     ...props
 }) => {
     return (
@@ -18,9 +28,35 @@ const WalletCoinsInput: FC<Props> = ({
             )}
         >
             <div className="flex items-center gap-[5px]">
-                <span className="text-[15px] font-[500] text-accent-green">
+                <select
+                    value={selectValue}
+                    onChange={onSelectChange}
+                    name="denom"
+                    className="bg-[#3D4B72] text-[15px] font-[500] text-accent-green "
+                >
+                    {/* {DenomList.map((d) => <opt)} */}
+                    {[DenomsNative, DenomsStabe].map((group, i) => (
+                        <optgroup
+                            key={i}
+                            label={i == 0 ? "Native coins" : "Stable coins"}
+                        >
+                            {Object.keys(group).map((denom) => (
+                                <option
+                                    key={denom}
+                                    value={denom}
+                                    disabled={disableDenom?.(
+                                        denom as keyof typeof DenomList,
+                                    )}
+                                >
+                                    {group[denom as keyof typeof group]}
+                                </option>
+                            ))}
+                        </optgroup>
+                    ))}
+                </select>
+                {/* <span className="text-[15px] font-[500] text-accent-green">
                     NUAH+
-                </span>
+                </span> */}
             </div>
             <input
                 className={cn(
@@ -29,8 +65,8 @@ const WalletCoinsInput: FC<Props> = ({
                 placeholder={placeholder}
                 {...props}
             />
-            <div className="bp-1024:hidden text-[15px] font-[500]">
-                ≈0.00 USDn
+            <div className="text-[15px] font-[500] bp-1024:hidden">
+                {suffix}
             </div>
         </div>
     );
