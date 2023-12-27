@@ -26,6 +26,7 @@ const WalletTab = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    console.log(currentAccount, user?.hasWallet)
     const connected = useMemo(() => {
         return !!user?.hasWallet && !!currentAccount;
     }, [user?.hasWallet, currentAccount]);

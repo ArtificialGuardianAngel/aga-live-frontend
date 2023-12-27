@@ -11,7 +11,11 @@ import WalletButton from "./WalletButton";
 import WalletInput from "./WalletInput";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { Bech32 } from "@cosmjs/encoding";
-import { DeliverTxResponse, SigningStargateClient, assertIsDeliverTxSuccess } from "@cosmjs/stargate";
+import {
+    DeliverTxResponse,
+    SigningStargateClient,
+    assertIsDeliverTxSuccess,
+} from "@cosmjs/stargate";
 import cn from "classnames";
 
 function isValidBech32Address(address: string) {
@@ -62,7 +66,7 @@ const SendMoneyForm = () => {
             if (isValidBech32Address(addressValue)) {
                 //
             } else {
-                setStatus('pending')
+                setStatus("pending");
                 const name =
                     await queryClient?.nameservice.getName(addressValue);
 
@@ -83,7 +87,7 @@ const SendMoneyForm = () => {
                             gas: "80000",
                         },
                     );
-                    setTx(tx)
+                    setTx(tx);
                 }
             }
         } catch (error) {
@@ -124,7 +128,11 @@ const SendMoneyForm = () => {
             <div className="grid grid-cols-2 gap-[30px] bp-1024:grid-cols-1">
                 <div className="flex flex-col gap-[15px] text-[15px] text-[#D6E1FA]">
                     <div className="leading-[10px]">Send money from:</div>
-                    <WalletInput value={myName} special disabled />
+                    <WalletInput
+                        value={myName || currentAccount?.address}
+                        special
+                        disabled
+                    />
                     <div className="leading-[10px]">
                         <span className="underline">Sign out</span> to change
                     </div>
@@ -192,7 +200,7 @@ const SendMoneyForm = () => {
                 color="green"
                 sz="lg"
                 className="self-end bp-1024:self-auto"
-                disabled={!isFormValid || status === 'pending'}
+                disabled={!isFormValid || status === "pending"}
                 onClick={handleSubmit}
             >
                 Send money

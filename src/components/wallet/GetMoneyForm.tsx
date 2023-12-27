@@ -5,6 +5,7 @@ import WalletInput from "./WalletInput";
 import {
     DenomList,
     DenomTrackerType,
+    DenomsStabe,
     useCosmos,
     useOracles,
 } from "@nuahorg/aga";
@@ -25,7 +26,7 @@ const GetMoneyForm = () => {
         if (!currentAccount) return;
         setStatus("pending");
         try {
-            await fetch("http://34.18.49.227:4500", {
+            await fetch("http://34.18.36.107:4500", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -69,6 +70,9 @@ const GetMoneyForm = () => {
                         onSelectChange={(e) =>
                             setDenom((e.target as any).value)
                         }
+                        disableDenom={(d) =>
+                            Object.keys(DenomsStabe).includes(d)
+                        }
                         suffix={
                             <>
                                 ≈
@@ -95,7 +99,7 @@ const GetMoneyForm = () => {
                     color="green"
                     sz="lg"
                     className="bp-1024:w-full"
-                    disabled={status === 'pending'}
+                    disabled={status === "pending"}
                     onClick={handleFaucetCall}
                 >
                     Get from faucet

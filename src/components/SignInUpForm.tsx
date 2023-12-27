@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Input } from ".";
 import { ArrowIcon } from "./Icons";
 import Link from "next/link";
@@ -29,18 +29,46 @@ const EmailEnter = ({ onButtonClick }: EnterProps) => {
     );
 };
 
-const PasswordEnter = ({ onButtonClick }: EnterProps) => {
-    const [state, set] = useState("");
+const PasswordEnter = ({
+    onButtonClick,
+    isFirstTime,
+}: EnterProps & { isFirstTime?: boolean }) => {
+    const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
     return (
         <>
             <Input
-                value={state}
-                onChange={(e) => set(e)}
+                value={password}
+                onChange={(e) => setPassword(e)}
                 type="password"
                 name="email"
+                placeholder="password"
             />
+            {isFirstTime && (
+                <>
+                    <p className="text-center text-sm">
+                        Please repeat password
+                    </p>
+                    <Input
+                        value={passwordConfirmation}
+                        onChange={(e) => setPasswordConfirmation(e)}
+                        type="password"
+                        name="email"
+                        placeholder="password confirmation"
+                    />
+                </>
+            )}
 
-            <Button disabled={!state} onClick={() => onButtonClick(state)}>
+            <Button
+                disabled={
+                    isFirstTime ? password !== passwordConfirmation : !password
+                }
+                onClick={() => {
+                    if (!isFirstTime) return onButtonClick(password);
+                    if (password === passwordConfirmation)
+                        return onButtonClick(password);
+                }}
+            >
                 Open wallet
             </Button>
 
@@ -121,8 +149,11 @@ export const SignInUpForm = () => {
     const { connectWallet, verify, user, mnemonic, authorize } = useApp();
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
-    const [firstTime, setFirstTime] = useState(true);
     const [step, setStep] = useState<StateSteps>("email.fill");
+
+    const isFirstTime = useMemo(() => !user?.hasWallet, [user?.hasWallet]);
+
+    console.log(user);
 
     const handleAuthorize = (email: string) => {
         authorize(email).then(() => {
@@ -136,14 +167,12 @@ export const SignInUpForm = () => {
         connectWallet(password, true);
         if (!user?.hasWallet) {
             setPwd(password);
-            setFirstTime(true);
             setStep("memo.mnemo");
         }
     };
     const handleOk = () => {
         connectWallet(pwd);
-        if (!user?.hasWallet) {
-            setFirstTime(true);
+        if (isFirstTime) {
             setStep("memo.mnemo");
         }
     };
@@ -173,7 +202,10 @@ export const SignInUpForm = () => {
             )}
             {step === "otp.fill" && <OtpEnter onButtonClick={handleVerify} />}
             {step === "password.fill" && (
-                <PasswordEnter onButtonClick={handleConnectWallet} />
+                <PasswordEnter
+                    onButtonClick={handleConnectWallet}
+                    isFirstTime={isFirstTime}
+                />
             )}
             {step === "memo.mnemo" && mnemonic && (
                 <MemoriseMnemonic mnemonic={mnemonic} onOk={handleOk} />
