@@ -37,11 +37,15 @@ const RequestMoneyForm = () => {
     const { price } = useOracles({ denom });
 
     const { name: myName } = useNameService(currentAccount?.address);
-    const [tx, setTx] = useState<DeliverTxResponse>();
 
-    const {status, executeSync, message} = usePreparedTransaction<MsgCreateRequestBookEncodeObject>({
+    const [message, setMessage] = useState("");
+    const {
+        status,
+        executeSync,
+        message: txMessage,
+    } = usePreparedTransaction<MsgCreateRequestBookEncodeObject>({
         fee: { amount: "1", denom: "nuahp" },
-    })
+    });
     // const {} = useTransaction()
 
     const handleSubmit = async () => {
@@ -95,10 +99,14 @@ const RequestMoneyForm = () => {
             };
             messages.push(createRequest);
 
-            await executeSync(messages)
+            await executeSync(messages);
+            setMessage(
+                "Request is pending, as soon as it will ber accepted you will receive money",
+            );
         } catch (error) {
             if (error instanceof Error) {
                 console.log(error);
+                setMessage(error.message);
             }
         }
     };
@@ -121,7 +129,11 @@ const RequestMoneyForm = () => {
                     <div className="leading-[10px]">
                         Where should the money be received?
                     </div>
-                    <WalletInput value={myName || currentAccount?.address} special disabled />
+                    <WalletInput
+                        value={myName || currentAccount?.address}
+                        special
+                        disabled
+                    />
                     <div className="leading-[10px]">
                         <span className="underline">Sign out</span> to change
                     </div>

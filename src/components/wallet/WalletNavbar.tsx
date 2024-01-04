@@ -112,7 +112,8 @@ const WalletNavbar = () => {
         nested: boolean,
     ) => {
         if (hasChildren) {
-            return setOpenedKey(key);
+            setOpenedKey(key);
+            return setSelectedTabKey(MENU[key].children![0].key);
         }
 
         if (!nested) {

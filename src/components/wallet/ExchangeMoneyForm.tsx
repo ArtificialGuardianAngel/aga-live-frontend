@@ -7,6 +7,7 @@ import {
     Denoms,
     DenomsNative,
     DenomsStabe,
+    useBalances,
     useExchange,
     useOracles,
 } from "@nuahorg/aga";
@@ -19,6 +20,7 @@ const ExchangeMoneyForm = () => {
     const [denomTarget, setDenomTarget] = useState<DenomTrackerType>("eur");
     const { price: priceSource } = useOracles({ denom: denomSource });
     const { price: priceTarget } = useOracles({ denom: denomTarget });
+    const { balances } = useBalances();
     // const {} = useExchange()
 
     const sourceDenomPrice = useMemo(() => {
@@ -105,7 +107,12 @@ const ExchangeMoneyForm = () => {
                             <WalletInput
                                 value={amount}
                                 onChange={(e) => setAmount(e.target.value)}
-                                placeholder="-0"
+                                placeholder={`0.00 - ${Number(
+                                    balances.find(
+                                        (balance) =>
+                                            balance.denom === denomSource,
+                                    )?.amount || 0,
+                                ).toFixed(2)}`}
                                 className="w-full border-[1px] border-white/20"
                             />
                         </div>

@@ -26,7 +26,6 @@ const WalletTab = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    console.log(currentAccount, user?.hasWallet)
     const connected = useMemo(() => {
         return !!user?.hasWallet && !!currentAccount;
     }, [user?.hasWallet, currentAccount]);
@@ -71,11 +70,11 @@ const WalletTab = () => {
             </div>
 
             <ChangeNameModal open={open} onClose={handleClose} />
-            {!connected && (
+            {/* {!connected && (
                 <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md">
                     <SignInUpForm />
                 </div>
-            )}
+            )} */}
         </div>
     );
 };
