@@ -5,6 +5,7 @@ import {
     useBalances,
     useCosmos,
     useOracles,
+    usePreparedTransaction,
 } from "@nuahorg/aga";
 import WalletCoinsInput from "./CoinsInput";
 import WalletButton from "./WalletButton";
@@ -13,6 +14,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { Bech32 } from "@cosmjs/encoding";
 import {
     DeliverTxResponse,
+    MsgSendEncodeObject,
     SigningStargateClient,
     assertIsDeliverTxSuccess,
 } from "@cosmjs/stargate";
@@ -39,11 +41,14 @@ const SendMoneyForm = () => {
     const [denom, setDenom] = useState<DenomTrackerType>("nuah");
 
     const [myName, setMyName] = useState("");
-    const [tx, setTx] = useState<DeliverTxResponse>();
-    const [status, setStatus] = useState<
-        "idle" | "pending" | "success" | "failed"
-    >("idle");
     const [message, setMessage] = useState("");
+    const {
+        executeSync,
+        status,
+        message: txMessage,
+    } = usePreparedTransaction<MsgSendEncodeObject>({
+        fee: { amount: "1", denom: "nuahp" },
+    });
 
     const isFormValid = useMemo(() => {
         return currentAccount?.address && amount && denom;
@@ -62,36 +67,31 @@ const SendMoneyForm = () => {
             if (!currentAccount?.address)
                 throw new Error("Transaction currency is not set");
             if (!addressValue) throw new Error("No recepient details provided");
-
+            let address = "";
             if (isValidBech32Address(addressValue)) {
                 //
+                address = addressValue;
             } else {
-                setStatus("pending");
                 const name =
                     await queryClient?.nameservice.getName(addressValue);
 
                 if (!name?.whois?.value)
                     throw new Error("No recepient details provided");
-                if (client instanceof SigningStargateClient) {
-                    const tx = await client.sendTokens(
-                        currentAccount.address,
-                        name.whois.value,
-                        [{ amount, denom }],
-                        {
-                            amount: [
-                                {
-                                    denom,
-                                    amount: (Number(amount) * 0.01).toString(),
-                                },
-                            ],
-                            gas: "80000",
-                        },
-                    );
-                    setTx(tx);
-                }
+                address = name.whois.value;
+            }
+            if (client instanceof SigningStargateClient) {
+                const msg: MsgSendEncodeObject = {
+                    typeUrl: "/cosmos.bank.v1beta1.MsgSend",
+                    value: {
+                        fromAddress: currentAccount.address,
+                        toAddress: address,
+                        amount: [{ amount, denom }],
+                    },
+                };
+
+                await executeSync([msg]);
             }
         } catch (error) {
-            setStatus("failed");
             if (error instanceof Error) {
                 setMessage(error.message);
                 console.log(error);
@@ -106,22 +106,6 @@ const SendMoneyForm = () => {
             .then((data) => setMyName(data.whoisByValue?.whoisIndex || ""))
             .catch((e) => console.error(e));
     }, [q, currentAccount?.address]);
-
-    useEffect(() => {
-        if (tx) {
-            try {
-                assertIsDeliverTxSuccess(tx);
-                setStatus("success");
-                setMessage("Successfuly sent coins");
-            } catch (error) {
-                setStatus("failed");
-                if (error instanceof Error) {
-                    setMessage(error.message);
-                    console.error("assertIsDeliverTxSuccess error", error);
-                }
-            }
-        }
-    }, [tx]);
 
     return (
         <div className="flex flex-col gap-[30px]">
@@ -212,7 +196,7 @@ const SendMoneyForm = () => {
                         "text-accent-green": status === "success",
                     })}
                 >
-                    {message}
+                    {message || txMessage}
                 </div>
             )}
         </div>
