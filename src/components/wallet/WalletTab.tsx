@@ -70,11 +70,11 @@ const WalletTab = () => {
             </div>
 
             <ChangeNameModal open={open} onClose={handleClose} />
-            {/* {!connected && (
+            {!connected && (
                 <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md">
                     <SignInUpForm />
                 </div>
-            )} */}
+            )}
         </div>
     );
 };

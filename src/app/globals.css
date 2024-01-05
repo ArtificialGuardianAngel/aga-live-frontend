@@ -142,3 +142,7 @@ textarea::-webkit-resizer {
     align-items: center;
     height: 100%;
 }
+
+select {
+    -webkit-appearance: none;
+}
