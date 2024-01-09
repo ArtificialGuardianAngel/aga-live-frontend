@@ -10,41 +10,54 @@ import {
     useOracles,
 } from "@nuahorg/aga";
 import cn from "classnames";
+import { useApp } from "@/hooks/use-app";
+import { useNameService } from "@/hooks/use-nameservice";
+import { useAlert } from "@/hooks/use-alert";
 
 const GetMoneyForm = () => {
+    const { user } = useApp();
     const { currentAccount } = useCosmos();
+    const { toggle } = useAlert();
     const [amount, setAmount] = useState("");
     const [denom, setDenom] = useState<DenomTrackerType>("nuah");
     const { price } = useOracles({ denom });
+    const { name } = useNameService();
 
     const [status, setStatus] = useState<
         "idle" | "pending" | "success" | "failed"
     >("idle");
-    const [message, setMessage] = useState("");
 
     const handleFaucetCall = useCallback(async () => {
         if (!currentAccount) return;
         setStatus("pending");
         try {
-            await fetch("https://nc-n1-me.aga.live:2083/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
+            await fetch(
+                process.env.NEXT_PUBLIC_NODE_FAUCET_URL ||
+                    "http://localhost:4500",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        address: currentAccount.address,
+                        coins: [amount + denom],
+                    }),
                 },
-                body: JSON.stringify({
-                    address: currentAccount.address,
-                    coins: [amount + denom],
-                }),
+            );
+            toggle({
+                message: `Your balance was funded with ${amount} ${DenomList[denom]}`,
+                type: "success",
             });
-            setStatus("success");
-            setMessage("Your balance was funded by " + amount + denom);
         } catch (error) {
-            setStatus("failed");
             if (error instanceof Error) {
-                setMessage(error.message);
+                toggle({
+                    message: error.message,
+                    type: "error",
+                });
             }
         }
-    }, [currentAccount, amount, denom]);
+    }, [currentAccount, amount, denom, toggle]);
 
     return (
         <div className="flex flex-col gap-[30px]">
@@ -53,7 +66,13 @@ const GetMoneyForm = () => {
                     <div className="leading-[10px]">
                         On what email should the funds be deposited:
                     </div>
-                    <WalletInput value="miko@nuah.org" special disabled />
+                    <WalletInput
+                        value={`${user?.email || currentAccount?.address} (${
+                            name || currentAccount?.address
+                        })`}
+                        special
+                        disabled
+                    />
                     <div className="leading-[10px]">
                         <span className="underline">Sign out</span> to change
                     </div>
@@ -121,16 +140,6 @@ const GetMoneyForm = () => {
                     Pay with fiat
                 </WalletButton>
             </div>
-            {status !== "pending" && (
-                <div
-                    className={cn({
-                        "text-red-500": status === "failed",
-                        "text-accent-green": status === "success",
-                    })}
-                >
-                    {message}
-                </div>
-            )}
         </div>
     );
 };

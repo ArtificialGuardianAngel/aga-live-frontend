@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, PropsWithChildren, createContext, useState } from "react";
-import { MenuItems } from "@/utils/wallet";
+import { MenuItems } from "../utils/wallet";
 
 interface IWalletTabsContext {
     key: MenuItems;
@@ -9,7 +9,7 @@ interface IWalletTabsContext {
 }
 
 const defaultValue: IWalletTabsContext = {
-    key: MenuItems.WALLET_ALL,
+    key: 1,
     setKey: () => {},
 };
 

@@ -40,6 +40,7 @@ interface IContext {
     changeChat: (id: string) => void;
     startNewChat: () => void;
     connectWallet: (password?: string) => Promise<void>;
+    logout: () => void;
 }
 
 const DEFAULT_CONTEXT: IContext = {
@@ -72,22 +73,21 @@ const DEFAULT_CONTEXT: IContext = {
         new Promise(() => {
             console.warn("Context Is Empty");
         }),
+    logout: () => {
+        console.warn("Context Is Empty");
+    },
 };
 
 export const AppContext = createContext<IContext>(DEFAULT_CONTEXT);
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
-    const { connect, accounts } = useCosmos();
-    console.log("accounts", accounts);
+    const { connect, client } = useCosmos();
     const [mnemonic, setMnemonic] = useState<string>();
 
     const [isGenerating, setIsGenerating] = useState(false);
     const [messages, setMessages] = useState<
         Array<{ _id: string; content: string; isMe: boolean }>
-    >([
-        // { _id: "123", content: "hello", isMe: true },
-        // { _id: "123", content: mdAnswer, isMe: false },
-    ]);
+    >([]);
 
     const [chatId, setChatId] = useState<string | null>(null);
     const [chats, setChats] = useState<IContext["chats"]>([]);
@@ -180,6 +180,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
                 if (mnemonic) connect(mnemonic);
                 if (!password) sessionStorage.setItem("pwd", password);
             } catch (error) {
+                if (error instanceof AxiosError) {
+                    throw new Error(error.response?.data.message);
+                }
                 throw error;
             } finally {
                 if (!stopF) setWalletF((p) => !p);
@@ -197,7 +200,6 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         },
         [chatId, socket],
     );
-
     const authorize: IContext["authorize"] = useCallback(
         (email) =>
             authApi
@@ -205,7 +207,6 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
                 .then((response) => setToken(response.data.token)),
         [],
     );
-
     const verify: IContext["verify"] = useCallback(
         (code, email) =>
             authApi.verify(code, email).then((r) => setUser(r.data)),
@@ -218,6 +219,21 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             .then((r) => setChatId(r.data._id))
             .catch((e) => console.error(e));
     }, []);
+
+    const logout = useCallback(() => {
+        localStorage.clear();
+        socket.disconnect();
+        client?.disconnect();
+
+        setChats([]);
+        setChat(undefined);
+        setMnemonic(undefined);
+        setMessages([]);
+        setChatId(null);
+        setToken(null);
+        setUser(null);
+        setWallet(null);
+    }, [client, socket]);
 
     useEffect(() => {
         if (chatId)
@@ -316,6 +332,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             connectWallet,
             mnemonic,
             getWalletMenmonic,
+            logout,
         }),
         [
             user,
@@ -336,6 +353,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
             getWalletMenmonic,
             connectWallet,
             mnemonic,
+            logout,
         ],
     );
 

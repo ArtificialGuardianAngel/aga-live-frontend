@@ -1,22 +1,18 @@
 import cn from "classnames";
 import Table, { Column } from "../Table";
 import WalletButton from "./WalletButton";
-import { FC, useCallback, useContext, useEffect } from "react";
+import { FC } from "react";
 import {
-    DenomList,
-    Denoms,
     DenomsNative,
     DenomsStabe,
     useBalances,
-    useCosmos,
     useOracles,
 } from "@nuahorg/aga";
 import Link from "next/link";
-import WalletTabsContext from "@/context/WalletTabsContext";
-import { MenuItems } from "@/utils/wallet";
 
 interface IWalletData {
     name: string;
+    denom: string;
     balance: number;
     livePrice: number;
     lastChange: {
@@ -25,57 +21,17 @@ interface IWalletData {
     };
 }
 
-const MOCK_DATA: IWalletData[] = [
-    {
-        name: "USDn",
-        balance: 0.0,
-        livePrice: 1.0,
-        lastChange: {
-            type: "up",
-            value: 0.9,
-        },
-    },
-    {
-        name: "USDn",
-        balance: 0.0,
-        livePrice: 1.0,
-        lastChange: {
-            type: "down",
-            value: 0.9,
-        },
-    },
-    {
-        name: "USDn",
-        balance: 0.0,
-        livePrice: 1.0,
-        lastChange: {
-            type: "up",
-            value: 0.9,
-        },
-    },
-];
-
 interface Props {
     type: "ALL" | "STABLE" | "NATIVE";
 }
 
 const WalletTable: FC<Props> = ({ type }) => {
-    const { setKey } = useContext(WalletTabsContext);
-    const { client } = useCosmos();
     const { price } = useOracles(undefined);
     const { balances } = useBalances();
 
-    // const {} = use;
-    const handleNaviagate = useCallback(
-        (k: MenuItems) => {
-            setKey(k);
-        },
-        [setKey],
-    );
-
-    // @ts-ignore
     const dataStable: IWalletData[] = Object.keys(DenomsStabe).map((denom) => ({
         name: DenomsStabe[denom as keyof typeof DenomsStabe],
+        denom,
         balance:
             Number(
                 balances.find(
@@ -94,6 +50,7 @@ const WalletTable: FC<Props> = ({ type }) => {
     const dataNative: IWalletData[] = Object.keys(DenomsNative).map(
         (denom) => ({
             name: DenomsNative[denom as keyof typeof DenomsNative],
+            denom,
             balance:
                 Number(balances.find((b) => b.denom === denom)?.amount) || 0,
             lastChange: { value: -0.2, type: "up" },
@@ -119,7 +76,7 @@ const WalletTable: FC<Props> = ({ type }) => {
             key: "balance",
             title: "Balance",
             render: (row) => (
-                <div className="p-[13px_20px] text-[15px] font-[500]">
+                <div className="p-[13px_20px] text-[15px]  font-[500] wishes-sm:p-[5px_10px]">
                     {row.balance.toFixed(2)}{" "}
                     <span className="text-[#D6E1FA]">(0.00 USDn)</span>
                 </div>
@@ -130,7 +87,7 @@ const WalletTable: FC<Props> = ({ type }) => {
             title: "Live price",
             width: 90,
             render: (row) => (
-                <div className="p-[13px_20px] text-[15px] font-[500]">
+                <div className="p-[13px_20px] text-[15px] font-[500] wishes-sm:p-[5px_10px]">
                     {row.livePrice.toFixed(2)} USDn
                 </div>
             ),
@@ -141,10 +98,13 @@ const WalletTable: FC<Props> = ({ type }) => {
             width: 80,
             render: (row) => (
                 <div
-                    className={cn("p-[13px_20px] text-[15px] font-[500]", {
-                        ["text-accent-green"]: row.lastChange.type === "up",
-                        ["text-[#FF6A85]"]: row.lastChange.type === "down",
-                    })}
+                    className={cn(
+                        "p-[13px_20px] text-[15px]  font-[500] wishes-sm:p-[5px_10px]",
+                        {
+                            ["text-accent-green"]: row.lastChange.type === "up",
+                            ["text-[#FF6A85]"]: row.lastChange.type === "down",
+                        },
+                    )}
                 >
                     {row.lastChange.value}%
                 </div>
@@ -153,23 +113,15 @@ const WalletTable: FC<Props> = ({ type }) => {
         {
             title: "Action",
             width: 155,
-            render: () => {
+            render: (row) => {
                 return (
                     <div className="flex h-full items-center gap-[5px]">
-                        <WalletButton
-                            onClick={() =>
-                                handleNaviagate(MenuItems.SEND_MONEY)
-                            }
-                        >
-                            Send
-                        </WalletButton>
-                        <WalletButton
-                            onClick={() =>
-                                handleNaviagate(MenuItems.EXCHANGE_MONEY)
-                            }
-                        >
-                            Exchange
-                        </WalletButton>
+                        <Link href={`/wallet/send?denom=${row.denom}`}>
+                            <WalletButton>Send</WalletButton>
+                        </Link>
+                        <Link href={`/wallet/exchange?from=${row.denom}`}>
+                            <WalletButton>Exchange</WalletButton>
+                        </Link>
                     </div>
                 );
             },

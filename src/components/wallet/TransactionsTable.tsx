@@ -2,36 +2,13 @@ import dayjs from "dayjs";
 import Table from "../Table";
 import { useWindowSize } from "usehooks-ts";
 import MobileTransactionsList from "./MobileTransactionsList";
-
-const MOCK_DATA = [
-    {
-        key: new Date(),
-        type: "Received",
-    },
-    {
-        key: new Date(),
-        type: "Exchange",
-    },
-    {
-        key: new Date(),
-        type: "Received",
-    },
-    {
-        key: new Date(),
-        type: "Exchange",
-    },
-    {
-        key: new Date(),
-        type: "Exchange",
-    },
-    {
-        key: new Date(),
-        type: "Received",
-    },
-];
+import { useGetTxns } from "@/app/wallet/txns/use-get-txns";
+import { DenomList } from "@nuahorg/aga";
+import truncate from "@/utils/truncate";
 
 const TransactionsTable = () => {
     const { width } = useWindowSize();
+    const { data } = useGetTxns();
 
     const columns = [
         {
@@ -51,16 +28,7 @@ const TransactionsTable = () => {
             title: "From/To",
             render: (row: any) => (
                 <div className="cell">
-                    {row.type === "Received" ? "user2@nuah.org" : "-"}
-                </div>
-            ),
-        },
-        {
-            key: "reason",
-            title: "Reason",
-            render: (row: any) => (
-                <div className="cell">
-                    {row.type === "Received" ? "Money transfer" : "-"}
+                    {truncate(row.from)} {row.to && `> ${truncate(row.to)}`}
                 </div>
             ),
         },
@@ -68,25 +36,44 @@ const TransactionsTable = () => {
             title: "Amount",
             render: (row: any) => (
                 <div className="cell">
-                    {row.type === "Received" && (
-                        <span className="text-accent-green">+10 NUAH</span>
-                    )}
-                    {row.type !== "Received" && (
-                        <div className="flex flex-col gap-[10px]">
+                    <div className="flex flex-col gap-[10px]">
+                        {row.spent.length > 0 && (
                             <div className="flex gap-[5px]">
-                                <span className="w-[45px]">From:</span>
                                 <span className="text-accent-green">
-                                    10 NUAH
+                                    {row.spent.map((transfer: any) => {
+                                        return (
+                                            <>
+                                                {transfer.amount}{" "}
+                                                {
+                                                    DenomList[
+                                                        transfer.denom as keyof typeof DenomList
+                                                    ]
+                                                }
+                                            </>
+                                        );
+                                    })}
                                 </span>
                             </div>
+                        )}
+                        {row.received.length > 0 && (
                             <div className="flex gap-[5px]">
-                                <span className="w-[45px]">To:</span>
                                 <span className="text-accent-green">
-                                    15 NUAH+
+                                    {row.received.map((transfer: any) => {
+                                        return (
+                                            <>
+                                                {transfer.amount}{" "}
+                                                {
+                                                    DenomList[
+                                                        transfer.denom as keyof typeof DenomList
+                                                    ]
+                                                }
+                                            </>
+                                        );
+                                    })}
                                 </span>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             ),
         },
@@ -95,8 +82,22 @@ const TransactionsTable = () => {
     if (width <= 1024) {
         return <MobileTransactionsList />;
     }
+    console.log(data);
 
-    return <Table columns={columns} data={MOCK_DATA} />;
+    return (
+        <Table
+            columns={columns}
+            data={data.map((tx) => ({
+                from: tx.from,
+                to: tx.to,
+                type: tx.type,
+                date: tx.date,
+                spent: tx.coin_transfer.filter((el) => el.amount < 0),
+                received: tx.coin_transfer.filter((el) => el.amount > 0),
+                // date: tx.body?.extensionOptions[0].
+            }))}
+        />
+    );
 };
 
 export default TransactionsTable;

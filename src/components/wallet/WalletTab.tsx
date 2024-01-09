@@ -57,8 +57,10 @@ const WalletTab = () => {
                         {tabData.title}
                     </div>
                 </div>
-                <WalletUserInfo openChangeMenu={handleOpen} 
-    refreshFlag={open}/>
+                <WalletUserInfo
+                    openChangeMenu={handleOpen}
+                    refreshFlag={open}
+                />
             </div>
 
             <div className="rounded-[10px] bg-white/[0.03] p-[60px] bp-1336:p-[40px] bp-1024:p-[30px_20px] bp-480:p-[30px_10px]">
@@ -69,7 +71,7 @@ const WalletTab = () => {
                 NUAH AGA (version 0.1)
             </div>
 
-            <ChangeNameModal open={open} onClose={handleClose} />
+            {/* <ChangeNameModal open={open} onClose={handleClose} /> */}
             {!connected && (
                 <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md">
                     <SignInUpForm />

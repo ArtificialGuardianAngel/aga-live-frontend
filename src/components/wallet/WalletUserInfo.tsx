@@ -1,12 +1,20 @@
+"use client";
+import { useApp } from "@/hooks/use-app";
+import truncate from "@/utils/truncate";
 import { useCosmos } from "@nuahorg/aga";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type WalletUserInfoProps = {
-    openChangeMenu: () => void;
-    refreshFlag?: boolean
+    openChangeMenu?: () => void;
+    refreshFlag?: boolean;
 };
-export const WalletUserInfo = ({ openChangeMenu, refreshFlag }: WalletUserInfoProps) => {
+export const WalletUserInfo = ({
+    openChangeMenu,
+    refreshFlag,
+}: WalletUserInfoProps) => {
     const [name, setName] = useState("");
+    const { logout } = useApp();
 
     const { currentAccount, queryClient } = useCosmos();
 
@@ -20,15 +28,26 @@ export const WalletUserInfo = ({ openChangeMenu, refreshFlag }: WalletUserInfoPr
 
     return (
         <>
-            <div className="grid grid-cols-2 items-center gap-[10px] bg-white/[0.03] p-[20px] rounded-[10px]">
-                <button
-                    className="w-full text-accent-green"
+            <div className="flex items-center gap-[10px] rounded-[10px] bg-white/[0.03] p-[20px] wishes-md:flex-col wishes-md:items-end">
+                <Link
+                    href="/wallet/settings"
+                    className="flex-1 break-words text-accent-green wishes-sm:hidden"
                     onClick={openChangeMenu}
                 >
                     {name || currentAccount?.address}
-                </button>
+                </Link>
+                <Link
+                    href="/wallet/settings"
+                    className="hidden flex-1 break-words text-accent-green wishes-sm:block"
+                    onClick={openChangeMenu}
+                >
+                    {name || truncate(currentAccount?.address || "")}
+                </Link>
 
-                <button className="text-xs text-blue-5 underline">
+                <button
+                    className="text-xs text-blue-5 underline"
+                    onClick={logout}
+                >
                     Sign Out
                 </button>
             </div>

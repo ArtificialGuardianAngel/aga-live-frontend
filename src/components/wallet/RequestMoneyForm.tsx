@@ -27,10 +27,12 @@ import {
 } from "@nuahorg/aga/dist/stargate/modules";
 import { wrap } from "@/utils/wrap";
 import cn from "classnames";
+import { useAlert } from "@/hooks/use-alert";
 
 const RequestMoneyForm = () => {
     const { client, currentAccount, queryClient } = useCosmos();
     const { balances } = useBalances();
+    const { toggle } = useAlert();
     const [to, setTo] = useState("");
     const [amount, setAmount] = useState("");
     const [denom, setDenom] = useState<DenomTrackerType>("nuah");
@@ -100,16 +102,26 @@ const RequestMoneyForm = () => {
             messages.push(createRequest);
 
             await executeSync(messages);
-            setMessage(
-                "Request is pending, as soon as it will ber accepted you will receive money",
-            );
         } catch (error) {
             if (error instanceof Error) {
                 console.log(error);
-                setMessage(error.message);
+                toggle({ message: error.message, type: "error" });
             }
         }
     };
+
+    useEffect(() => {
+        if (status === "failed") {
+            toggle({ message: "Transaction failed", type: "error" });
+        }
+        if (status === "success") {
+            toggle({
+                message:
+                    "Request is pending, as soon as it will ber accepted you will receive money",
+                type: "success",
+            });
+        }
+    }, [status, txMessage, toggle]);
 
     return (
         <div className="flex flex-col gap-[30px]">

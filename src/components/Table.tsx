@@ -17,7 +17,7 @@ const Table = <T,>(props: Props<T>) => {
     const { columns, data } = props;
 
     return (
-        <div>
+        <div className="overflow-x-auto w-full">
             <div className="m-[2px_0] flex rounded-[5px] bg-[rgba(34,48,77,0.40)]">
                 {columns.map((column, index) => (
                     <div
@@ -36,12 +36,12 @@ const Table = <T,>(props: Props<T>) => {
                 ))}
             </div>
 
-            <div className="flex flex-col gap-[2px]">
+            <div className="flex flex-col gap-[2px] w-full">
                 {data.map((item, itemIndex) => {
                     return (
                         <div
                             key={itemIndex}
-                            className="flex rounded-[5px] bg-[#22304D]"
+                            className="flex rounded-[5px] bg-[#22304D] w-full items-center"
                         >
                             {columns.map((column, columnIndex) => (
                                 <div

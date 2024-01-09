@@ -13,6 +13,7 @@ import {
     MsgAcceptRequestEncodeObject,
     MsgDeclineRequestEncodeObject,
 } from "@nuahorg/aga/dist/stargate/modules";
+import { useAlert } from "@/hooks/use-alert";
 
 const truncate = (value: string, start = 9, end = 3) =>
     `${value.slice(0, start)}...${value.slice(
@@ -35,6 +36,7 @@ const getStatus = (r: any) => {
 
 const MoneyRequestsReceivedTable = () => {
     const { width } = useWindowSize();
+    const { toggle, close } = useAlert();
     const { queryClient, currentAccount, client } = useCosmos();
     const [requestBook, setRequestBook] =
         useState<QueryGetRequestBookResponse>();
@@ -113,10 +115,12 @@ const MoneyRequestsReceivedTable = () => {
                     value: {
                         fromAddress: currentAccount.address,
                         toAddress: to,
-                        amount: [{
-                            amount: amount.toString(),
-                            denom: denom
-                        }],
+                        amount: [
+                            {
+                                amount: amount.toString(),
+                                denom: denom,
+                            },
+                        ],
                     },
                 },
                 {
@@ -124,7 +128,11 @@ const MoneyRequestsReceivedTable = () => {
                     value: { creator: currentAccount.address, id },
                 },
             ]);
-        } catch (error) {}
+        } catch (error) {
+            if (error instanceof Error) {
+                toggle({ message: error.message, type: "error" });
+            }
+        }
     };
     const handleDecline = async (id: number, ...rest: any) => {
         setId(id);
@@ -139,7 +147,11 @@ const MoneyRequestsReceivedTable = () => {
                     value: { creator: currentAccount.address, id },
                 },
             ]);
-        } catch (error) {}
+        } catch (error) {
+            if (error instanceof Error) {
+                toggle({ message: error.message, type: "error" });
+            }
+        }
     };
 
     const columns = useMemo(
@@ -181,7 +193,10 @@ const MoneyRequestsReceivedTable = () => {
             {
                 key: "type",
                 title: "Pending",
-                render: (row: { transferArgs: [number, string, number, string]; type: string }) => {
+                render: (row: {
+                    transferArgs: [number, string, number, string];
+                    type: string;
+                }) => {
                     if (row.type === "Pending") {
                         return (
                             <div className="cell flex gap-[5px]">
@@ -239,10 +254,20 @@ const MoneyRequestsReceivedTable = () => {
         if (addresses.length > 0) makeAddressNameMap(addresses);
     }, [addresses, makeAddressNameMap]);
 
-    if (width < 1366) {
-        return <MobileMoneyRequestsList />;
-    }
-
+    useEffect(() => {
+        if (status === "failed") {
+            toggle({
+                message: "Transaction failed: " + message,
+                type: "error",
+            });
+        }
+        if (status === "success") {
+            toggle({
+                message: message || "Success",
+                type: "success",
+            });
+        }
+    }, [status, message, toggle]);
     return (
         <>
             <Table
@@ -261,16 +286,6 @@ const MoneyRequestsReceivedTable = () => {
                     })) || []
                 }
             />
-            {status !== "pending" && (
-                <div
-                    className={cn({
-                        "text-red-500": status === "failed",
-                        "text-accent-green": status === "success",
-                    })}
-                >
-                    {message}
-                </div>
-            )}
         </>
     );
 };

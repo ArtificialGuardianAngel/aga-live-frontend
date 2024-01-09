@@ -5,8 +5,12 @@ import { PropsWithChildren } from "react";
 export const WrappedCosmosProvider = ({ children }: PropsWithChildren) => {
     return (
         <CosmosProvider
-            rpc="https://nc-n1-me.aga.live:2096/"
-            apiUrl="https://nc-n1-me.aga.live:2087/"
+            rpc={
+                process.env.NEXT_PUBLIC_NODE_RPC_URL || "http://localhost:26657"
+            }
+            apiUrl={
+                process.env.NEXT_PUBLIC_NODE_API_URL || "http://localhost:1317"
+            }
         >
             {children}
         </CosmosProvider>

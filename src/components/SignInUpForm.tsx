@@ -6,14 +6,29 @@ import Link from "next/link";
 import Button from "@/app/wishes/components/Button";
 import { useApp } from "@/hooks/use-app";
 import { UserTypeEnum } from "@/types/user";
+import { useAlert } from "@/hooks/use-alert";
+import { useCosmos } from "@nuahorg/aga";
 
 type EnterProps = {
     onButtonClick: (value: string) => void;
+    error?: string;
 };
-const EmailEnter = ({ onButtonClick }: EnterProps) => {
+
+const ErrorMessage = ({ error }: { error?: string }) => (
+    <div>
+        {error && (
+            <div className="rounded-sm border border-red-200 bg-white/10 px-4 py-2 text-sm text-red-500">
+                {error}
+            </div>
+        )}
+    </div>
+);
+
+const EmailEnter = ({ onButtonClick, error }: EnterProps) => {
     const [state, set] = useState("");
     return (
         <>
+            <ErrorMessage error={error} />
             <Input
                 value={state}
                 onChange={(e) => set(e)}
@@ -32,6 +47,7 @@ const EmailEnter = ({ onButtonClick }: EnterProps) => {
 const PasswordEnter = ({
     onButtonClick,
     isFirstTime,
+    error,
 }: EnterProps & { isFirstTime?: boolean }) => {
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -59,6 +75,7 @@ const PasswordEnter = ({
                 </>
             )}
 
+            <ErrorMessage error={error} />
             <Button
                 disabled={
                     isFirstTime ? password !== passwordConfirmation : !password
@@ -81,7 +98,7 @@ const PasswordEnter = ({
     );
 };
 
-const OtpEnter = ({ onButtonClick }: EnterProps) => {
+const OtpEnter = ({ onButtonClick, error }: EnterProps) => {
     const [state, set] = useState("");
     return (
         <>
@@ -92,6 +109,7 @@ const OtpEnter = ({ onButtonClick }: EnterProps) => {
                 name="email"
             />
 
+            <ErrorMessage error={error} />
             <Button disabled={!state} onClick={() => onButtonClick(state)}>
                 Verify
             </Button>
@@ -147,30 +165,43 @@ const getTextForStep = (step: StateSteps) => {
 
 export const SignInUpForm = () => {
     const { connectWallet, verify, user, mnemonic, authorize } = useApp();
+    const { currentAccount, queryClient } = useCosmos();
+    const { toggle, close } = useAlert();
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
     const [step, setStep] = useState<StateSteps>("email.fill");
 
     const isFirstTime = useMemo(() => !user?.hasWallet, [user?.hasWallet]);
 
-    console.log(user);
+    const connected = useMemo(() => {
+        return !!user?.hasWallet && !!currentAccount;
+    }, [user?.hasWallet, currentAccount]);
 
     const handleAuthorize = (email: string) => {
-        authorize(email).then(() => {
-            setEmail(email);
-            setStep("otp.fill");
-        });
+        close();
+        authorize(email)
+            .then(() => {
+                setEmail(email);
+                setStep("otp.fill");
+            })
+            .catch((e) => toggle({ message: e.message, type: "error" }));
     };
 
     const handleConnectWallet = (password: string) => {
+        close();
+
         // @ts-ignore
-        connectWallet(password, true);
-        if (!user?.hasWallet) {
-            setPwd(password);
-            setStep("memo.mnemo");
-        }
+        connectWallet(password, true)
+            .then(() => {
+                if (!user?.hasWallet) {
+                    setPwd(password);
+                    setStep("memo.mnemo");
+                }
+            })
+            .catch((e) => toggle({ message: e.message, type: "error" }));
     };
     const handleOk = () => {
+        close();
         connectWallet(pwd);
         if (isFirstTime) {
             setStep("memo.mnemo");
@@ -178,9 +209,12 @@ export const SignInUpForm = () => {
     };
 
     const handleVerify = (otp: string) => {
-        verify(otp, email).then(() => {
-            setStep("password.fill");
-        });
+        close();
+        verify(otp, email)
+            .then(() => {
+                setStep("password.fill");
+            })
+            .catch((e) => toggle({ message: e.message, type: "error" }));
     };
 
     useEffect(() => {
@@ -191,32 +225,39 @@ export const SignInUpForm = () => {
     }, [user?.email, user?.type]);
 
     return (
-        <div className="flex max-w-[296px] flex-col gap-[20px] rounded-[10px] border border-blue-5 bg-white/[3%] p-[40px_20px]">
-            <h4 className="text-center text-lg font-bold uppercase text-accent-green">
-                Access your wallet
-            </h4>
-            <p className="text-center text-sm">{getTextForStep(step)}</p>
+        !connected && <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md">
+            <div className="flex max-w-[296px] flex-col gap-[20px] rounded-[10px] border border-blue-5 bg-white/[3%] p-[40px_20px]">
+                <h4 className="text-center text-lg font-bold uppercase text-accent-green">
+                    Access your wallet
+                </h4>
+                <p className="text-center text-sm">{getTextForStep(step)}</p>
 
-            {step === "email.fill" && (
-                <EmailEnter onButtonClick={handleAuthorize} />
-            )}
-            {step === "otp.fill" && <OtpEnter onButtonClick={handleVerify} />}
-            {step === "password.fill" && (
-                <PasswordEnter
-                    onButtonClick={handleConnectWallet}
-                    isFirstTime={isFirstTime}
-                />
-            )}
-            {step === "memo.mnemo" && mnemonic && (
-                <MemoriseMnemonic mnemonic={mnemonic} onOk={handleOk} />
-            )}
+                {step === "email.fill" && (
+                    <EmailEnter onButtonClick={handleAuthorize} />
+                )}
+                {step === "otp.fill" && (
+                    <OtpEnter onButtonClick={handleVerify} />
+                )}
+                {step === "password.fill" && (
+                    <PasswordEnter
+                        onButtonClick={handleConnectWallet}
+                        isFirstTime={isFirstTime}
+                    />
+                )}
+                {step === "memo.mnemo" && mnemonic && (
+                    <MemoriseMnemonic mnemonic={mnemonic} onOk={handleOk} />
+                )}
 
-            <div className="border-t border-t-white/10"></div>
+                <div className="border-t border-t-white/10"></div>
 
-            <div className="flex justify-center">
-                <Link href="/chat" className="text-sm text-blue-5 underline">
-                    Cancel
-                </Link>
+                <div className="flex justify-center">
+                    <Link
+                        href="/chat"
+                        className="text-sm text-blue-5 underline"
+                    >
+                        Cancel
+                    </Link>
+                </div>
             </div>
         </div>
     );

@@ -1,18 +1,8 @@
-import { WrappedCosmosProvider } from "@/components/WrappedCosmosContext";
-import WalletLayout from "@/components/wallet/WalletLayout";
-import { AppProvider } from "@/context/AppContext";
-import { WalletTabsContextProvider } from "@/context/WalletTabsContext";
+'use client'
+import WalletTable from "@/components/wallet/WalletTable";
 
 const WalletPage = () => {
-    return (
-        <WrappedCosmosProvider>
-            <AppProvider>
-                <WalletTabsContextProvider>
-                    <WalletLayout />
-                </WalletTabsContextProvider>
-            </AppProvider>
-        </WrappedCosmosProvider>
-    );
+    return <WalletTable type="ALL" />;
 };
 
 export default WalletPage;

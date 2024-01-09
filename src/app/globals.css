@@ -143,6 +143,12 @@ textarea::-webkit-resizer {
     height: 100%;
 }
 
+@media (max-width: 640px) {
+    .cell {
+        padding: 6px 10px;
+    }
+}
+
 select {
     -webkit-appearance: none;
 }

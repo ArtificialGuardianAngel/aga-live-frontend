@@ -19,6 +19,8 @@ import {
     assertIsDeliverTxSuccess,
 } from "@cosmjs/stargate";
 import cn from "classnames";
+import { useAlert } from "@/hooks/use-alert";
+import { useSearchParams } from "next/navigation";
 
 function isValidBech32Address(address: string) {
     try {
@@ -35,13 +37,14 @@ function isValidBech32Address(address: string) {
     }
 }
 const SendMoneyForm = () => {
+    const params = useSearchParams();
     const { client, currentAccount, queryClient } = useCosmos();
+    const { toggle } = useAlert();
     const [addressValue, setAddressValue] = useState("");
     const [amount, setAmount] = useState("");
     const [denom, setDenom] = useState<DenomTrackerType>("nuah");
 
     const [myName, setMyName] = useState("");
-    const [message, setMessage] = useState("");
     const {
         executeSync,
         status,
@@ -56,6 +59,8 @@ const SendMoneyForm = () => {
 
     const { price } = useOracles({ denom });
     const { balances } = useBalances();
+
+    const urlDenom = params.get("denom");
 
     // useEffect(() => {}, [addressValue])
 
@@ -93,8 +98,7 @@ const SendMoneyForm = () => {
             }
         } catch (error) {
             if (error instanceof Error) {
-                setMessage(error.message);
-                console.log(error);
+                toggle({ message: error.message, type: "error" });
             }
         }
     };
@@ -106,6 +110,22 @@ const SendMoneyForm = () => {
             .then((data) => setMyName(data.whoisByValue?.whoisIndex || ""))
             .catch((e) => console.error(e));
     }, [q, currentAccount?.address]);
+
+    useEffect(() => {
+        if (status === "failed") {
+            toggle({ message: "Transaction failed", type: "error" });
+        }
+        if (status === "success") {
+            toggle({
+                message: `Successfuly sent ${amount} ${DenomList[denom]}`,
+                type: "success",
+            });
+        }
+    }, [status, txMessage, toggle, amount, denom]);
+
+    useEffect(() => {
+        if (urlDenom) setDenom(urlDenom as keyof typeof DenomList);
+    }, [urlDenom]);
 
     return (
         <div className="flex flex-col gap-[30px]">
@@ -189,16 +209,6 @@ const SendMoneyForm = () => {
             >
                 Send money
             </WalletButton>
-            {status !== "pending" && (
-                <div
-                    className={cn({
-                        "text-red-500": status === "failed",
-                        "text-accent-green": status === "success",
-                    })}
-                >
-                    {message || txMessage}
-                </div>
-            )}
         </div>
     );
 };

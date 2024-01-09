@@ -1,27 +1,15 @@
+"use client";
 import Button from "@/app/wishes/components/Button";
 import { Input } from "..";
 import { useBalances, useCosmos, usePreparedTransaction } from "@nuahorg/aga";
 import { useEffect, useMemo, useState } from "react";
-import {
-    nameserviceTypes,
-    MsgSetNameEncodeObject,
-} from "@nuahorg/aga/src/stargate/modules/nameservices";
-import {
-    DeliverTxResponse,
-    GasPrice,
-    SigningStargateClient,
-    StdFee,
-    assertIsDeliverTxSuccess,
-} from "@cosmjs/stargate";
-import cn from "classnames";
+import { MsgSetNameEncodeObject } from "@nuahorg/aga/src/stargate/modules/nameservices";
 import { useNameService } from "@/hooks/use-nameservice";
+import { useAlert } from "@/hooks/use-alert";
 
-type ChangeNameFormProps = {
-    open?: boolean;
-    onClose?: () => void;
-};
-export const ChangeNameModal = ({ onClose, open }: ChangeNameFormProps) => {
+export const ChangeNameModal = () => {
     const { queryClient, currentAccount, client } = useCosmos();
+    const { toggle } = useAlert();
     const { name: myName } = useNameService(currentAccount?.address);
     const { balances } = useBalances();
 
@@ -63,22 +51,12 @@ export const ChangeNameModal = ({ onClose, open }: ChangeNameFormProps) => {
         );
     }, [status, balances]);
 
-    const error = useMemo(() => {
-        if (
-            parseInt(balances.find((b) => b.denom === "nuahp")?.amount || "0") <
-            1
-        ) {
-            return "insufficient balance";
-        }
-    }, [balances]);
-
     const reset = () => {
         sR(false);
     };
 
     const handleClose = () => {
         reset();
-        onClose?.();
     };
 
     useEffect(() => {
@@ -89,26 +67,32 @@ export const ChangeNameModal = ({ onClose, open }: ChangeNameFormProps) => {
             .catch((e) => console.error(e));
     }, [q, currentAccount?.address, r]);
 
+    useEffect(() => {
+        if (status === "failed") {
+            toggle({ message: "Transaction failed", type: "error" });
+        }
+        if (status === "success") {
+            toggle({
+                message: "Successfuly set new name",
+                type: "success",
+            });
+        }
+    }, [status, message, toggle]);
+
     return (
-        <div
-            className={cn(
-                "fixed inset-0 flex items-center justify-center backdrop-blur-md",
-                {
-                    hidden: !open,
-                    flex: open,
-                },
-            )}
-            onClick={handleClose}
-        >
+        <>
+            <h2 className="text-2xl text-accent-green mb-[40px]">
+                {currentAccount?.address}
+            </h2>
             <div
-                className="flex max-w-[296px] flex-col gap-[20px] rounded-[10px] border border-blue-5 bg-white/[3%] p-[40px_20px]"
+                className="mb-[40px] flex flex-col items-start gap-[20px]"
                 onClick={(e) => {
                     e.stopPropagation();
                 }}
             >
                 {!r ? (
                     <>
-                        <div className="text-center">
+                        <div className="text-xl">
                             {myName ? "Change" : "Enter"} on-chain name
                         </div>
                         <Input
@@ -116,23 +100,12 @@ export const ChangeNameModal = ({ onClose, open }: ChangeNameFormProps) => {
                             value={name}
                             onChange={(e) => setName(e)}
                         />
-                        <div></div>
                         <Button
                             disabled={isButtonDisabled}
                             onClick={handleSetName}
                         >
                             Set name
                         </Button>
-                        {status !== "pending" && (
-                            <p
-                                className={cn("break-words", {
-                                    "text-red-500": status === "failed",
-                                    "text-accent-green": status === "success",
-                                })}
-                            >
-                                {message || error}
-                            </p>
-                        )}
                     </>
                 ) : (
                     <>
@@ -142,6 +115,6 @@ export const ChangeNameModal = ({ onClose, open }: ChangeNameFormProps) => {
                     </>
                 )}
             </div>
-        </div>
+        </>
     );
 };

@@ -1,4 +1,3 @@
-// import video from '../../assets/videos/AgaHQ.mp4';
 import Link from "next/link";
 import { Button } from "../../components";
 import styles from "./WelcomeBlock.module.scss";
