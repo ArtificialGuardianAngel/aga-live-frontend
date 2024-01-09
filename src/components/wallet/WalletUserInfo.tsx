@@ -19,11 +19,15 @@ export const WalletUserInfo = ({
     const { currentAccount, queryClient } = useCosmos();
 
     useEffect(() => {
-        if (currentAccount?.address)
+        if (!currentAccount?.address) return;
+        const id = setInterval(() => {
             queryClient?.nameservice
                 .getNameByAddress(currentAccount?.address)
                 .then((r) => setName(r.whoisByValue?.whoisIndex as string))
                 .catch((e) => console.error(e));
+        }, 2000);
+
+        return () => clearInterval(id);
     }, [currentAccount?.address, refreshFlag]);
 
     return (
