@@ -162,10 +162,7 @@ const RequestMoneyForm = () => {
                         onSelectChange={(e) =>
                             setDenom((e.target as any).value)
                         }
-                        placeholder={`0.00 - ${Number(
-                            balances.find((balance) => balance.denom === denom)
-                                ?.amount || 0,
-                        ).toFixed(2)}`}
+                        placeholder={`0.00`}
                         suffix={
                             <>
                                 ≈
