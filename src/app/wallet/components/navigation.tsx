@@ -47,6 +47,10 @@ const MENU = [
                 title: "Received",
                 href: "/wallet/requests",
             },
+            {
+                title: "Sent",
+                href: "/wallet/requests/sent",
+            },
         ],
     },
     {

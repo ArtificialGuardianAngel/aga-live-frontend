@@ -10,16 +10,11 @@ import { QueryGetRequestBookResponse } from "@nuahorg/aga/dist/stargate/proto/nu
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { MsgAcceptRequest } from "@nuahorg/aga/dist/stargate/proto/nuah/loan/tx";
 import {
-    MsgAcceptRequestEncodeObject,
     MsgDeclineRequestEncodeObject,
 } from "@nuahorg/aga/dist/stargate/modules";
 import { useAlert } from "@/hooks/use-alert";
+import truncate from "@/utils/truncate";
 
-const truncate = (value: string, start = 9, end = 3) =>
-    `${value.slice(0, start)}...${value.slice(
-        value.length - end,
-        value.length,
-    )}`;
 
 const getStatus = (r: any) => {
     if (r.accepted === -1) {
